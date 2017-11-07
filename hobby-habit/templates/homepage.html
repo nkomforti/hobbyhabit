@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}HobbyHabit{% endblock %}
+
+{% block content %}
+
+    <div class="homepage">
+        <h1>Welcome to HobbyHabit</h1> 
+        <br>
+        <img src="http://mypicturegallery.net/pic004/all-pet/allpet000008/imgs/1541555.jpg">
+        <br>
+        <br>
+
+        <form action="/register" method="GET">
+            <br>
+            New user? <input type="submit" value="Create Account">
+            <br>
+            <br>
+
+        </form>
+        <form action="/login" method="GET">
+            Already have an account? <input type="submit" value="Login">
+        </form>
+    </div>
+
+{% endblock %}
+
+
+<!-- Add about section?? -->
