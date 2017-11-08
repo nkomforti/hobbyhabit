@@ -9,12 +9,12 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, User, Completion, Goal, Hobby
 
 
-app = Flask(__name__)  # ??
+app = Flask(__name__)
+app.jinja_env.undefined = StrictUndefined
 
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 
 # Raises an error if an undefined variable is used in Jinja 2.
-app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
@@ -61,19 +61,19 @@ def process_register_form():
     return redirect("/")
 
 
-@app.route('login', methods=['GET'])
+@app.route('/login', methods=['GET'])
 def login_form():
     """Display login form."""
 
     return render_template("login-form.html")
 
 
-@app.route('login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def process_login_form():
     """Process login form."""
 
     # Get form variables.
-    username = request.form.get(username)  # how can I accept either username or email for login??
+    username = request.form.get(username)  # accept username for sign up first and then add logic to give the option of loging in with both username and email later on.
     password = request.form.get(password)
 
     user = User.query.filter_by(username=username).first()
@@ -81,3 +81,10 @@ def process_login_form():
     if not user:
         pass
 
+
+if __name__ == "__main__":
+
+    app.debug = True
+    DebugToolbarExtension(app)
+
+    app.run(host="0.0.0.0")
