@@ -18,17 +18,30 @@ app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 
 
 @app.route('/')
-def hompage():
+def homepage():
     """Display homepage."""
 
     return render_template("homepage.html")
+
+
+@app.route('/remaining-registration/<username>', methods=['POST'])
+def partial_registration(username):
+    """Display remaining registration form.
+
+    User will only see this page if sign up was started directly on homepage and
+    not by clicking on 'Sign up' link in the homepage header, which renders
+    complete registration form.
+
+    """
+
+    return render_template("partial-registration-form.html")
 
 
 @app.route('/register', methods=['GET'])
 def register_form():
     """Display registration form for user signup."""
 
-    return render_template("registration-form.html")
+    return render_template("complete-registration-form.html")
 
 
 @app.route('/register', methods=['POST'])
@@ -36,9 +49,7 @@ def process_register_form():
     """Process registration form and add user to database."""
 
     # Get form variables.
-
-    # first_name = request.form["first-name"]
-    first_name = request.form.get("first-name")
+    first_name = request.form.get("first-name")  # can also be written as: first_name = request.form["first-name"]
     last_name = request.form.get("last-name")
     email = request.form.get("email")
     username = request.form.get("username")

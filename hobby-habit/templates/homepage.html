@@ -5,26 +5,34 @@
 {% block content %}
 
     <div class="homepage">
-        <h1>Welcome to HobbyHabit!</h1> 
+
+        <header class="header" role="banner">
+        <a href="/login">Sign in</a>
+        <p>or</p>
+        <a href="/register">Sign up</a> <!-- how do I get Sign in or Sign up on the same line?? CSS display inline?? -->
+        </header>
+
+        <!-- I want this all aligned to the left -->
+        <h1>HobbyHabit is a place to...(ADD DETAILS)</h1> 
         <br>
         <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
         <br>
         <br>
-        <p>BRIEF SYNOPSIS/ABOUT BLURB</p>
 
-        <form action="/register" method="GET">
+        <!-- I want this all aligned to the right -->
+        <form action="/register" method="POST">
+            Username<br><input type="text" name="username" placeholder="Pick a username" required>
             <br>
-            New user? <input type="submit" value="Create Account">
+            <br>
+            Email<br><input type="email" name="email" placeholder="you@example.com" required>
             <br>
             <br>
+            Password<br><input type="password" name="password" placeholder="Create a password" required>
+            <br>
+            <br>
+            <input type="submit" value="Sign up for HobbyHabit">
+        </form>
 
-        </form>
-        <form action="/login" method="GET">
-            Already have an account? <input type="submit" value="Login">
-        </form>
     </div>
 
 {% endblock %}
-
-
-<!-- Add about section?? -->

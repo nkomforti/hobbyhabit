@@ -19,9 +19,9 @@ class User(db.Model):
                         autoincrement=True,
                         primary_key=True)
     first_name = db.Column(db.String(25),
-                           nullable=False,)
+                           nullable=True,)
     last_name = db.Column(db.String(25),
-                          nullable=False)
+                          nullable=True)
     email = db.Column(db.String(64),
                       unique=True,
                       nullable=False)
