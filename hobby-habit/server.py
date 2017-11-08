@@ -28,8 +28,8 @@ def homepage():
 def partial_registration(username):
     """Display remaining registration form.
 
-    User will only see this page if sign up was started directly on homepage and
-    not by clicking on 'Sign up' link in the homepage header, which renders
+    User will only see this page if sign up process began directly on homepage
+    and not by clicking on 'Sign up' link in the homepage header, which renders
     complete registration form.
 
     """
@@ -41,7 +41,7 @@ def partial_registration(username):
 def register_form():
     """Display registration form for user signup."""
 
-    return render_template("complete-registration-form.html")
+    return render_template("complete-registration-form.html")  # Should take you to user's profile page and display the fields that need to be added?? instead of a different form. The completed forms shoul show content and the rest left blank.
 
 
 @app.route('/register', methods=['POST'])
