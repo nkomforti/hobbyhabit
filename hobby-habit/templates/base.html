@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="">
+
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- My CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
+    {% block my_css_link %}CSS LINK GOES HERE{% endblock my_css_link %}
+    
+    <title>
+        {% block title %}TITLE GOES HERE{% endblock title %}
+    </title>
+    
+
 </head>
+
 <body>
-    {% block content %}BODY GOES HERE{% endblock %}
+
+    <article id="banner">
+        {% clock banner_content %}BANNER CONTENT GOES HERE{% endblock banner_content %}
+    </article>
+
+    <div id="body-content">
+        {% block body_content %}BODY GOES HERE{% endblock body_content %}
+    </div>
+
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2017 by <a href="http://.../">Natalie Komforti</a>.
+        {% endblock footer %}
+    </div>
+
+    <!-- JQuery links -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+
+    <!-- JavaScript link -->
+    <!-- <script src="my_js_file.js"></script> -->
+    {% block js_link %}JAVASCRIPT LINK GOES HERE{% endblock js_link %}
+
 </body>
 </html>
+
+
+
+
+
+
+

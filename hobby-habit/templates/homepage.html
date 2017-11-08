@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}HobbyHabit{% endblock %}
+{% block title %}HobbyHabit{% endblock title %}
 
-{% block content %}
+{% block body_content %}
 
     <div class="homepage">
 
-        <header class="header" role="banner">
+        <!-- <header class="header" role="banner"> -->
         <a href="/login">Sign in</a>
         <p>or</p>
-        <a href="/register">Sign up</a> <!-- how do I get Sign in or Sign up on the same line?? CSS display inline?? -->
-        </header>
+        <a href="/register">Sign up</a> <!-- how do I display inline?? -->
+        <!-- </header> -->
 
         <!-- I want this all aligned to the left -->
         <h1>HobbyHabit is a place to...(ADD DETAILS)</h1> 
@@ -21,6 +21,7 @@
 
         <!-- I want this all aligned to the right -->
         <form action="/register" method="POST">
+
             Username<br><input type="text" name="username" placeholder="Pick a username" required>
             <br>
             <br>
@@ -31,8 +32,13 @@
             <br>
             <br>
             <input type="submit" value="Sign up for HobbyHabit">
+            
         </form>
 
     </div>
 
-{% endblock %}
+{% endblock body_content %}
+
+{% block js_link %}
+    <!-- <script type="text/javascript" src="my_js_file.js"></script> -->
+{% endblock js_link %}

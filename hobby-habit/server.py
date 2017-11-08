@@ -10,11 +10,12 @@ from model import connect_to_db, User, Completion, Goal, Hobby
 
 
 app = Flask(__name__)
-app.jinja_env.undefined = StrictUndefined
+
+app.jinja_env.undefined = StrictUndefined  # Raises an error if an undefined variable is used in Jinja 2.
+
+app.jinja_env.auto_reload = True  # What does this do??
 
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
-
-# Raises an error if an undefined variable is used in Jinja 2.
 
 
 @app.route('/')
@@ -24,25 +25,26 @@ def homepage():
     return render_template("homepage.html")
 
 
-@app.route('/remaining-registration/<username>', methods=['POST'])
-def partial_registration(username):
-    """Display remaining registration form.
-
-    User will only see this page if sign up process began directly on homepage
-    and not by clicking on 'Sign up' link in the homepage header, which renders
-    complete registration form.
-
-    """
-
-    return render_template("partial-registration-form.html")
-
-
 @app.route('/register', methods=['GET'])
 def register_form():
-    """Display registration form for user signup."""
+    """Display registration form for user sign up."""
 
-    return render_template("complete-registration-form.html")  # Should take you to user's profile page and display the fields that need to be added?? instead of a different form. The completed forms shoul show content and the rest left blank.
+    return render_template("registration-form.html")  # Should take you to user's profile page and display the fields that need to be added?? instead of a different form. The completed forms shoul show content and the rest left blank.
 
+
+@app.route('/welcome')
+def welcome_user():
+    """Display welcome page for user to add hobbies and habits."""
+
+    return render_template("welcome.html")
+
+
+@app.route('welcome', methods=['POST'])
+def process_welcome_form():
+    """Process welcom form and add user hobbies to database."""
+
+    hobby_habit = request.form.get("hobby-habit")
+    pass
 
 @app.route('/register', methods=['POST'])
 def process_register_form():
