@@ -21,7 +21,8 @@
 <body>
 
     <article id="banner">
-        {% clock banner_content %}BANNER CONTENT GOES HERE{% endblock banner_content %}
+        <!-- <img id-"banner-logo" src=""> -->
+        {% block banner_content %}BANNER CONTENT GOES HERE{% endblock banner_content %}
     </article>
 
     <div id="body-content">
@@ -30,7 +31,7 @@
 
     <div id="footer">
         {% block footer %}
-        &copy; Copyright 2017 by <a href="http://.../">Natalie Komforti</a>.
+        &copy; Copyright 2017 by <!-- <a href=""> -->Natalie Komforti<!-- </a> -->.
         {% endblock footer %}
     </div>
 

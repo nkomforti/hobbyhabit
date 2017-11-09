@@ -1,44 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}HobbyHabit{% endblock title %}
+    {% block my_css_link %}
+        <!-- <link rel="stylesheet" type="text/css" href=""> -->
+    {% endblock my_css_link %}
 
-{% block body_content %}
+    {% block title %}HobbyHabit{% endblock title %}
 
     <div class="homepage">
 
-        <!-- <header class="header" role="banner"> -->
-        <a href="/login">Sign in</a>
-        <p>or</p>
-        <a href="/register">Sign up</a> <!-- how do I display inline?? -->
-        <!-- </header> -->
+        {% block banner_content %}
+            <a href="/login">Sign in</a>
+            <p>or</p>
+            <a href="/register">Sign up</a> <!-- how do I display inline?? -->
+        {% endblock banner_content %}
 
-        <!-- I want this all aligned to the left -->
-        <h1>HobbyHabit is a place to...(ADD DETAILS)</h1> 
-        <br>
-        <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
-        <br>
-        <br>
+        {% block body_content %}
 
-        <!-- I want this all aligned to the right -->
-        <form action="/register" method="POST">
+            <h1>HobbyHabit is a place to...(ADD DETAILS)</h1> 
+            <br>
+            <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
+            <br>
+            <br>
 
-            Username<br><input type="text" name="username" placeholder="Pick a username" required>
-            <br>
-            <br>
-            Email<br><input type="email" name="email" placeholder="you@example.com" required>
-            <br>
-            <br>
-            Password<br><input type="password" name="password" placeholder="Create a password" required>
-            <br>
-            <br>
-            <input type="submit" value="Sign up for HobbyHabit">
-            
-        </form>
+            <form action="/welcome" method="POST">
+                Username<br>
+                <input type="text" name="username" placeholder="Pick a username" required>
+                <br>
+                <br>
+                Email<br>
+                <input type="email" name="email" placeholder="you@example.com" required>
+                <br>
+                <br>
+                Password<br>
+                <input type="password" name="password" placeholder="Create a password" required>
+                <br>
+                <br>
+                <input type="submit" value="Sign up for HobbyHabit">
+            </form>
+
+        {% endblock body_content %}
 
     </div>
 
-{% endblock body_content %}
 
-{% block js_link %}
-    <!-- <script type="text/javascript" src="my_js_file.js"></script> -->
-{% endblock js_link %}
+    {% block js_link %}
+        <!-- <script type="text/javascript" src="my_js_file.js"></script> -->
+    {% endblock js_link %}
