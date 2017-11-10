@@ -35,11 +35,13 @@ class User(db.Model):
                         nullable=True)
 
     def __repr__(self):
-        """Provide helpful representation about user when printed."""
+        """Provide helpful representation about a User when printed."""
 
         s = "<User user_id=%s email=%s username=%s>"
 
-        return s % (self.user_id, self.email, self.username)
+        return s % (self.user_id,
+                    self.email,
+                    self.username)
 
 
 class Completion(db.Model):
@@ -50,23 +52,24 @@ class Completion(db.Model):
     completion_id = db.Column(db.Integer,
                               autoincrement=True,
                               primary_key=True)
-    goal_id = db.Column(db.Integer,
-                        db.ForeignKey('goals.goal_id'))
     date = db.Column(db.DateTime,
                      nullable=False)
     notes = db.Column(db.Text,
                       nullable=True)
+    user_hobby_id = db.Column(db.Integer,
+                              db.ForeignKey('user_hobbies.user_hobby_id'))
 
-    goal = db.relationship("Goal",
-                           backref=db.backref("completions"))
+    user_hobby = db.relationship("UserHobby",
+                                 backref=db.backref("completions"))
 
     def __repr__(self):
-        """Provide helpful representation about completed hobby/habbit when printed.
-        """
+        """Provide helpful representation about Completion when printed."""
 
-        s = '<Completion completion_id=%s goal_id=%s>'
+        s = '<Completion completion_id=%s user_id=%s hobby_id=%s >'
 
-        return s % (self.completion_id, self.goal_id)
+        return s % (self.completion_id,
+                    self.user_hobby.user_id,
+                    self.user_hobby.hobby_id)
 
 
 class Goal(db.Model):
@@ -77,34 +80,28 @@ class Goal(db.Model):
     goal_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey('users.user_id'))
-    hobby_id = db.Column(db.Integer,
-                         db.ForeignKey('hobbies.hobby_id'))
+    user_hobby_id = db.Column(db.Integer,
+                              db.ForeignKey('user_hobbies.user_hobby_id'))
     goal_frequency_num = db.Column(db.Integer,
                                    nullable=False)  # Number of times per...
-    goal_frequency_time_unit = db.Column(db.String(5),
-                                         db.Enum('Day',
+    goal_frequency_time_unit = db.Column(db.Enum('Day',
                                                  'Week',
                                                  'Month',
                                                  'Year',
                                                  name='goal_frequency_time_unit'),
                                          nullable=False)  # day/week/month/year
 
-    # Define relationship to user.
-    user = db.relationship("User",
-                           backref=db.backref("goals"))
-
-    # Define relationship to hobby/habbit.
-    hobby = db.relationship("Hobby",
-                            backref=db.backref("hobbies"))
+    user_hobby = db.relationship("UserHobby",
+                                 backref=db.backref("goals"))
 
     def __repr__(self):
-        """Provide helpful representation about user goal when printed."""
+        """Provide helpful representation about Goal when printed."""
 
         s = '<Goal goal_id=%s user_id=%s hobby_id=%s>'
 
-        return s % (self.goal_id, self.user_id, self.hobby_id)
+        return s % (self.goal_id,
+                    self.user_hobby.user_id,
+                    self.user_hobby.hobby_id)
 
 
 class Hobby(db.Model):
@@ -121,11 +118,43 @@ class Hobby(db.Model):
                              default=False)  # No autocompletion for user added hobbies/habits. In seed.py will set non-user-added hobbies/habits to True.
 
     def __repr__(self):
-        """Provide helpful representation about a hobby/habit when printed."""
+        """Provide helpful representation about Hobby when printed."""
 
         s = '<Hobby hobby_id=%s hobby_name=%s>'
 
-        return s % (self.hobby_id, self.hobby_name)
+        return s % (self.hobby_id,
+                    self.hobby_name)
+
+
+class UserHobby(db.Model):
+    """Association table to bridge users and hobbies."""
+
+    __tablename__ = "user_hobbies"
+
+    user_hobby_id = db.Column(db.Integer,
+                              autoincrement=True,
+                              primary_key=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.user_id'))
+    hobby_id = db.Column(db.Integer,
+                         db.ForeignKey('hobbies.hobby_id'))
+
+    # Define relationship to user.
+    user = db.relationship("User",
+                           backref=db.backref("user_hobbies"))
+
+    # Define relationship to hobby/habbit.
+    hobby = db.relationship("Hobby",
+                            backref=db.backref("user_hobbies"))
+
+    def __repr__(self):
+        """Provide helpful representation aboout UserHobby when printed."""
+
+        s = '<UserHobby user_hobby_id=%s user_id=%s hoby_id=%s>'
+
+        return s % (self.user_hobby_id,
+                    self.user.user_id,
+                    self.hobby.hobby_id)
 
 
 ################################################################################
