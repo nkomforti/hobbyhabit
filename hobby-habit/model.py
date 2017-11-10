@@ -1,7 +1,6 @@
 """Models and database functions for HobbyHabit project."""
 
 from flask_sqlalchemy import SQLAlchemy
-
 from flask import Flask
 
 db = SQLAlchemy()
@@ -144,6 +143,7 @@ def connect_to_db(app):
 
 if __name__ == "__main__":
 
-    app = Flask(__name__)  # dummy instance of Flask class. Using this instead of: from server import app
-    connect_to_db(app)
+    app = Flask(__name__)  # Dummy instance of Flask class. Using this instead of: from server import app
+    connect_to_db(app)  # Connect database to Flask app
+    db.create_all()  # Create database
     print "Connected to DB."

@@ -9,20 +9,21 @@
     <div class="homepage">
 
         {% block banner_content %}
-            <a href="/login">Sign in</a>
-            <p>or</p>
-            <a href="/register">Sign up</a> <!-- how do I display inline?? -->
+
+            <span id="login-link"><a href="/login">Login</a></span>
+            <!--  or <span id="sign-up-link"><a href="/register">Sign up</a></span> -->
+
         {% endblock banner_content %}
 
         {% block body_content %}
 
-            <h1>HobbyHabit is a place to...(ADD DETAILS)</h1> 
+            <h1>HobbyHabit is a place to...</h1> 
             <br>
             <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
             <br>
             <br>
 
-            <form action="/welcome" method="POST">
+            <form action="/register" method="POST">
                 Username<br>
                 <input type="text" name="username" placeholder="Pick a username" required>
                 <br>

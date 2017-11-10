@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+    {% block my_css_link %}
+        <!-- <link rel="stylesheet" type="text/css" href=""> -->
+    {% endblock my_css_link %}
+
+    {% block title %}Welcome to HobbyHabit{% endblock title %}
+
+    <div class="add-goals">
+
+        {% block banner_content %}
+            <!-- <a href=""></a> -->
+        {% endblock banner_content %}
+
+        {% block body_content %}
+            <h1>
+                Get Started
+            </h1>
+            <h2>
+                Add a hobby or habit you want to track. Click the '+' to add multiple hobbies or habits.
+            </h2>
+
+            <form id="add-hobbies" action="/process-goals" method="POST"> <!-- How do I get the user to already be logged in at this point? -->
+                <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
+                <div></div>
+                <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="Hobby No. 1">
+                <button id="plus-btn" type="button">
+                    <img src="/static/js/plus.png" alt="Add another hobby" style="width:50px;height:50px;"/>
+                </button>
+                <br>
+                <br>
+                <input type="submit" value="Continue">
+            </form>
+
+        {% endblock body_content %}
+
+    </div>
+
+    {% block js_link %}
+        <script type="text/javascript" src="add-hobbies.js"></script>
+    {% endblock js_link %}
