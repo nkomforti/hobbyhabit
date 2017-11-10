@@ -52,7 +52,7 @@ def register_user():
         return redirect("/add-hobbies")
 
 
-@app.route('/add-hobbies', methods=['POST'])
+@app.route('/add-hobbies', methods=['GET'])
 def display_add_hobbies_form():
     """Display add hobbies form."""
 
@@ -94,38 +94,40 @@ def display_add_goals_form():
 def process_add_goals_form():
     """Process add goals form."""
 
-    # get data from form.
-    # add data to db, assigning to appropriate hobby.
+    # # get data from form.
+    # # add data to db, assigning to appropriate hobby.
 
-    # num_hobbies = request.form.get("num-hobbies")
+    # # num_hobbies = request.form.get("num-hobbies")
 
-    #make as many new goals as were input
-    for hobby_num in range(num_hobbies):
+    # #make as many new goals as were input
+    # for hobby_num in range(num_hobbies):
 
-        #get hobby name, see if it's in the DB
-        hobby_name = request.form.get("hobby-name-" + str(hobby_num + 1))
-        hobby_obj = Hobby.query.filter(Hobby.hobby_name == hobby_name).first()
+    #     #get hobby name, see if it's in the DB
+    #     hobby_name = request.form.get("hobby-name-" + str(hobby_num + 1))
+    #     hobby_obj = Hobby.query.filter(Hobby.hobby_name == hobby_name).first()
 
-        #if it's not in the DB, add it
-        if not hobby_obj:
-            hobby_obj = Hobby(hobby_name=hobby_name)
-            db.session.add(hobby_obj)
-            db.session.commit()
+    #     #if it's not in the DB, add it
+    #     if not hobby_obj:
+    #         hobby_obj = Hobby(hobby_name=hobby_name)
+    #         db.session.add(hobby_obj)
+    #         db.session.commit()
 
-        #create a new goal and assign it data
-        new_goal = Goal()
-        new_goal.user_id = session["user_id"]
-        new_goal.hobby = hobby_obj
-        new_goal.goal_frequency_num = (
-            request.form.get("hobby-freq-num-" + str(hobby_num + 1)))
-        new_goal.goal_frequency_time_unit = (
-            request.form.get("hobby-freq-time-unit-" + str(hobby_num + 1)))
-        db.session.add(new_goal)
+    #     #create a new goal and assign it data
+    #     new_goal = Goal()
+    #     new_goal.user_id = session["user_id"]
+    #     new_goal.hobby = hobby_obj
+    #     new_goal.goal_frequency_num = (
+    #         request.form.get("hobby-freq-num-" + str(hobby_num + 1)))
+    #     new_goal.goal_frequency_time_unit = (
+    #         request.form.get("hobby-freq-time-unit-" + str(hobby_num + 1)))
+    #     db.session.add(new_goal)
 
-    #add the new goals to the DB
-    db.session.commit()
+    # #add the new goals to the DB
+    # db.session.commit()
 
-    return redirect("/dashboard")
+    # return redirect("/dashboard")
+
+    pass
 
 
 @app.route('/dashboard', methods=['POST'])

@@ -14,22 +14,14 @@
 
         {% block body_content %}
             <h1>
-                Get Started
+                Set Goals
             </h1>
             <h2>
-                Add a hobby or habit you want to track. Click the '+' to add multiple hobbies or habits.
+                Option to set goals
             </h2>
 
-            <form id="add-hobbies" action="/process-goals" method="POST"> <!-- How do I get the user to already be logged in at this point? -->
-                <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
-                <div></div>
-                <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="Hobby No. 1">
-                <button id="plus-btn" type="button">
-                    <img src="/static/js/plus.png" alt="Add another hobby" style="width:50px;height:50px;"/>
-                </button>
-                <br>
-                <br>
-                <input type="submit" value="Continue">
+            <form id="add-goals" action="/process-goals" method="POST">
+                <!-- User will see a list of their hobbies, which are all clickable. On click a form will display with two fields: hobby-freq-num and hobby-freq-time-unit -->
             </form>
 
         {% endblock body_content %}
