@@ -12,12 +12,11 @@ $("#plus-btn").click(function (evt) {
 
     // Every time the plus button is clicked, create new add hobby input field.
     let newHobbyNameField = $("<input>");
-    // Add attributes to the new input field.
+    // Add attributes and values to the new input field.
     newHobbyNameField.attr({"id": "hobby-name-" + numHobbies,
                             "type": "text",
                             "name": "hobby-name-" + numHobbies,
                             "placeholder": "Hobby No. " + numHobbies,
-                            "display": "block"
     });
 
     // Put the new input into the DOM.
@@ -48,7 +47,7 @@ $(document).on("keyup", "#add-hobbies input", function (evt) {
                 // tracking variable equal to true (because field is empty).
                 $("#plus-btn").prop("disabled", true);
                 empty = true;
-            }   
+            }
         });
 
         // Check if tracking variable equals false (input fields not empty).

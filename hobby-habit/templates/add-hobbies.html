@@ -19,16 +19,16 @@
             <h2>
                 Add a hobby or habit you want to track. Click the '+' to add multiple hobbies or habits.
             </h2>
-<!-- add div inside form and and move submit outside of div but still inside form -->
-            <form id="add-hobbies" action="/process-hobbies" method="POST"> <!-- How do I get the user to already be logged in at this point? -->
-                <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
-                <div></div>
-                <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="Hobby No. 1">
-                <button id="plus-btn" type="button" disabled>
-                    <img src="/static/images/plus.png" alt="Add another hobby" style="width:50px;height:50px;"/>
-                </button>
-                <br>
-                <br>
+
+            <form id="hobbies-form" action="/process-hobbies" method="POST">
+                <div id="add-hobbies">
+                    <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
+                    <div></div>
+                    <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="Hobby No. 1">
+                    <button id="plus-btn" type="button" disabled>
+                        <img src="/static/images/plus.png" alt="Add another hobby" style="width:50px;height:50px;"/>
+                    </button>
+                </div>
                 <input type="submit" value="Continue">
             </form>
 

@@ -23,7 +23,7 @@ def homepage():
 def register_user():
     """Process registration form and add user to database."""
 
-    # Get form data.
+    # Get data from form.
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"]
@@ -148,7 +148,7 @@ def login_form():
 def process_login_form():
     """Process login form."""
 
-    # Get form variables.
+    # Get data from form.
     username = request.form["username"]
     password = request.form["password"]
 
@@ -167,8 +167,6 @@ def process_login_form():
     flash("Login successful")
 
     return redirect("/dashboard")
-
-    # return redirect("/dashboard/%s" % user.user_id)
 
 
 @app.route('/logout')
