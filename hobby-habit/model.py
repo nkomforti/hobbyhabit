@@ -37,12 +37,13 @@ class User(db.Model):
     # Define relationship to hobby.
     hobby = db.relationship("Hobby",
                             secondary="user_hobbies",
-                            backref=db.backref("users"))  # Do I need hobby_id as a FK?
+                            backref=db.backref("users"))
 
     # Define relationship to goal.
     goal = db.relationship("UserHobby",
-                           primaryjoin="and_(UserHobby.user_id == User.user_id, UserHobby.goal_active == True)",
-                           backref=db.backref("users"))  # Do I need user_hobby_id as a FK?
+                           primaryjoin=("and_(UserHobby.user_id == User.user_id,"
+                                        + " UserHobby.goal_active == True)"),
+                           backref=db.backref("users"))
 
     # def get_hobby_data_by_user(self):
     #     """Gets helpful hobby data about a particular user object."""
@@ -87,12 +88,12 @@ class UserHobby(db.Model):
                                             "Week",
                                             "Month",
                                             "Year",
-                                            name="goal_frequency_time_unit"),
+                                            name="goal_freq_time_unit"),
                                     nullable=True)  # Day/Week/Month/Year.
 
     # Define relationship to completions.
     completions = db.relationship("Completion",
-                                  order_by="completions.date",
+                                  order_by="Completion.date",
                                   backref=db.backref("completions"))
 
     def __repr__(self):
