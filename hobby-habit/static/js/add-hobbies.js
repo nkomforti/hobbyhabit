@@ -20,7 +20,11 @@ $("#plus-btn").click(function (evt) {
     });
 
     // Put the new input into the DOM.
-    $("#add-hobbies").append(newHobbyNameField);
+    // $("#add-hobbies").append(newHobbyNameField);
+
+    $("<br>").insertBefore("#plus-btn");
+    newHobbyNameField.insertBefore("#plus-btn");
+
 
     // Get the value for the input witht the id num-hobbies.
     $("#num-hobbies").val(numHobbies);
