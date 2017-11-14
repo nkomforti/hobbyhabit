@@ -17,11 +17,40 @@
                 Set Goals
             </h1>
             <h2>
-                Option to set goals
+                Setting goals for your HobbyHabits is optional...
             </h2>
+            <h3>
+                Click a hobby to set a goal for that hobby...
+            </h3>
+            <h5>
+                (Click skip at the bottom to go directly to your dashboard.)
+            </h5>
+
+            <div id="user-hobbies">
+
+                 {% for current_user_hobby in current_user_hobbies %}
+
+                    <button id="current-user-hobby-btn" type="button">{{ current_user_hobby }}</button>
+
+                 {% endfor %}
+
+            </div>
 
             <form id="add-goals" action="/process-goals" method="POST">
-                <!-- User will see a list of their hobbies, which are all clickable. On click a form will display with two fields: hobby-freq-num and hobby-freq-time-unit -->
+
+                <input id="goal-start-date" type="" name="goal-start-date">  <!-- would like this to be a dropdown calendar -->
+
+                <select id="goal-freq-num" name="goal-freq-num" size="5">
+                    <option><!-- range of numbers from 1-50? --></option>
+                </select>
+
+                <select id="goal-freq-time-unit" name="goal-freq-time-unit" size="4">
+                    <option value="Day">Day</option>
+                    <option value="Week">Week</option>
+                    <option value="Month">Month</option>
+                    <option value="Year">Year</option>
+                </select>
+                
             </form>
 
         {% endblock body_content %}
@@ -31,3 +60,7 @@
     {% block js_link %}
         <script type="text/javascript" src="add-hobbies.js"></script>
     {% endblock js_link %}
+
+
+
+

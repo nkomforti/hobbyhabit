@@ -141,8 +141,6 @@ class Completion(db.Model):
                            db.ForeignKey("user_hobbies.user_hobby_id"))
     date = db.Column(db.DateTime,
                      nullable=False)
-    total_practice_time_hours = db.Column(db.Integer,
-                                          nullable=True)  # Is this and the following column the best way to track practice time?
     total_practice_time_minutes = db.Column(db.Integer,
                                             nullable=True)
     notes = db.Column(db.Text,

@@ -16,12 +16,10 @@ $("#plus-btn").click(function (evt) {
     newHobbyNameField.attr({"id": "hobby-name-" + numHobbies,
                             "type": "text",
                             "name": "hobby-name-" + numHobbies,
-                            "placeholder": "Hobby No. " + numHobbies,
+                            "placeholder": "HobbyHabit No. " + numHobbies,
     });
 
     // Put the new input into the DOM.
-    // $("#add-hobbies").append(newHobbyNameField);
-
     $("<br>").insertBefore("#plus-btn");
     newHobbyNameField.insertBefore("#plus-btn");
 

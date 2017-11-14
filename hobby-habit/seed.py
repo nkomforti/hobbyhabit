@@ -3,7 +3,7 @@
 import datetime
 from sqlalchemy import func
 
-from model import User, Completion, Goal, Hobby, connect_to_db, db
+from model import User, Completion, UserHobby, Hobby, connect_to_db, db
 from server import app
 
 # write load functions to add data to database

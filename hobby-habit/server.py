@@ -3,7 +3,7 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, User, Completion, Goal, Hobby, UserHobby
+from model import connect_to_db, db, User, Completion, Hobby, UserHobby
 
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ app.jinja_env.auto_reload = True  # What does this do??
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 
 
+# Display homepage.
 @app.route('/', methods=['GET'])
 def homepage():
     """Display homepage."""
@@ -19,6 +20,7 @@ def homepage():
     return render_template("homepage.html")
 
 
+# Process registration then redirect to page displaying add hobbies form, or redirect existing user to login page.
 @app.route('/register', methods=['POST'])
 def register_user():
     """Process registration form and add user to database."""
@@ -52,6 +54,7 @@ def register_user():
         return redirect("/add-hobbies")
 
 
+# Display dynamic add hobbies form.
 @app.route('/add-hobbies', methods=['GET'])
 def display_add_hobbies_form():
     """Display add hobbies form."""
@@ -59,6 +62,7 @@ def display_add_hobbies_form():
     return render_template("add-hobbies.html")
 
 
+# Process add hobbies form and commit data to DB, then redirect to add goals page.
 @app.route('/process-hobbies', methods=['POST'])
 def process_add_hobbies_form():
     """Process add hobbies form."""
@@ -67,7 +71,7 @@ def process_add_hobbies_form():
     num_hobbies = request.form["num-hobbies"]
 
     # Make as many new goals as user adds to form.
-    for hobby_num in range(num_hobbies):
+    for hobby_num in range(int(num_hobbies)):
 
         # Get hobby name, see if it's in the DB
         hobby_name = request.form.get("hobby-name-" + str(hobby_num + 1))
@@ -79,17 +83,29 @@ def process_add_hobbies_form():
             db.session.add(hobby_obj)
             db.session.commit()
 
-    # What's connecting the hobbies the user adds to the actual user(user_id)?
+    # What's connecting the hobbies the user adds to the actual user(user_id)?? The session??
     return redirect("/add-goals")
 
 
-@app.route('/add-goals', methods=['POST'])
+# Display add goals form.
+@app.route('/add-goals', methods=['GET'])
 def display_add_goals_form():
     """Display add goals form."""
 
-    return render_template("add-goals.html")  # should I make this an ajax request from add hobbies??
+    # Get current user from session.
+    current_user = session["user_id"]
+
+    # Get list of current user's hobbies from DB.
+    current_user_hobbies = db.session.query(User.hobby.hobby_name).filter(User.user_id == current_user).all()
+
+    # user_first_name = db.session.query(User.first_name).filter(User.user_id == current_user).first()
+
+    # Render add goals template and pass list of hobbies to Jinja.
+    return render_template("add-goals.html",
+                           current_user_hobbies=current_user_hobbies)
 
 
+# Process add goals form and commit data to DB, redirect to user dashboard.
 @app.route('/process-goals', methods=['POST'])
 def process_add_goals_form():
     """Process add goals form."""
@@ -130,6 +146,7 @@ def process_add_goals_form():
     pass
 
 
+# Display user dashboard.
 @app.route('/dashboard', methods=['POST'])
 def display_dashboard():
     """Display user's dashboard."""
@@ -137,6 +154,7 @@ def display_dashboard():
     return render_template("dashboard.html")
 
 
+# Display form on login page.
 @app.route('/login', methods=['GET'])
 def login_form():
     """Display login form."""
@@ -144,6 +162,7 @@ def login_form():
     return render_template("login-form.html")
 
 
+# Process login form and add user to session.
 @app.route('/login', methods=['POST'])
 def process_login_form():
     """Process login form."""
@@ -169,6 +188,7 @@ def process_login_form():
     return redirect("/dashboard")
 
 
+# Log user out and remove from session.
 @app.route('/logout')
 def logout():
     """Log out."""
@@ -180,39 +200,6 @@ def logout():
 
 
 ################################################################################
-
-# IGNORE REGISTRATION ROUTES BELOW
-
-
-# @app.route('/register', methods=['GET'])
-# def register_form():
-#     """Display registration form for user sign up."""
-
-#     return render_template("registration-form.html")  # Should take you to user's profile page and display the fields that need to be added?? instead of a different form. The completed forms shoul show content and the rest left blank.
-
-
-# @app.route('/register', methods=['POST'])
-# def process_register_form():
-#     """Process registration form and add user to database."""
-
-#     # Get form variables.
-#     username = request.form["username"]
-#     email = request.form["email"]
-#     password = request.form["password"]
-
-#     new_user = User(first_name=first_name,
-#                     last_name=last_name,
-#                     email=email,
-#                     username=username,
-#                     password=password,
-#                     phone=phone,
-#                     zipcode=zipcode)
-
-#     db.session.add(new_user)
-#     db.session.commit()
-
-#     flash("User, %s, successfully registered." % username)
-#     return redirect("/")
 
 
 if __name__ == "__main__":
