@@ -141,8 +141,8 @@ class Completion(db.Model):
                            db.ForeignKey("user_hobbies.user_hobby_id"))
     date = db.Column(db.DateTime,
                      nullable=False)
-    total_practice_time_minutes = db.Column(db.Integer,
-                                            nullable=True)
+    total_practice_time = db.Column(db.Integer,
+                                    nullable=True)
     notes = db.Column(db.Text,
                       nullable=True)
 

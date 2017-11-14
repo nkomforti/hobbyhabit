@@ -1,17 +1,19 @@
 """Utility file to seed hobbyhabbit database."""
 
 import datetime
-from sqlalchemy import func
 
 from model import User, Completion, UserHobby, Hobby, connect_to_db, db
 from server import app
 
-# write load functions to add data to database
-# dont forget to: db.session.add(data_being_added) and then db.session.commit()
+
 def load_users():
     """Load users from u.user into database."""
 
-    print "Users"
+    print "User"
+
+    # Delete all rows in table, so if we need to run this a second time,
+    # we won't be trying to add duplicate users
+    User.query.delete()
 
     for i, row in enumerate(open("seed-data/u.user")):
         row = row.rstrip()
@@ -43,15 +45,47 @@ def load_users():
     db.session.commit()
 
 
+def load_hobbies():
+    """Load hobbies from u.hobby into database."""
+
+    print "Hobby"
+
+    Hobby.query.delete()
+
+    for i, row in enumerate(open("seed-data/u.hobby")):
+        row = row.rstrip()
+
+        hobby_name, autocomplete = row.split("|")
+
+        if autocomplete:
+            autocomplete = True
+        else:
+            autocomplete = False
+
+        hobby = Hobby(hobby_name=hobby_name,
+                      autocomplete=autocomplete)
+
+        db.session.add(hobby)
+
+        if i % 100 == 0:
+            print i
+
+    db.session.commit()
+
+
 def load_user_hobbies():
     """Load user hobbies from u.userhobby into database."""
 
-    print "User Hobbies"
+    print "UserHobby"
+
+    UserHobby.query.delete()
 
     for i, row in enumerate(open("seed-data/u.userhobby")):
         row = row.rstrip()
 
-        (goal_start_date_str,
+        (user_id,
+         hobby_id,
+         goal_start_date_str,
          goal_active,
          goal_freq_num,
          goal_freq_time_unit) = row.split("|")
@@ -69,7 +103,17 @@ def load_user_hobbies():
         else:
             goal_freq_num = None
 
+        if not goal_freq_time_unit:
+            goal_freq_time_unit = None
+
+        if not goal_active:
+            goal_active = None
+
+        # import pdb; pdb.set_trace()
+
         user_hobby = UserHobby(goal_start_date=goal_start_date,
+                               user_id=user_id,
+                               hobby_id=hobby_id,
                                goal_active=goal_active,
                                goal_freq_num=goal_freq_num,
                                goal_freq_time_unit=goal_freq_time_unit)
@@ -91,34 +135,43 @@ def load_user_hobbies():
     db.session.commit()
 
 
-def load_hobbies():
-    """Load hobbies from u.hobby into database."""
-
-    pass
-
-
 def load_completions():
     """Load completions from u.completion into database."""
 
-    pass
+    print "Completion"
 
+    Completion.query.delete()
 
-def set_user_id():
-    """Set value for the next user_id after seeding the database."""
+    with open("seed-data/u.completion") as completions_data:
 
-    # Get the Max user_id in the database.
-    result = db.session.query(func.max(User.user_id)).one()
-    max_id = int(result[0])
+        for i, completion_data in enumerate(completions_data):
+            completion_data = completion_data.rstrip()
+            date_str, total_practice_time, notes = completion_data.split("|")
 
-    # Set the value for the next user_id to be max_id +1
-    query = "SELECT setval('users_user_id_seq', :new_id)"
-    db.session.execute(query, {'new_id': max_id + 1})
-    db.session.commit()
+            date = datetime.datetime.strptime(date_str, "%d-%m-%Y")
+
+            if total_practice_time:
+                total_practice_time = int(total_practice_time)
+            else:
+                total_practice_time = None
+
+            completion = Completion(date=date,
+                                    total_practice_time=total_practice_time,
+                                    notes=notes)
+
+            db.session.add(completion)
+
+            if i % 100 == 0:
+                print i
+
+        db.session.commit()
 
 
 if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
 
-    # call load functions here
-    set_user_id()
+    load_users()
+    load_hobbies()
+    load_user_hobbies()
+    load_completions()
