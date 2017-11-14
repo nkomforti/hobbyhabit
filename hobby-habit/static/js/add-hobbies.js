@@ -1,3 +1,4 @@
+"use strict";
 
 // Select element with id plus-button and attach an event listener to it that
 // will call the following anonymous function when clicked.
