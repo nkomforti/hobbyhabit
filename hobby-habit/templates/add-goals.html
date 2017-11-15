@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
     {% block my_css_link %}
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
     {% endblock my_css_link %}
 
-    {% block title %}Welcome to HobbyHabit{% endblock title %}
+    {% block title %}HobbyHabit: Add Goals{% endblock title %}
 
     <div class="add-goals">
 
@@ -29,22 +29,22 @@
             <div id="user-hobbies">
 
                  {% for current_user_hobby in current_user_hobbies %}
+                    {% for hobby_name in current_user_hobby %}
 
-                    <button id="current-user-hobby-btn" type="button">{{ current_user_hobby }}</button>
+                    <button id="current-user-hobby-btn" type="button">{{ hobby_name.title() }}</button>
 
+                    {% endfor %}
                  {% endfor %}
 
             </div>
 
             <form id="add-goals" action="/process-goals" method="POST">
 
-                <input id="goal-start-date" type="" name="goal-start-date">  <!-- would like this to be a dropdown calendar -->
+                <input id="goal-start-date" type="text" name="goal-start-date">
 
-                <select id="goal-freq-num" name="goal-freq-num" size="5">
-                    <option><!-- range of numbers from 1-50? --></option>
-                </select>
+                <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="50">
 
-                <select id="goal-freq-time-unit" name="goal-freq-time-unit" size="4">
+                <select id="goal-freq-time-unit" name="goal-freq-time-unit">
                     <option value="Day">Day</option>
                     <option value="Week">Week</option>
                     <option value="Month">Month</option>
@@ -58,9 +58,7 @@
     </div>
 
     {% block js_link %}  
-        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="static/js/add-hobbies.js"></script>
+        <script type="text/javascript" src="static/js/add-goals.js"></script>
     {% endblock js_link %}
 
 

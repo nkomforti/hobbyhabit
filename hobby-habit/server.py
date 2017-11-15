@@ -83,6 +83,14 @@ def process_add_hobbies_form():
             db.session.add(hobby_obj)
             db.session.commit()
 
+        user_hobby_obj = UserHobby.query.filter(UserHobby.hobby_id == hobby_obj.hobby_id, UserHobby.user_id == session["user_id"]).first()
+
+        if not user_hobby_obj:
+            user_hobby_obj = UserHobby(user_id=session["user_id"],
+                                       hobby_id=hobby_obj.hobby_id)
+            db.session.add(user_hobby_obj)
+            db.session.commit()
+
     # What's connecting the hobbies the user adds to the actual user(user_id)?? The session??
     return redirect("/add-goals")
 
@@ -96,9 +104,13 @@ def display_add_goals_form():
     current_user = session["user_id"]
 
     # Get list of current user's hobbies from DB.
-    current_user_hobbies = db.session.query(User.hobby.hobby_name).filter(User.user_id == current_user).all()
+    hobby_ids = db.session.query(UserHobby.hobby_id).filter(UserHobby.user_id == current_user).subquery()
 
-    # user_first_name = db.session.query(User.first_name).filter(User.user_id == current_user).first()
+    current_user_hobbies = db.session.query(Hobby.hobby_name).filter(Hobby.hobby_id.in_(hobby_ids)).all()
+
+
+
+    print current_user_hobbies
 
     # Render add goals template and pass list of hobbies to Jinja.
     return render_template("add-goals.html",
