@@ -83,40 +83,10 @@ def load_user_hobbies():
     for i, row in enumerate(open("seed-data/u.userhobby")):
         row = row.rstrip()
 
-        (user_id,
-         hobby_id,
-         goal_start_date_str,
-         goal_active,
-         goal_freq_num,
-         goal_freq_time_unit) = row.split("|")
+        user_id, hobby_id = row.split("|")
 
-        # The date is in the file as daynum-month_abbreviation-year;
-        # we need to convert it to an actual datetime object.
-        if goal_start_date_str:
-            goal_start_date = datetime.datetime.strptime(goal_start_date_str,
-                                                         "%d-%m-%Y")
-        else:
-            goal_start_date = None
-
-        if goal_freq_num:
-            goal_freq_num = int(goal_freq_num)
-        else:
-            goal_freq_num = None
-
-        if not goal_freq_time_unit:
-            goal_freq_time_unit = None
-
-        if not goal_active:
-            goal_active = None
-
-        # import pdb; pdb.set_trace()
-
-        user_hobby = UserHobby(goal_start_date=goal_start_date,
-                               user_id=user_id,
-                               hobby_id=hobby_id,
-                               goal_active=goal_active,
-                               goal_freq_num=goal_freq_num,
-                               goal_freq_time_unit=goal_freq_time_unit)
+        user_hobby = UserHobby(user_id=user_id,
+                               hobby_id=hobby_id)
 
         # We need to add to the session or it won't ever be stored
         db.session.add(user_hobby)
@@ -142,7 +112,48 @@ def load_goals():
 
     Goal.query.delete()
 
-    pass  # finish this
+    with open("seed-data/u.goal") as goals_data:
+
+        for i, goal_data in enumerate(goals_data):
+            goal_data = goal_data.rstrip()
+
+            (user_hobby_id,
+             goal_start_date_str,
+             goal_active,
+             goal_freq_num,
+             goal_freq_time_unit) = goal_data.split("|")
+
+            # Convert date string to a datetime object.
+            if goal_start_date_str:
+                goal_start_date = datetime.datetime.strptime(goal_start_date_str,
+                                                             "%d-%m-%Y")
+            else:
+                goal_start_date = None
+
+            if goal_freq_num:
+                goal_freq_num = int(goal_freq_num)
+            else:
+                goal_freq_num = None
+
+            if not goal_freq_time_unit:
+                goal_freq_time_unit = None
+
+            if not goal_active:
+                goal_active = None
+
+            goal = Goal(user_hobby_id=user_hobby_id,
+                        goal_start_date=goal_start_date,
+                        goal_active=goal_active,
+                        goal_freq_num=goal_freq_num,
+                        goal_freq_time_unit=goal_freq_time_unit)
+
+            # We need to add to the session or it won't ever be stored
+            db.session.add(goal)
+
+            if i % 100 == 0:
+                print i
+
+        db.session.commit()
 
 
 def load_completions():
@@ -184,4 +195,5 @@ if __name__ == "__main__":
     load_users()
     load_hobbies()
     load_user_hobbies()
+    load_goals()
     load_completions()

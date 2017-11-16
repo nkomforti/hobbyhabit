@@ -34,19 +34,23 @@ class User(db.Model):
     zipcode = db.Column(db.String(15),
                         nullable=True)
 
-    # Define relationship to hobby.
+    # Define relationship to hobbies.
     hobbies = db.relationship("Hobby",
                               secondary="user_hobbies",
                               backref=db.backref("users"))
 
-    # Define relationship to goal.
-    goal = db.relationship("Goal",
-                           backref=db.backref("goals"))
-
     # # change this
+    # # Define relationship to user_hobbies.
+    # goals = db.relationship("UserHobby",
+    #                         primaryjoin=("and_(UserHobby.user_id == User.user_id,"
+    #                                      + " UserHobby.goal_active == True)"),
+    #                         backref=db.backref("users"))
+
+    # # Define relationship to completions table.
     # completions = db.relationship("Completion",
-    #                               primaryjoin=("and_(UserHobby.user_id == User.user_id,"
-    #                                            + " UserHobby.goal_active == True)"),
+    #                               primaryjoin="UserHobby.user_id == User.user_id",
+    #                               secondaryjoin="UserHobby.user_hobby_id == Completion.user_hobby_id",
+    #                               viewonly=True,
     #                               backref=db.backref("users"))
 
     # def get_hobby_data_by_user(self):
@@ -82,10 +86,10 @@ class UserHobby(db.Model):
     hobby_id = db.Column(db.Integer,
                          db.ForeignKey("hobbies.hobby_id"))
 
-    # Define relationship to completions.
+    # Define relationship to completions table.
     completions = db.relationship("Completion",
                                   order_by="Completion.date",
-                                  backref=db.backref("completions"))
+                                  backref=db.backref("user_hobbies"))
 
     def __repr__(self):
         """Provide helpful representation aboout UserHobby when printed."""
@@ -95,6 +99,29 @@ class UserHobby(db.Model):
         return s % (self.user_hobby_id,
                     self.users.user_id,
                     self.hobbies.hobby_id)
+
+
+class Hobby(db.Model):
+    """User hobby/habit."""
+
+    __tablename__ = "hobbies"
+
+    hobby_id = db.Column(db.Integer,
+                         autoincrement=True,
+                         primary_key=True)
+    hobby_name = db.Column(db.String(64),
+                           nullable=False)
+    autocomplete = db.Column(db.Boolean,
+                             default=False,
+                             nullable=False)  # No autocompletion for user added hobbies/habits. In seed.py will set non-user-added hobbies/habits to True.
+
+    def __repr__(self):
+        """Provide helpful representation about Hobby when printed."""
+
+        s = "<Hobby hobby_id=%s hobby_name=%s>"
+
+        return s % (self.hobby_id,
+                    self.hobby_name)
 
 
 class Goal(db.Model):
@@ -121,7 +148,7 @@ class Goal(db.Model):
                                             name="goal_freq_time_unit"),
                                     nullable=True)  # Day/Week/Month/Year.
 
-    # Define relationship to user_hobbies.
+    # Define relationship to user_hobbies table.
     user_hobby = db.relationship("UserHobby",
                                  order_by="Goal.goal_start_date",
                                  backref=db.backref("goals"))
@@ -136,29 +163,6 @@ class Goal(db.Model):
                     self.user_hobby.user_id)
 
 
-class Hobby(db.Model):
-    """User hobby/habit."""
-
-    __tablename__ = "hobbies"
-
-    hobby_id = db.Column(db.Integer,
-                         autoincrement=True,
-                         primary_key=True)
-    hobby_name = db.Column(db.String(64),
-                           nullable=False)
-    autocomplete = db.Column(db.Boolean,
-                             default=False,
-                             nullable=False)  # No autocompletion for user added hobbies/habits. In seed.py will set non-user-added hobbies/habits to True.
-
-    def __repr__(self):
-        """Provide helpful representation about Hobby when printed."""
-
-        s = "<Hobby hobby_id=%s hobby_name=%s>"
-
-        return s % (self.hobby_id,
-                    self.hobby_name)
-
-
 class Completion(db.Model):
     """Completion log of user hobby/habbit."""
 
@@ -167,7 +171,7 @@ class Completion(db.Model):
     completion_id = db.Column(db.Integer,
                               autoincrement=True,
                               primary_key=True)
-    user_hobby = db.Column(db.Integer,
+    user_hobby_id = db.Column(db.Integer,
                            db.ForeignKey("user_hobbies.user_hobby_id"))
     date = db.Column(db.DateTime,
                      nullable=False)
