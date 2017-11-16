@@ -1,18 +1,17 @@
 "use strict";
 
-// $(function insertDatepicker() {
-//     $("#goal-start-date").datepicker();
-// });
-
+// Select element with id goal-start-date and attach datepicker to it.
 $("#goal-start-date").datepicker();
 
+// Select elements with class add-goal-btn and attatch event listener to them.
 $(".add-goal-btn").click(function(evt) {
+    // On click 
     let next = $(this).data("next");
     let formData = {};
-    formData.goal-start-date = $("#goal-start-date").val();
-    formData.goal-freq-num = $("#goal-freq-num").val();
-    formData.goal-freq-time-unit = $("#goal-freq-time-unit").val();
-    formData.hobby-id = $("#hobby-id").val();
+    formData["goal-start-date"] = $("#goal-start-date").val();
+    formData["goal-freq-num"] = $("#goal-freq-num").val();
+    formData["goal-freq-time-unit"] = $("#goal-freq-time-unit").val();
+    formData["hobby-id"] = $("#hobby-id").val();
 
     $.post("/add-goal", formData, function(results) {
         if (next === "add-more") {

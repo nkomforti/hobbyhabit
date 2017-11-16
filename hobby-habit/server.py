@@ -114,7 +114,7 @@ def display_add_goal_form():
                            current_user=current_user)
 
 
-@app.route('/process-goal', methods=['POST'])
+@app.route('/add-goal', methods=['POST'])
 def process_add_goal_form():
     """Process add-goal form."""
 
@@ -146,12 +146,10 @@ def process_add_goal_form():
 
     db.session.commit()
 
-    pass
-    # Process add goals form and commit data to DB, redirect to user dashboard.
-    # return redirect("/dashboard")  # Now what do I return here?? JS is now rendering this for us.
+    return "Success"  # Javascript is redirecting to /dashboard.
 
 
-@app.route('/dashboard', methods=['POST'])
+@app.route('/dashboard', methods=['GET'])
 def display_dashboard():
     """Display user's dashboard."""
 
