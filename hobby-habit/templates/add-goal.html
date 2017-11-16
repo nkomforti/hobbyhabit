@@ -54,17 +54,18 @@
 
                         <div class="modal-body">
                             <form id="add-goal-form">
-                                <input id="hobby-id" type="hidden" name="hobby-id">  <!-- Change to hidden once working -->
-                                Goal Start Date
-                                <input id="goal-start-date" type="text" name="goal-start-date" placeholder=" -- Select start date --" required>
+                                <input id="hobby-id" type="hidden" name="hobby-id">
+                                Goal Start Date: 
+                                <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
                                 <br>
                                 <br>
-                                Goal Frequency
+                                Goal Frequency: 
                                 <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
                                 <br>
                                 <br>
-                                Goal Time Unit
+                                Goal Time Unit: 
                                 <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
+                                    <option value="" disabled selected>-- Time unit --</option>
                                     <option value="Day">Day</option>
                                     <option value="Week">Week</option>
                                     <option value="Month">Month</option>
@@ -72,8 +73,8 @@
                                 </select>
                                 <br>
                                 <br>
-                                <button class="add-goal-btn" data-next="add-more">Add goal for another HobbyHabit</button> or <!-- Only display if user has more than one hobbyhabit -->
-                                <button class="add-goal-btn" data-next="dashboard">Set goal & continue to dashboard</button>
+                                <button id="add-more" class="add-goal-btn btn-info btn-sm" data-next="add-more">Add goal for another HobbyHabit</button> or <!-- Disable if user does not have more than one hobbyhabit -->
+                                <button class="add-goal-btn btn-info btn-sm" data-next="dashboard">Set goal & continue to dashboard</button>
                             </form>
                         </div>
 

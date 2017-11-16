@@ -7,7 +7,7 @@ $("#plus-btn").click(function (evt) {
     // Get the vlaue for the input with the id numHobbies and bind to variable.
     let numHobbies = $("#num-hobbies").val();
     // Convert string to integer.
-    numHobbies = parseInt(numHobbies);
+    numHobbies = parseInt(numHobbies, 10);
     // Increment numHobbies.
     numHobbies += 1;
 
