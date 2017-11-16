@@ -1,6 +1,12 @@
 "use strict";
 
-$("#goal-start-date").datepicker();
+// $(function insertDatepicker() {
+//     $("#goal-start-date").datepicker();
+// });
+
+$("#goal-start-date").click($(function(evt) {
+    $( "#goal-start-date" ).datepicker();
+} );
 
 $(".add-goal-btn").click(function(evt) {
     let next = $(this).data("next");

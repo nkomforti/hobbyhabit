@@ -110,7 +110,8 @@ def display_add_goal_form():
 
     # Render add goal template and pass list of hobbies to Jinja template.
     return render_template("add-goal.html",
-                           current_user_hobbies=current_user.hobbies)  # does this need a .all()?
+                           current_user_hobbies=current_user.hobbies,
+                           current_user=current_user)
 
 
 @app.route('/process-goal', methods=['POST'])
