@@ -20,7 +20,7 @@
                 Add a hobby or habit you want to track. Click the '+' to add multiple hobbies or habits.
             </h2>
 
-            <form id="hobbies-form" action="/process-hobbies" method="POST">
+            <form id="hobbies-form" action="/process-hobby" method="POST">
                 <div id="add-hobbies">
                     <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
                     <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="HobbyHabit No. 1">
@@ -35,5 +35,5 @@
     </div>
 
     {% block js_link %}
-        <script type="text/javascript" src="static/js/add-hobbies.js"></script>
+        <script type="text/javascript" src="static/js/add-hobby.js"></script>
     {% endblock js_link %}

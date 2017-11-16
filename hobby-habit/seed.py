@@ -2,7 +2,7 @@
 
 import datetime
 
-from model import User, Completion, UserHobby, Hobby, connect_to_db, db
+from model import User, Completion, UserHobby, Hobby, Goal, connect_to_db, db
 from server import app
 
 
@@ -133,6 +133,16 @@ def load_user_hobbies():
 
     # Once we're done, we should commit our work
     db.session.commit()
+
+
+def load_goals():
+    """Load goals from u.goal into database."""
+
+    print "Goal"
+
+    Goal.query.delete()
+
+    pass  # finish this
 
 
 def load_completions():

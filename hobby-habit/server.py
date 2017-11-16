@@ -3,7 +3,7 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, User, Completion, Hobby, UserHobby
+from model import connect_to_db, db, User, Completion, Hobby, UserHobby, Goal
 
 
 app = Flask(__name__)
@@ -12,7 +12,6 @@ app.jinja_env.auto_reload = True  # What does this do??
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 
 
-# Display homepage.
 @app.route('/', methods=['GET'])
 def homepage():
     """Display homepage."""
@@ -20,7 +19,6 @@ def homepage():
     return render_template("homepage.html")
 
 
-# Process registration then redirect to page displaying add hobbies form, or redirect existing user to login page.
 @app.route('/register', methods=['POST'])
 def register_user():
     """Process registration form and add user to database."""
@@ -51,21 +49,22 @@ def register_user():
         flash("Account successfully created")
         session["user_id"] = new_user.user_id
 
-        return redirect("/add-hobbies")
+        return redirect("/add-hobby")
 
 
-# Display dynamic add hobbies form.
-@app.route('/add-hobbies', methods=['GET'])
-def display_add_hobbies_form():
-    """Display add hobbies form."""
+@app.route('/add-hobby', methods=['GET'])
+def display_add_hobby_form():
+    """Display add-hobby form."""
 
-    return render_template("add-hobbies.html")
+    return render_template("add-hobby.html")
 
 
-# Process add hobbies form and commit data to DB, then redirect to add goals page.
-@app.route('/process-hobbies', methods=['POST'])
-def process_add_hobbies_form():
-    """Process add hobbies form."""
+@app.route('/process-hobby', methods=['POST'])
+def process_add_hobby_form():
+    """Process add-hobby form."""
+
+    # Get current user from session.
+    current_user_id = session["user_id"]
 
     # Get data from form.
     num_hobbies = request.form["num-hobbies"]
@@ -83,82 +82,74 @@ def process_add_hobbies_form():
             db.session.add(hobby_obj)
             db.session.commit()
 
-        user_hobby_obj = UserHobby.query.filter(UserHobby.hobby_id == hobby_obj.hobby_id, UserHobby.user_id == session["user_id"]).first()
+        user_hobby_obj = UserHobby.query.filter(UserHobby.hobby_id == hobby_obj.hobby_id,
+                                                UserHobby.user_id == current_user_id).first()
 
         if not user_hobby_obj:
-            user_hobby_obj = UserHobby(user_id=session["user_id"],
+            user_hobby_obj = UserHobby(user_id=current_user_id,
                                        hobby_id=hobby_obj.hobby_id)
             db.session.add(user_hobby_obj)
             db.session.commit()
 
-    # What's connecting the hobbies the user adds to the actual user(user_id)?? The session??
-    return redirect("/add-goals")
+    return redirect("/add-goal")
 
 
-# Display add goals form.
-@app.route('/add-goals', methods=['GET'])
-def display_add_goals_form():
-    """Display add goals form."""
+@app.route('/add-goal', methods=['GET'])
+def display_add_goal_form():
+    """Display add-goal form."""
 
     # Get current user from session.
-    current_user = session["user_id"]
+    current_user_id = session["user_id"]
 
-    # Get list of current user's hobbies from DB.
-    hobby_ids = db.session.query(UserHobby.hobby_id).filter(UserHobby.user_id == current_user).subquery()
+    current_user = User.query.get(current_user_id)
 
-    current_user_hobbies = db.session.query(Hobby.hobby_name).filter(Hobby.hobby_id.in_(hobby_ids)).all()
+    # # Get subquery object of hobby ids for current user from DB.
+    # current_user_hobby_ids_obj = db.session.query(UserHobby.hobby_id).filter(UserHobby.user_id == current_user_id).subquery()
+    # # Get list of hobby names for current user by user-hobby ids from DB.
+    # current_user_hobbies = db.session.query(Hobby.hobby_name).filter(Hobby.hobby_id.in_(current_user_hobby_ids_obj)).all()
 
-
-
-    print current_user_hobbies
-
-    # Render add goals template and pass list of hobbies to Jinja.
-    return render_template("add-goals.html",
-                           current_user_hobbies=current_user_hobbies)
+    # Render add goal template and pass list of hobbies to Jinja template.
+    return render_template("add-goal.html",
+                           current_user_hobbies=current_user.hobbies)  # does this need a .all()?
 
 
-# Process add goals form and commit data to DB, redirect to user dashboard.
-@app.route('/process-goals', methods=['POST'])
-def process_add_goals_form():
-    """Process add goals form."""
+@app.route('/process-goal', methods=['POST'])
+def process_add_goal_form():
+    """Process add-goal form."""
 
-    # # get data from form.
-    # # add data to db, assigning to appropriate hobby.
+    # Get current user from session.
+    current_user_id = session["user_id"]
 
-    # # num_hobbies = request.form.get("num-hobbies")
+    # Get data from form.
+    goal_start_date = request.form["goal-start-date"]
+    goal_freq_num = request.form["goal-freq-num"]
+    goal_freq_time_unit = request.form["goal-freq-time-unit"]
+    hobby_id = request.form["hobby-id"]
 
-    # #make as many new goals as were input
-    # for hobby_num in range(num_hobbies):
+    user_hobby_id = db.session.query(UserHobby).filter(UserHobby.user_id == current_user_id,
+                                                       UserHobby.hobby_id == hobby_id).one().user_hobby_id
 
-    #     #get hobby name, see if it's in the DB
-    #     hobby_name = request.form.get("hobby-name-" + str(hobby_num + 1))
-    #     hobby_obj = Hobby.query.filter(Hobby.hobby_name == hobby_name).first()
+    new_goal = Goal(goal_start_date=goal_start_date,
+                    goal_freq_num=goal_freq_num,
+                    goal_freq_time_unit=goal_freq_time_unit,
+                    user_hobby_id=user_hobby_id,
+                    goal_active=True)
 
-    #     #if it's not in the DB, add it
-    #     if not hobby_obj:
-    #         hobby_obj = Hobby(hobby_name=hobby_name)
-    #         db.session.add(hobby_obj)
-    #         db.session.commit()
+    db.session.add(new_goal)
 
-    #     #create a new goal and assign it data
-    #     new_goal = Goal()
-    #     new_goal.user_id = session["user_id"]
-    #     new_goal.hobby = hobby_obj
-    #     new_goal.goal_frequency_num = (
-    #         request.form.get("hobby-freq-num-" + str(hobby_num + 1)))
-    #     new_goal.goal_frequency_time_unit = (
-    #         request.form.get("hobby-freq-time-unit-" + str(hobby_num + 1)))
-    #     db.session.add(new_goal)
+    active_goal = db.session.query(Goal).filter(Goal.user_hobby_id == user_hobby_id,
+                                                Goal.goal_active.is_(True)).first()  # or Goal.goal_active == True).first()
 
-    # #add the new goals to the DB
-    # db.session.commit()
+    if active_goal:
+        active_goal.goal_active = False
 
-    # return redirect("/dashboard")
+    db.session.commit()
 
     pass
+    # Process add goals form and commit data to DB, redirect to user dashboard.
+    # return redirect("/dashboard")  # Now what do I return here?? JS is now rendering this for us.
 
 
-# Display user dashboard.
 @app.route('/dashboard', methods=['POST'])
 def display_dashboard():
     """Display user's dashboard."""
@@ -166,7 +157,6 @@ def display_dashboard():
     return render_template("dashboard.html")
 
 
-# Display form on login page.
 @app.route('/login', methods=['GET'])
 def login_form():
     """Display login form."""
@@ -174,7 +164,6 @@ def login_form():
     return render_template("login-form.html")
 
 
-# Process login form and add user to session.
 @app.route('/login', methods=['POST'])
 def process_login_form():
     """Process login form."""
@@ -200,7 +189,6 @@ def process_login_form():
     return redirect("/dashboard")
 
 
-# Log user out and remove from session.
 @app.route('/logout')
 def logout():
     """Log out."""

@@ -35,15 +35,19 @@ class User(db.Model):
                         nullable=True)
 
     # Define relationship to hobby.
-    hobby = db.relationship("Hobby",
-                            secondary="user_hobbies",
-                            backref=db.backref("users"))
+    hobbies = db.relationship("Hobby",
+                              secondary="user_hobbies",
+                              backref=db.backref("users"))
 
     # Define relationship to goal.
-    goal = db.relationship("UserHobby",
-                           primaryjoin=("and_(UserHobby.user_id == User.user_id,"
-                                        + " UserHobby.goal_active == True)"),
-                           backref=db.backref("users"))
+    goal = db.relationship("Goal",
+                           backref=db.backref("goals"))
+
+    # # change this
+    # completions = db.relationship("Completion",
+    #                               primaryjoin=("and_(UserHobby.user_id == User.user_id,"
+    #                                            + " UserHobby.goal_active == True)"),
+    #                               backref=db.backref("users"))
 
     # def get_hobby_data_by_user(self):
     #     """Gets helpful hobby data about a particular user object."""
@@ -77,6 +81,32 @@ class UserHobby(db.Model):
                         db.ForeignKey("users.user_id"))
     hobby_id = db.Column(db.Integer,
                          db.ForeignKey("hobbies.hobby_id"))
+
+    # Define relationship to completions.
+    completions = db.relationship("Completion",
+                                  order_by="Completion.date",
+                                  backref=db.backref("completions"))
+
+    def __repr__(self):
+        """Provide helpful representation aboout UserHobby when printed."""
+
+        s = "<UserHobby user_hobby_id=%s user_id=%s hobby_id=%s>"
+
+        return s % (self.user_hobby_id,
+                    self.users.user_id,
+                    self.hobbies.hobby_id)
+
+
+class Goal(db.Model):
+    """"""
+
+    __tablename__ = "goals"
+
+    goal_id = db.Column(db.Integer,
+                        autoincrement=True,
+                        primary_key=True)
+    user_hobby_id = db.Column(db.Integer,
+                              db.ForeignKey("user_hobbies.user_hobby_id"))
     goal_start_date = db.Column(db.DateTime,
                                 nullable=True)
     goal_active = db.Column(db.Boolean,
@@ -91,19 +121,19 @@ class UserHobby(db.Model):
                                             name="goal_freq_time_unit"),
                                     nullable=True)  # Day/Week/Month/Year.
 
-    # Define relationship to completions.
-    completions = db.relationship("Completion",
-                                  order_by="Completion.date",
-                                  backref=db.backref("completions"))
+    # Define relationship to user_hobbies.
+    user_hobby = db.relationship("UserHobby",
+                                 order_by="Goal.goal_start_date",
+                                 backref=db.backref("goals"))
 
     def __repr__(self):
-        """Provide helpful representation aboout UserHobby when printed."""
+        """Provide helpful representation about Goal when printed."""
 
-        s = "<UserHobby user_hobby_id=%s user_id=%s hoby_id=%s>"
+        s = "<Goal goal_id=%s hobby_id=%s user_id=%s>"
 
-        return s % (self.user_hobby_id,
-                    self.user.user_id,
-                    self.hobby.hobby_id)
+        return s % (self.goal_id,
+                    self.user_hobby.hobby_id,
+                    self.user_hobby.user_id)
 
 
 class Hobby(db.Model):
