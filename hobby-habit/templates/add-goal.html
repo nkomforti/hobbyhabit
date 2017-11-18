@@ -6,7 +6,7 @@
 
     {% block title %}HobbyHabit: Add Goals{% endblock title %}
 
-    <div class="add-goals">
+    <div class="add-goal">
 
         {% block body_content %}
             <h1>
@@ -23,17 +23,17 @@
             </h5>
             <br>
 
-                 {% for hobby in current_user_hobbies %}
-                        <div id="current-user-hobby">
+                {% for hobby in current_user_hobbies %}
+                    <div id="current-user-hobby">
 
-                            <!-- Trigger the modal with button. -->
-                            <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
-                                {{ hobby.hobby_name.title() }}
-                            </button>
+                        <!-- Trigger the modal with button. -->
+                        <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
+                            {{ hobby.hobby_name.title() }}
+                        </button>
 
-                        </div>
+                    </div>
                     <br>
-                 {% endfor %}
+                {% endfor %}
 
                 <button id="skip-goal-btn" type="button">
                     Skip
@@ -43,12 +43,37 @@
             <div id="goalModal" class="modal fade">
                 <div class="modal-dialog">
 
+
+
+               <!-- {% if current_user_hobbies|length > 1 %}
+                    <script type='text/javascript'>
+                        $("#add-more").prop("disabled", false);
+                    </script>
+                {% else %}
+                    <script type='text/javascript'>
+                        $("#add-more").prop("disabled", true);
+                    </script>
+                {% endif %} -->
+
+               <!-- <script type='text/javascript'>
+                    $(function () {
+                        if ({{ current_user_hobbies }}.length > 1) {
+                            $("#add-more").prop("disabled", false);
+                        }
+                        else {
+                            $("#add-more").prop("disabled", true);
+                        }
+                    });
+                </script> -->
+
+
+
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">
-                                Set {{ current_user.username }}'s goal for <!-- hobby name -->
+                                Set {{ current_user.username }}'s goal for <span id="hobby-name"></span>
                             </h4>
                         </div>
 

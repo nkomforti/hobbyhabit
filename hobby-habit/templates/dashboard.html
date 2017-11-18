@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 
     {% block my_css_link %}
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
         <!-- <link rel="stylesheet" type="text/css" href=""> -->
     {% endblock my_css_link %}
 
-    {% block title %}HobbyHabit: Dashboard{% endblock title %}
+    {% block title %}HobbyHabit: Dashboard{% endblock title %} <!-- add username?? -->
+
+    <div class="dashboard">
+
+        {% block body_content %}
+
+        <button id="user-profile-btn" class="btn-info btn-lg" type="button">User Profile</button>
+        <br><br>
+        <button id="my-hobbyhabits-btn" class="btn-info btn-lg" type="button">My HobbyHabits</button>
+        <br><br>
+        <button id="social-btn" class="btn-info btn-lg" type="button">Social</button>
+        <br><br>
+        <button id="settings-btn" class="btn-info btn-lg" type="button">Settings</button>
+
+        {% endblock body_content %}
+
+    </div>
+
+    {% block js_link %}  
+        <script type="text/javascript" src="static/js/add-goal.js"></script>
+    {% endblock js_link %}

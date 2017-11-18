@@ -39,22 +39,31 @@ class User(db.Model):
                               secondary="user_hobbies",
                               backref=db.backref("users"))
 
-    # # change this
-    # # Define relationship to user_hobbies.
+    goals = db.relationship("Goal", primaryjoin="User.user_id==UserHobby.user_id",
+                            secondary="user_hobbies",
+                            secondaryjoin="UserHobby.user_hobby_id==Goal.user_hobby_id")
+
+    active_goals = db.relationship("Goal", primaryjoin="User.user_id==UserHobby.user_id",
+                                   secondary="user_hobbies",
+                                   secondaryjoin="and_(UserHobby.user_hobby_id==Goal.user_hobby_id, Goal.goal_active==True)")
+
+    # How do I efficiently query for a user's user_hobbies, completions, goals (active and not active)?? are the relationships built correctly for this?
+
+    # # Define relationship to user_hobbies.  # Goal is now a separate table.
     # goals = db.relationship("UserHobby",
     #                         primaryjoin=("and_(UserHobby.user_id == User.user_id,"
     #                                      + " UserHobby.goal_active == True)"),
     #                         backref=db.backref("users"))
 
-    # # Define relationship to completions table.
+    # # Define relationship to completions table.  # Not necessary.
     # completions = db.relationship("Completion",
     #                               primaryjoin="UserHobby.user_id == User.user_id",
     #                               secondaryjoin="UserHobby.user_hobby_id == Completion.user_hobby_id",
     #                               viewonly=True,
     #                               backref=db.backref("users"))
 
-    # def get_hobby_data_by_user(self):
-    #     """Gets helpful hobby data about a particular user object."""
+    def get_user_data(self):
+        """Gets helpful hobby data for a particular user object."""
 
     #     {"hobby_id": {"completions": [...],
     #                   "goal_freq_num": ...,
@@ -62,6 +71,30 @@ class User(db.Model):
     #      "...": {"...": ...,
     #              "...": ...,
     #              "...": ...}}
+
+        user_data = {}
+
+        # Get list of hobby_objects for user
+        hobbies = self.hobbies
+
+        # Get each hobby_object.
+        for hobby in hobbies:
+            # Get the hobby_id for each hobby.
+            hobby_id = hobby_object.hobby_id
+
+            # Get the hobby_name for each hobby.
+            hobby_name = hobby_object.hobby_name
+
+            # Get user_hobby_id for each hobby.
+            # Get list of completetions for that user_hobby_id.
+            # Get value of goal_active for each user_hobby.
+            # if True:
+            if goal_active:
+                # Get goal_id(s) for each user_hobby goal with active goal.
+                # Get goal_start_date for that goal_id.
+                # Get goal_freq_num for that goal_id.
+                # Get goal_freq_time_unit for that goal_id.
+                pass
 
     def __repr__(self):
         """Provide helpful representation about a User when printed."""
@@ -90,6 +123,9 @@ class UserHobby(db.Model):
     completions = db.relationship("Completion",
                                   order_by="Completion.date",
                                   backref=db.backref("user_hobbies"))
+        # test
+    # user = db.relationship("User",
+    #                        backref=db.backref("user_hobbies"))
 
     def __repr__(self):
         """Provide helpful representation aboout UserHobby when printed."""
@@ -98,7 +134,7 @@ class UserHobby(db.Model):
 
         return s % (self.user_hobby_id,
                     self.users.user_id,
-                    self.hobbies.hobby_id)
+                    self.hobbies.hobby_id)  # ??
 
 
 class Hobby(db.Model):
@@ -172,7 +208,7 @@ class Completion(db.Model):
                               autoincrement=True,
                               primary_key=True)
     user_hobby_id = db.Column(db.Integer,
-                           db.ForeignKey("user_hobbies.user_hobby_id"))
+                              db.ForeignKey("user_hobbies.user_hobby_id"))
     date = db.Column(db.DateTime,
                      nullable=False)
     total_practice_time = db.Column(db.Integer,

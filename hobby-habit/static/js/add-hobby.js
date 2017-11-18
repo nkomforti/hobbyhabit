@@ -20,6 +20,8 @@ $("#plus-btn").click(function (evt) {
                             "placeholder": "HobbyHabit No. " + numHobbies,
     });
 
+    newHobbyNameField.prop("required", true);
+                            
     // Put the new input into the DOM.
     $("<br>").insertBefore("#plus-btn");
     newHobbyNameField.insertBefore("#plus-btn");
@@ -33,19 +35,19 @@ $("#plus-btn").click(function (evt) {
 
 // Select entire page/document and attach an event listenter to it that will
 // call the following anonymous function when a key on the keyboard is released.
-$(document).on("keyup", "#add-hobbies input", function (evt) {
+$(document).on("keyup", "#add-hobby input", function (evt) {
 
         // Create variable to track input field values; set to false to start.
         let empty = false;
 
-        // Select all elements with the id add-hobbies that are also input
+        // Select all elements with the id add-hobby that are also input
         // elements, and run method to iterate over the collection of elements
         // and will call the following function. 
-        $("#add-hobbies input").each(function (evt){
+        $("#add-hobby input").each(function (evt){
 
             // Check if the input value of the current loop iteration (object
             // that currently "owns" the function) is equal to an empty string.
-            if ($(this).val() === "" ){
+            if ($(this).val() === "" ) {
                 // If value equals empty string, disable plus button, and set
                 // tracking variable equal to true (because field is empty).
                 $("#plus-btn").prop("disabled", true);
@@ -59,3 +61,10 @@ $(document).on("keyup", "#add-hobbies input", function (evt) {
             $("#plus-btn").prop("disabled", false);
         }
     });
+
+// $("#hobby-form").submit(function (evt) {
+//     if ($("#hobby-name-1").val() === "") {
+//         evt.preventDefault();
+//     }
+// });
+

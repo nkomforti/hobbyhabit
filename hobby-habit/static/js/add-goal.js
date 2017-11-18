@@ -37,8 +37,11 @@ $(".hobby-goal-btn").click(function(evt) {
     // and bind to variable.
     let hobbyId = $(this).data("hobbyId");
 
-    // Get the value for the selected element with id hobby-id.
+    // Set the value for the selected element with id hobby-id.
     $("#hobby-id").val(hobbyId);
     // And, create and show modal with id goalModal.
     $("#goalModal").modal("show");
+
+    let hobbyName = $(this).text();
+    $("#hobby-name").text(hobbyName);
 });

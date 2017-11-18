@@ -1,15 +1,36 @@
 """HobbyHabit."""
 
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, g, url_for, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Completion, Hobby, UserHobby, Goal
+from functools import wraps
 
 
 app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined  # Raises an error if an undefined variable is used in Jinja 2.
 app.jinja_env.auto_reload = True  # What does this do??
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if g.user is None:  # g is short for global
+            return redirect(url_for('process_login_form', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# Runs before every server request.
+@app.before_request
+def before_request():
+    user_id = session.get("user_id")
+
+    if not user_id:
+        g.user = None
+    else:
+        g.user = User.query.get(user_id)
 
 
 @app.route('/', methods=['GET'])
@@ -53,13 +74,15 @@ def register_user():
 
 
 @app.route('/add-hobby', methods=['GET'])
+@login_required
 def display_add_hobby_form():
     """Display add-hobby form."""
 
     return render_template("add-hobby.html")
 
 
-@app.route('/process-hobby', methods=['POST'])
+@app.route('/add-hobby', methods=['POST'])
+@login_required
 def process_add_hobby_form():
     """Process add-hobby form."""
 
@@ -95,6 +118,7 @@ def process_add_hobby_form():
 
 
 @app.route('/add-goal', methods=['GET'])
+@login_required
 def display_add_goal_form():
     """Display add-goal form."""
 
@@ -115,6 +139,7 @@ def display_add_goal_form():
 
 
 @app.route('/add-goal', methods=['POST'])
+@login_required
 def process_add_goal_form():
     """Process add-goal form."""
 
@@ -150,6 +175,7 @@ def process_add_goal_form():
 
 
 @app.route('/dashboard', methods=['GET'])
+@login_required
 def display_dashboard():
     """Display user's dashboard."""
 
@@ -157,7 +183,7 @@ def display_dashboard():
 
 
 @app.route('/login', methods=['GET'])
-def login_form():
+def display_login_form():
     """Display login form."""
 
     return render_template("login-form.html")
@@ -188,7 +214,7 @@ def process_login_form():
     return redirect("/dashboard")
 
 
-@app.route('/logout')
+@app.route('/logout', methods=["GET"])
 def logout():
     """Log out."""
 
