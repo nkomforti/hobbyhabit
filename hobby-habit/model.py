@@ -56,8 +56,9 @@ class User(db.Model):
 
     user_hobbies = db.relationship("UserHobby",
                                    primaryjoin="User.user_id==UserHobby.user_id",
-                                   backref=db.backref("user"))  # SELECT user_hobby_id, users.first_name FROM user_hobbies JOIN users ON user_hobbies.user_id=users.user_id;
-##########UNUSED RELATIONSHIPS###########
+                                   backref=db.backref("user"))
+
+########## UNUSED RELATIONSHIPS FOR REFERENCE ###########
     # # Define relationship to user_hobbies.  # Goal is now a separate table.
     # goals = db.relationship("UserHobby",
     #                         primaryjoin=("and_(UserHobby.user_id == User.user_id,"
