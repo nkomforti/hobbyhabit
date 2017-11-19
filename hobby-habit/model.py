@@ -70,7 +70,7 @@ class User(db.Model):
     #                               secondaryjoin="UserHobby.user_hobby_id == Completion.user_hobby_id",
     #                               viewonly=True,
     #                               backref=db.backref("users"))
-##########
+
     def get_user_data(self):
         """Gets helpful hobby data for a particular user object."""
 
@@ -81,38 +81,41 @@ class User(db.Model):
         user_hobbies = self.user_hobbies
 
         for i, user_hobby in enumerate(user_hobbies):
-            hobby_count = str(i + 1)
-            user_data["user hobbies"]["user hobby " + hobby_count] = {}
-            user_data["user hobbies"]["user hobby " + hobby_count]["user hobby id"] = user_hobby.user_hobby_id
-            user_data["user hobbies"]["user hobby " + hobby_count]["hobby name"] = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
-            int(hobby_count)
+            count = str(i + 1)
+            user_data["user hobbies"]["user hobby " + count] = {}
+            user_data["user hobbies"]["user hobby " + count]["user hobby id"] = user_hobby.user_hobby_id
+            user_data["user hobbies"]["user hobby " + count]["hobby name"] = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
+            user_data["user hobbies"]["user hobby " + count]["completions"] = {}
+            user_data["user hobbies"]["user hobby " + count]["goals"] = {}
+            i = int(count)
 
-    #         # Get the user_hobby_id for each user_hobby. Add to dictionary.
-    #         user_data[user_hobby_id][user_hobby.user_hobby_id] = {}  # OK
-    #         hobby_name = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
-    #         user_data[user_hobby_id]
+            completions = db.session.query(Completion).join(UserHobby).filter(UserHobby.user_hobby_id == Completion.user_hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).all()
 
+            for completion in completions:
+                user_data["user hobbies"]["user hobby " + count]['completions']['completion id'] = completion.completion_id
+                user_data["user hobbies"]["user hobby " + count]['completions']['completion date'] = completion.completion_date
+                user_data["user hobbies"]["user hobby " + count]['completions']['total practice time'] = completion.total_practice_time
 
+                has_goals = self.goals
 
-    #         user_hobby_completions = user_hobby.completions
+                if has_goals:
+                    active = self.active_goals
+                    goals = db.session.query(Goal).join(UserHobby).filter(Goal.user_hobby_id == UserHobby.user_hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).all()
+                    for goal in goals:
+                        if goal in active:
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["active"] = {}
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["active"] = goal.goal_id
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["active"] = goal.goal_start_date
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["active"] = goal.goal_freq_num
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["active"] = goal.goal_freq_time_unit
+                        else:
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["inactive"] = {}
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["inactive"] = goal.goal_id
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["inactive"] = goal.goal_start_date
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["inactive"] = goal.goal_freq_num
+                            user_data["user hobbies"]["user hobby " + count]["goals"]["inactive"] = goal.goal_freq_time_unit
 
-    #     if self.active_goals:
-    #         goals = self.goals
-    #         for goal in goals:
-    #             goal_id = goal.goal_id
-    #             goal_start_date = goal.goal_start_date
-    #             goal_freq_num = goal.goal_freq_num
-    #             goal_freq_time_unit = goal.goal_freq_time_unit
-
-    #         # Get list of completetions for that user_hobby_id.
-    #         # Get value of goal_active for each user_hobby.
-    #         # if True:
-    #         if goal_active:
-    #             # Get goal_id(s) for each user_hobby goal with active goal.
-    #             # Get goal_start_date for that goal_id.
-    #             # Get goal_freq_num for that goal_id.
-    #             # Get goal_freq_time_unit for that goal_id.
-    #             pass  ##################
+        return user_data
 
     def __repr__(self):
         """Provide helpful representation about a User when printed."""
