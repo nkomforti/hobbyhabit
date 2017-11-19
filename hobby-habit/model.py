@@ -82,9 +82,10 @@ class User(db.Model):
 
         for i, user_hobby in enumerate(user_hobbies):
             hobby_count = str(i + 1)
-            user_data["user hobbies"]["hobby " + hobby_count] = user_hobby.user_hobby_id
+            user_data["user hobbies"]["user hobby " + hobby_count] = {}
+            user_data["user hobbies"]["user hobby " + hobby_count]["user hobby id"] = user_hobby.user_hobby_id
+            user_data["user hobbies"]["user hobby " + hobby_count]["hobby name"] = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
             int(hobby_count)
-            
 
     #         # Get the user_hobby_id for each user_hobby. Add to dictionary.
     #         user_data[user_hobby_id][user_hobby.user_hobby_id] = {}  # OK
