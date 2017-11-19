@@ -167,9 +167,9 @@ def load_completions():
 
         for i, completion_data in enumerate(completions_data):
             completion_data = completion_data.rstrip()
-            user_hobby_id, date_str, total_practice_time, notes = completion_data.split("|")
+            user_hobby_id, completion_date_str, total_practice_time, notes = completion_data.split("|")
 
-            date = datetime.datetime.strptime(date_str, "%d-%m-%Y")
+            completion_date = datetime.datetime.strptime(completion_date_str, "%d-%m-%Y")
 
             if total_practice_time:
                 total_practice_time = int(total_practice_time)
@@ -177,7 +177,7 @@ def load_completions():
                 total_practice_time = None
 
             completion = Completion(user_hobby_id=user_hobby_id,
-                                    date=date,
+                                    completion_date=completion_date,
                                     total_practice_time=total_practice_time,
                                     notes=notes)
 

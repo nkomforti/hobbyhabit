@@ -38,63 +38,80 @@ class User(db.Model):
     hobbies = db.relationship("Hobby",
                               secondary="user_hobbies",
                               backref=db.backref("users"))
-
-    goals = db.relationship("Goal", primaryjoin="User.user_id==UserHobby.user_id",
+    # Define relationship to goals.
+    goals = db.relationship("Goal",
+                            primaryjoin="User.user_id==UserHobby.user_id",
                             secondary="user_hobbies",
                             secondaryjoin="UserHobby.user_hobby_id==Goal.user_hobby_id")
-
-    active_goals = db.relationship("Goal", primaryjoin="User.user_id==UserHobby.user_id",
+    # Define relationship to goals.
+    active_goals = db.relationship("Goal",
+                                   primaryjoin="User.user_id==UserHobby.user_id",
                                    secondary="user_hobbies",
                                    secondaryjoin="and_(UserHobby.user_hobby_id==Goal.user_hobby_id, Goal.goal_active==True)")
+    # Define relationship to completions.
+    completions = db.relationship("Completion",
+                                  primaryjoin="User.user_id==UserHobby.user_id",
+                                  secondary="user_hobbies",
+                                  secondaryjoin="UserHobby.user_hobby_id==Completion.user_hobby_id")
 
-    # How do I efficiently query for a user's user_hobbies, completions, goals (active and not active)?? are the relationships built correctly for this?
-
+    user_hobbies = db.relationship("UserHobby",
+                                   primaryjoin="User.user_id==UserHobby.user_id",
+                                   backref=db.backref("user"))  # SELECT user_hobby_id, users.first_name FROM user_hobbies JOIN users ON user_hobbies.user_id=users.user_id;
+##########UNUSED RELATIONSHIPS###########
     # # Define relationship to user_hobbies.  # Goal is now a separate table.
     # goals = db.relationship("UserHobby",
     #                         primaryjoin=("and_(UserHobby.user_id == User.user_id,"
     #                                      + " UserHobby.goal_active == True)"),
     #                         backref=db.backref("users"))
 
-    # # Define relationship to completions table.  # Not necessary.
+    # Define relationship to completions table.  # Not necessary.
     # completions = db.relationship("Completion",
     #                               primaryjoin="UserHobby.user_id == User.user_id",
     #                               secondaryjoin="UserHobby.user_hobby_id == Completion.user_hobby_id",
     #                               viewonly=True,
     #                               backref=db.backref("users"))
-
+##########
     def get_user_data(self):
         """Gets helpful hobby data for a particular user object."""
 
-    #     {"hobby_id": {"completions": [...],
-    #                   "goal_freq_num": ...,
-    #                   "goal_freq_time_unit": ...,}
-    #      "...": {"...": ...,
-    #              "...": ...,
-    #              "...": ...}}
+        user_data = {"user id": self.user_id,
+                     "username": self.username,
+                     "user hobbies": {}}
 
-        user_data = {}
+        user_hobbies = self.user_hobbies
 
-        # Get list of hobby_objects for user
-        hobbies = self.hobbies
+        for i, user_hobby in enumerate(user_hobbies):
+            hobby_count = str(i + 1)
+            user_data["user hobbies"]["hobby " + hobby_count] = user_hobby.user_hobby_id
+            int(hobby_count)
+            
 
-        # Get each hobby_object.
-        for hobby in hobbies:
-            # Get the hobby_id for each hobby.
-            hobby_id = hobby_object.hobby_id
+    #         # Get the user_hobby_id for each user_hobby. Add to dictionary.
+    #         user_data[user_hobby_id][user_hobby.user_hobby_id] = {}  # OK
+    #         hobby_name = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
+    #         user_data[user_hobby_id]
 
-            # Get the hobby_name for each hobby.
-            hobby_name = hobby_object.hobby_name
 
-            # Get user_hobby_id for each hobby.
-            # Get list of completetions for that user_hobby_id.
-            # Get value of goal_active for each user_hobby.
-            # if True:
-            if goal_active:
-                # Get goal_id(s) for each user_hobby goal with active goal.
-                # Get goal_start_date for that goal_id.
-                # Get goal_freq_num for that goal_id.
-                # Get goal_freq_time_unit for that goal_id.
-                pass
+
+    #         user_hobby_completions = user_hobby.completions
+
+    #     if self.active_goals:
+    #         goals = self.goals
+    #         for goal in goals:
+    #             goal_id = goal.goal_id
+    #             goal_start_date = goal.goal_start_date
+    #             goal_freq_num = goal.goal_freq_num
+    #             goal_freq_time_unit = goal.goal_freq_time_unit
+
+    #         # Get list of completetions for that user_hobby_id.
+    #         # Get value of goal_active for each user_hobby.
+    #         # if True:
+    #         if goal_active:
+    #             # Get goal_id(s) for each user_hobby goal with active goal.
+    #             # Get goal_start_date for that goal_id.
+    #             # Get goal_freq_num for that goal_id.
+    #             # Get goal_freq_time_unit for that goal_id.
+    #             pass  ##################
 
     def __repr__(self):
         """Provide helpful representation about a User when printed."""
@@ -104,37 +121,6 @@ class User(db.Model):
         return s % (self.user_id,
                     self.email,
                     self.username)
-
-
-class UserHobby(db.Model):
-    """Association table to bridge users and hobbies."""
-
-    __tablename__ = "user_hobbies"
-
-    user_hobby_id = db.Column(db.Integer,
-                              autoincrement=True,
-                              primary_key=True)
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey("users.user_id"))
-    hobby_id = db.Column(db.Integer,
-                         db.ForeignKey("hobbies.hobby_id"))
-
-    # Define relationship to completions table.
-    completions = db.relationship("Completion",
-                                  order_by="Completion.date",
-                                  backref=db.backref("user_hobbies"))
-        # test
-    # user = db.relationship("User",
-    #                        backref=db.backref("user_hobbies"))
-
-    def __repr__(self):
-        """Provide helpful representation aboout UserHobby when printed."""
-
-        s = "<UserHobby user_hobby_id=%s user_id=%s hobby_id=%s>"
-
-        return s % (self.user_hobby_id,
-                    self.users.user_id,
-                    self.hobbies.hobby_id)  # ??
 
 
 class Hobby(db.Model):
@@ -158,6 +144,29 @@ class Hobby(db.Model):
 
         return s % (self.hobby_id,
                     self.hobby_name)
+
+
+class UserHobby(db.Model):
+    """Association table to bridge users and hobbies."""
+
+    __tablename__ = "user_hobbies"
+
+    user_hobby_id = db.Column(db.Integer,
+                              autoincrement=True,
+                              primary_key=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("users.user_id"))
+    hobby_id = db.Column(db.Integer,
+                         db.ForeignKey("hobbies.hobby_id"))
+
+    def __repr__(self):
+        """Provide helpful representation aboout UserHobby when printed."""
+
+        s = "<UserHobby user_hobby_id=%s user_id=%s hobby_id=%s>"
+
+        return s % (self.user_hobby_id,
+                    self.user_id,
+                    self.hobby_id)
 
 
 class Goal(db.Model):
@@ -192,11 +201,9 @@ class Goal(db.Model):
     def __repr__(self):
         """Provide helpful representation about Goal when printed."""
 
-        s = "<Goal goal_id=%s hobby_id=%s user_id=%s>"
+        s = "<Goal goal_id=%s user_hobby_id=%s goal_active=%s>"
 
-        return s % (self.goal_id,
-                    self.user_hobby.hobby_id,
-                    self.user_hobby.user_id)
+        return s % (self.goal_id, self.user_hobby_id, self.goal_active)
 
 
 class Completion(db.Model):
@@ -209,21 +216,24 @@ class Completion(db.Model):
                               primary_key=True)
     user_hobby_id = db.Column(db.Integer,
                               db.ForeignKey("user_hobbies.user_hobby_id"))
-    date = db.Column(db.DateTime,
-                     nullable=False)
+    completion_date = db.Column(db.DateTime,
+                                nullable=False)
     total_practice_time = db.Column(db.Integer,
                                     nullable=True)
     notes = db.Column(db.Text,
                       nullable=True)
 
+    # Define relationship to user_hobbies table.
+    user_hobby = db.relationship("UserHobby",
+                                 order_by="Completion.completion_date",
+                                 backref=db.backref("completions"))
+
     def __repr__(self):
         """Provide helpful representation about Completion when printed."""
 
-        s = "<Completion completion_id=%s user_id=%s hobby_id=%s>"
+        s = "<Completion completion_id=%s hobby_id=%s>"
 
-        return s % (self.completion_id,
-                    self.user_hobby.user_id,
-                    self.user_hobby.hobby_id)
+        return s % (self.completion_id, self.user_hobby_id)
 
 
 ################################################################################
@@ -243,5 +253,5 @@ if __name__ == "__main__":
 
     app = Flask(__name__)  # Dummy instance of Flask class. Using this instead of: from server import app
     connect_to_db(app)  # Connect database to Flask app
-    db.create_all()  # Create database
+    # db.create_all()  # Create database
     print "Connected to DB."
