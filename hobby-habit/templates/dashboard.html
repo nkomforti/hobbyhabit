@@ -5,20 +5,47 @@
         <!-- <link rel="stylesheet" type="text/css" href=""> -->
     {% endblock my_css_link %}
 
-    {% block title %}HobbyHabit: Dashboard{% endblock title %} <!-- add username?? -->
+    {% block title %}HobbyHabit: Dashboard{% endblock title %}
 
     <div class="dashboard">
 
         {% block body_content %}
+
         <div class="menu-btns">
-            <button id="user-profile-btn" class="btn-info btn-lg" type="button">User Profile</button>
-            <br><br>
-            <button id="my-hobbyhabits-btn" class="btn-info btn-lg" type="button">My HobbyHabits</button>
-            <br><br>
-            <button id="social-btn" class="btn-info btn-lg" type="button">Social</button>
-            <br><br>
-            <button id="settings-btn" class="btn-info btn-lg" type="button">Settings</button>
+
+            <div id="user-profile">
+                <button id="user-profile-btn" class="btn-info btn-lg" type="button">
+                    User Profile
+                </button>
+                <br><br>
+            </div>
+
+            <div id="my-hobbyhabits">
+                <button id="my-hobbyhabits-btn" class="btn-info btn-lg" type="button">
+                    My HobbyHabits
+                </button>
+                <br><br>
+            </div>
+
+            <div id="social">
+                <button id="social-btn" class="btn-info btn-lg" type="button">
+                    Social
+                </button>
+                <br><br>
+            </div>
+
+            <div id="settings">
+                <button id="settings-btn" class="btn-info btn-lg" type="button">
+                    Settings
+                </button>
+            </div>
+            
         </div>
+
+        <!-- <div class="my-hobbyhabit-display"> -->
+            <!-- display content for My HobbyHabit -->
+        <!-- </div> -->
+
         {% endblock body_content %}
 
     </div>

@@ -84,6 +84,8 @@ def display_dashboard():
     current_user_data = current_user.get_user_data()
 
     return render_template("dashboard.html",
+                           current_user=current_user,
+                           current_user_hobbies=current_user.hobbies,
                            current_user_data=current_user_data)
 
 
