@@ -14,42 +14,55 @@
         <div class="menu-btns">
 
             <div id="user-profile">
-                <button id="user-profile-btn" class="btn-info btn-lg" type="button">
+                <button id="user-profile-menu-btn" class="btn-info btn-lg" type="button">
                     User Profile
                 </button>
                 <br><br>
+                <p>hello</p>
             </div>
 
-            <div id="my-hobbyhabits">
-                <button id="my-hobbyhabits-btn" class="btn-info btn-lg" type="button">
+            <div class="my-hobbyhabits">
+                <button id="my-hobbyhabits-menu-btn" class="btn-info btn-lg" type="button">
                     My HobbyHabits
                 </button>
                 <br><br>
+                <div id="my-hobbyhabits-content">
+                    <p>how</p>
+
+                    {% for hobby in current_user_hobbies %}
+                        <div id="my-hobbyhabit-btn">
+                            <!-- Trigger which hobbyhabbit to display details for with button. -->
+                            <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
+                                {{ hobby.hobby_name.title() }}
+                            </button>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
             </div>
 
             <div id="social">
-                <button id="social-btn" class="btn-info btn-lg" type="button">
+                <button id="social-menu-btn" class="btn-info btn-lg" type="button">
                     Social
                 </button>
                 <br><br>
+                <p>are</p>
             </div>
 
             <div id="settings">
-                <button id="settings-btn" class="btn-info btn-lg" type="button">
+                <button id="settings-menu-btn" class="btn-info btn-lg" type="button">
                     Settings
                 </button>
+                <p>you?</p>
             </div>
-            
-        </div>
 
-        <!-- <div class="my-hobbyhabit-display"> -->
-            <!-- display content for My HobbyHabit -->
-        <!-- </div> -->
+        </div>
 
         {% endblock body_content %}
 
     </div>
 
     {% block js_link %}  
-        <script type="text/javascript" src="static/js/add-goal.js"></script>
+        <script type="text/javascript" src="static/js/dashboard.js"></script>
     {% endblock js_link %}

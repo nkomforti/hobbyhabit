@@ -1,29 +1,37 @@
 "use strict";
 
-$("#user-profile-btn").click(function(evt) {
-    $("#user-profile").show();
-    $("#my-hobbyhabits").hide();
-    $("#social").hide();
-    $("#settings").hide();
-});
+$(document).ready(function(){
+    $("#user-profile > p").hide();
+    $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+    $("#social > p").hide();
+    $("#settings > p").hide();
 
-$("#my-hobbyhabits-btn").click(function(evt) {
-    $("#user-profile").hide();
-    $("#my-hobbyhabits").show();
-    $("#social").hide();
-    $("#settings").hide();
-});
+    $("#user-profile-menu-btn").click(function(evt) {
+        $("#user-profile > p").show();
+        $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
+        $("#social > p").hide();
+        $("#settings > p").hide();
+    });
 
-$("#social-btn").click(function(evt) {
-    $("#my-hobbyhabits").hide();
-    $("#user-profile").hide();
-    $("#social").show();
-    $("#settings").hide();
-});
+    $("#my-hobbyhabits-menu-btn").click(function(evt) {
+        $("#user-profile > p").hide();
+        $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+        $("#social > p").hide();
+        $("#settings > p").hide();
+    });
 
-$("#settings-btn").click(function(evt) {
-    $("#my-hobbyhabits").hide();
-    $("#user-profile").hide();
-    $("#social").hide();
-    $("#settings").show();
+    $("#social-menu-btn").click(function(evt) {
+        $("#user-profile > p").hide();
+        $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
+        $("#social > p").show();
+        $("#settings > p").hide();
+    });
+
+    $("#settings-menu-btn").click(function(evt) {
+        $("#user-profile > p").hide();
+        $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
+        $("#social > p").hide();
+        $("#settings > p").show();
+    });
+
 });

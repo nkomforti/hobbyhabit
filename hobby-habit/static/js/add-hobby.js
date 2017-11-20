@@ -60,7 +60,7 @@ $(document).on("keyup", "#add-hobby input", function (evt) {
         if (empty === false) {
             $("#plus-btn").prop("disabled", false);
         }
-    });
+});
 
 // $("#hobby-form").submit(function (evt) {
 //     if ($("#hobby-name-1").val() === "") {
