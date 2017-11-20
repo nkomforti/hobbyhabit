@@ -40,6 +40,61 @@ def homepage():
     return render_template("homepage.html")
 
 
+@app.route('/login', methods=['GET'])
+def display_login_form():
+    """Display login form."""
+
+    return render_template("login-form.html")
+
+
+@app.route('/login', methods=['POST'])
+def process_login_form():
+    """Process login form."""
+
+    # Get data from form.
+    username = request.form["username"]
+    password = request.form["password"]
+
+    user = User.query.filter_by(username=username).first()
+
+    if not user:
+        flash("Invalid username")
+        return redirect("/login")
+
+    if user.password != password:
+        flash("Invalid password")
+        return redirect("/login")
+
+    session["user_id"] = user.user_id
+
+    flash("Login successful")
+
+    return redirect("/dashboard")
+
+
+@app.route('/dashboard', methods=['GET'])
+@login_required
+def display_dashboard():
+    """Display user's dashboard."""
+
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    current_user_data = current_user.get_user_data()
+
+    return render_template("dashboard.html",
+                           current_user_data=current_user_data)
+
+
+@app.route('/dashboard', methods=['POST'])
+@login_required
+def process_dashboard():
+    """Process user's request for content to display on dashboard."""
+
+    pass
+
+
 @app.route('/register', methods=['POST'])
 def register_user():
     """Process registration form and add user to database."""
@@ -172,46 +227,6 @@ def process_add_goal_form():
     db.session.commit()
 
     return "Success"  # Javascript is redirecting to /dashboard.
-
-
-@app.route('/dashboard', methods=['GET'])
-@login_required
-def display_dashboard():
-    """Display user's dashboard."""
-
-    return render_template("dashboard.html")
-
-
-@app.route('/login', methods=['GET'])
-def display_login_form():
-    """Display login form."""
-
-    return render_template("login-form.html")
-
-
-@app.route('/login', methods=['POST'])
-def process_login_form():
-    """Process login form."""
-
-    # Get data from form.
-    username = request.form["username"]
-    password = request.form["password"]
-
-    user = User.query.filter_by(username=username).first()
-
-    if not user:
-        flash("Invalid username")
-        return redirect("/login")
-
-    if user.password != password:
-        flash("Invalid password")
-        return redirect("/login")
-
-    session["user_id"] = user.user_id
-
-    flash("Login successful")
-
-    return redirect("/dashboard")
 
 
 @app.route('/logout', methods=["GET"])
