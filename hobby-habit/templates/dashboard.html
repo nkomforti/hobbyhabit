@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
     {% block my_css_link %}
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-        <!-- <link rel="stylesheet" type="text/css" href=""> -->
+        <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
     {% endblock my_css_link %}
 
     {% block title %}HobbyHabit: Dashboard{% endblock title %}
@@ -31,7 +31,7 @@
                         <input id="email" type="email" name="email"> <!-- Display from DB -->
                         <br><br>
 
-                        <!-- Button to trigger update password modal -->
+                        <!-- Modal trigger button -->
                         <button id="update-password-btn" class="btn btn-info active" type="button">
                             Update password
                         </button>
@@ -65,8 +65,51 @@
                         </button>
 
                     </form>
+                    <!-- Change Password modal -->
+                    <div id="updatePasswordModal" class="modal fade">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">
+                                        Update Password
+                                    </h4>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form id="update-password-form">
+                                        Old password
+                                        <br>
+                                        <input id="old-password" type="password" name="old-password" required>
+                                        <br>
+                                        <br>
+                                        New password
+                                        <br> 
+                                        <input id="new-password" type="password" name="new-password" required>
+                                        <br>
+                                        <br>
+                                        Confirm new password
+                                        <br> 
+                                        <input id="confirm-new-password" type="password" name="confirm-new-password" required>
+                                        <br>
+                                        <a href="">Forgot password</a> <!-- Add link and and add and commit to DB -->
+                                    </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button id="update-password" class="add-goal-btn btn-info btn-sm">
+                                            Update password
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+        </div>
 
             <div id="my-hobbyhabits">
                 <button id="my-hobbyhabits-menu-btn" class="btn-info btn-lg" type="button">
