@@ -88,9 +88,9 @@ $(document).ready(function(){
 
         formData["first-name"] = $("#first-name").val();
         formData["last-name"] = $("#last-name").val();
-        formData["zipcode"] = $("#zipcode").val();
+        formData.zipcode = $("#zipcode").val();
         formData["phone-number"] = $("#phone-number").val();
-        formData["txt-reminder"] = $(".txt-reminder").val();
+        formData["txt-opt-in-out"] = $(".txt-reminder").val();
             
         $.post("/dashboard", formData, function (results) {
             window.location = "/dashboard";

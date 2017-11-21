@@ -31,9 +31,9 @@ class User(db.Model):
                          nullable=False)
     phone = db.Column(db.String(15),
                       nullable=True)
-    # text_reminder = db.Column(db.Boolean,
-    #                           default=False,
-    #                           nullable=False)
+    text_reminder = db.Column(db.Boolean,
+                              default=False,
+                              nullable=False)
     zipcode = db.Column(db.String(15),
                         nullable=True)
 

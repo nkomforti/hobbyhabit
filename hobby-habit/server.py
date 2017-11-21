@@ -102,13 +102,18 @@ def process_dashboard():
     last_name = request.form["last-name"]
     zipcode = request.form["zipcode"]
     phone_number = request.form["phone-number"]
-    # text_reminder = request.form["txt-opt-in-out"]
+    text_reminder = request.form["txt-opt-in-out"]
+
+    print text_reminder
 
     current_user.first_name = first_name
     current_user.last_name = last_name
     current_user.zipcode = zipcode
     current_user.phone = phone_number
-    # current_user.text_reminder = text_reminder
+    if text_reminder == "on":
+        current_user.text_reminder = True
+    else:
+        current_user.text_reminder = False
 
     db.session.add(current_user)
 

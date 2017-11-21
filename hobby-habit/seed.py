@@ -15,7 +15,7 @@ def load_users():
     # we won't be trying to add duplicate users
     User.query.delete()
 
-    for i, row in enumerate(open("seed-data/u.user")):
+    for i, row in enumerate(open("seed-data/user.txt")):
         row = row.rstrip()
 
         (first_name,
@@ -24,8 +24,13 @@ def load_users():
          username,
          password,
          phone,
-         # text_reminder,
+         text_reminder,
          zipcode) = row.split("|")
+
+        if not text_reminder:
+            text_reminder = False
+        else:
+            text_reminder = True
 
         user = User(first_name=first_name,
                     last_name=last_name,
@@ -33,13 +38,8 @@ def load_users():
                     username=username,
                     password=password,
                     phone=phone,
-                    # text_reminder=text_reminder,
+                    text_reminder=text_reminder,
                     zipcode=zipcode)
-
-        # if not text_reminder:
-        #     text_reminder = False
-        # else:
-        #     text_reminder = True
 
         # We need to add to the session or it won't ever be stored
         db.session.add(user)
@@ -59,7 +59,7 @@ def load_hobbies():
 
     Hobby.query.delete()
 
-    for i, row in enumerate(open("seed-data/u.hobby")):
+    for i, row in enumerate(open("seed-data/hobby.txt")):
         row = row.rstrip()
 
         hobby_name, autocomplete = row.split("|")
@@ -87,7 +87,7 @@ def load_user_hobbies():
 
     UserHobby.query.delete()
 
-    for i, row in enumerate(open("seed-data/u.userhobby")):
+    for i, row in enumerate(open("seed-data/userhobby.txt")):
         row = row.rstrip()
 
         user_id, hobby_id = row.split("|")
@@ -119,7 +119,7 @@ def load_goals():
 
     Goal.query.delete()
 
-    with open("seed-data/u.goal") as goals_data:
+    with open("seed-data/goal.txt") as goals_data:
 
         for i, goal_data in enumerate(goals_data):
             goal_data = goal_data.rstrip()
@@ -170,7 +170,7 @@ def load_completions():
 
     Completion.query.delete()
 
-    with open("seed-data/u.completion") as completions_data:
+    with open("seed-data/completion.txt") as completions_data:
 
         for i, completion_data in enumerate(completions_data):
             completion_data = completion_data.rstrip()
