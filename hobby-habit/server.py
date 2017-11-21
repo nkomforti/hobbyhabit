@@ -94,7 +94,29 @@ def display_dashboard():
 def process_dashboard():
     """Process user's request for content to display on dashboard."""
 
-    pass
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    first_name = request.form["first-name"]
+    last_name = request.form["last-name"]
+    zipcode = request.form["zipcode"]
+    phone_number = request.form["phone-number"]
+    # text_reminder = request.form["txt-opt-in-out"]
+
+    current_user.first_name = first_name
+    current_user.last_name = last_name
+    current_user.zipcode = zipcode
+    current_user.phone = phone_number
+    # current_user.text_reminder = text_reminder
+
+    db.session.add(current_user)
+
+    db.session.commit()
+
+    flash("Profile successfully updated")
+
+    return "success"
 
 
 @app.route('/register', methods=['POST'])

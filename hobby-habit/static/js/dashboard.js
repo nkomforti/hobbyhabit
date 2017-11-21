@@ -46,4 +46,55 @@ $(document).ready(function(){
         $("#first-name").attr({"placeholder": "First name"});
     }
 
+        $("#update-password-btn").click(function (evt) {
+        $("#updatePasswordModal").modal("show");
+    });
+
+    let lastName = $("#hidden-last-name");
+    if ($("#hidden-last-name") !== null) {
+        $("#last-name").attr({"value": lastName.val()});
+    }
+    else {
+        $("#last-name").attr({"placeholder": "Last name"});
+    }
+
+        $("#update-password-btn").click(function (evt) {
+        $("#updatePasswordModal").modal("show");
+    });
+
+    let zipcode = $("#hidden-zipcode");
+    if ($("#hidden-zipcode") !== null) {
+        $("#zipcode").attr({"value": zipcode.val()});
+    }
+    else {
+        $("#zipcode").attr({"placeholder": "Zipcode"});
+    }
+
+        $("#update-password-btn").click(function (evt) {
+        $("#updatePasswordModal").modal("show");
+    });
+
+    let phoneNumber = $("#hidden-phone-number");
+    if ($("#hidden-phone-number") !== null) {
+        $("#phone-number").attr({"value": phoneNumber.val()});
+    }
+    else {
+        $("#phone-number").attr({"placeholder": "First name"});
+    }
+
+
+    $("#update-profile").click(function (evt) {
+        let formData = {};
+
+    formData["first-name"] = $("#first-name").val();
+    formData["last-name"] = $("#last-name").val();
+    formData["zipcode"] = $("#zipcode").val();
+    formData["phone-number"] = $("#phone-number").val();
+    formData["txt-reminder"] = $(".txt-reminder").val();
+        
+    $.post("/dashboard", formData, function (results) {
+        window.location = "/dashboard";           
+        });
+    });
+
 });

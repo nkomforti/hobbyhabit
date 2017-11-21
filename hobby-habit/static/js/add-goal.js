@@ -4,7 +4,7 @@
 $("#goal-start-date").datepicker();
 
 // Select elements with class add-goal-btn and attatch event listener to them.
-$(".add-goal-btn").click(function(evt) {
+$(".add-goal-btn").click(function (evt) {
     // On click, get value of data attribute for that clicked element ('this')
     // and bind to variable.
     let next = $(this).data("next");
@@ -21,7 +21,7 @@ $(".add-goal-btn").click(function(evt) {
     // AJAX post request to add-goal route to retrieve values from form. Then,
     // depending on which button was clicked, either hide modal for user to
     // select another hobbyhabit, or redirect to dashboard route.
-    $.post("/add-goal", formData, function(results) {
+    $.post("/add-goal", formData, function (results) {
         if (next === "add-more") {
             $("#goalModal").modal("hide");
         }
@@ -32,7 +32,7 @@ $(".add-goal-btn").click(function(evt) {
 });
 
 // Select the element with class hobby-goal-btn and attach event listern to it.
-$(".hobby-goal-btn").click(function(evt) {
+$(".hobby-goal-btn").click(function (evt) {
     // On click, get value of the attribute for that clicked element ('this')
     // and bind to variable.
     let hobbyId = $(this).data("hobbyId");

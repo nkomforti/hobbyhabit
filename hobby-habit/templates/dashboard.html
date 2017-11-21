@@ -23,12 +23,12 @@
                     <form id="user-profile-form">
                         Username
                         <br>
-                        <input id="username" type="text" name="username" value="{{ current_user.username }}">
+                        <input id="username" type="text" name="username" value="{{ current_user.username }}" disabled>
                         <br><br>
 
                         Email
                         <br>
-                        <input id="email" type="email" name="email" value="{{ current_user.email }}">
+                        <input id="email" type="email" name="email" value="{{ current_user.email }}" disabled>
                         <br><br>
 
                         <!-- Modal trigger button -->
@@ -39,30 +39,32 @@
 
                         First name
                         <br>
-                        <input id="first-name" type="text" name="first-name" value=""> <!-- Display fname from DB or placeholder if not in DB -->
+                        <input id="first-name" type="text" name="first-name" value=""> 
                         <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
                         <br><br>
 
                         Last name
                         <br>
-                        <input id="last-name" type="text" name="last-name"> <!-- Display last name from DB or placeholder if not in DB -->
+                        <input id="last-name" type="text" name="last-name" value="">
+                        <input id="hidden-last-name" type="hidden" name="hidden-last-name" value="{{ current_user.last_name }}">
                         <br><br>
 
                         Zipcode
                         <br>
-                        <input id="zipcode" type="text" name="zipcode"><!-- Display zip from DB or placeholder if not in DB -->
+                        <input id="zipcode" type="text" name="zipcode" value="">
+                        <input id="hidden-zipcode" type="hidden" name="hidden-zipcode" value="{{ current_user.zipcode }}">
                         <br><br>
 
                         Phone number
                         <br>
-                        <input id="phone-number" type="text" name="phone-number"> <!-- Display phone from DB or placeholder if not in DB. Also add tooltip explaining why and needs to be mobile, mobile charges apply... -->
+                        <input id="phone-number" type="text" name="phone-number" value="">
+                        <input id="hidden-phone-number" type="hidden" name="hidden-phone-number" value="{{ current_user.phone }}">
                         <br><br>
 
                         Text message reminder
                         <br>
-                        <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in" value="on"> On
-                        <!-- add way to set message frequency conditions -->
-                        <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-out" value="off" checked> Off
+                        <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in-out" value="on"> On
+                        <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
                         <br><br>
 
                         <!-- make sure to add and commit these changes to the DB -->
@@ -128,14 +130,14 @@
                     {% for hobby in current_user_hobbies %}
                         <div id="my-hobbyhabit-btn">
                             <!-- Trigger which hobbyhabbit to display details for with button. hidden input??-->
-                            <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
+                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button"> <!-- data-hobby-id="{{ hobby.hobby_id }}" -->
                                 {{ hobby.hobby_name.title() }}
                             </button>
 
                         </div>
                     {% endfor %}
+                        <button id="add-hobbyhabit" class="btn btn-info active ">+</button> <!--add small modal with hobby field every time + is clicked-->
                 </div>
-
             </div>
 
             <div id="social">

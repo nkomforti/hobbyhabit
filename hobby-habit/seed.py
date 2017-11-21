@@ -24,6 +24,7 @@ def load_users():
          username,
          password,
          phone,
+         # text_reminder,
          zipcode) = row.split("|")
 
         user = User(first_name=first_name,
@@ -32,7 +33,13 @@ def load_users():
                     username=username,
                     password=password,
                     phone=phone,
+                    # text_reminder=text_reminder,
                     zipcode=zipcode)
+
+        # if not text_reminder:
+        #     text_reminder = False
+        # else:
+        #     text_reminder = True
 
         # We need to add to the session or it won't ever be stored
         db.session.add(user)
