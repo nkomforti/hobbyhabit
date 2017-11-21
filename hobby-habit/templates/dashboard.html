@@ -23,12 +23,12 @@
                     <form id="user-profile-form">
                         Username
                         <br>
-                        <input id="username" type="text" name="username"> <!-- Display from DB -->
+                        <input id="username" type="text" name="username" value="{{ current_user.username }}">
                         <br><br>
 
                         Email
                         <br>
-                        <input id="email" type="email" name="email"> <!-- Display from DB -->
+                        <input id="email" type="email" name="email" value="{{ current_user.email }}">
                         <br><br>
 
                         <!-- Modal trigger button -->
@@ -39,12 +39,18 @@
 
                         First name
                         <br>
-                        <input id="first-name" type="text" name="first-name"> <!-- Display first name from DB or placeholder if not in DB -->
+                        <input id="first-name" type="text" name="first-name" value=""> <!-- Display fname from DB or placeholder if not in DB -->
+                        <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
                         <br><br>
 
                         Last name
                         <br>
                         <input id="last-name" type="text" name="last-name"> <!-- Display last name from DB or placeholder if not in DB -->
+                        <br><br>
+
+                        Zipcode
+                        <br>
+                        <input id="zipcode" type="text" name="zipcode"><!-- Display zip from DB or placeholder if not in DB -->
                         <br><br>
 
                         Phone number

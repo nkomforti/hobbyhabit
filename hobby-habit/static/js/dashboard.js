@@ -37,4 +37,13 @@ $(document).ready(function(){
     $("#update-password-btn").click(function (evt) {
         $("#updatePasswordModal").modal("show");
     });
+
+    let firstName = $("#hidden-first-name");
+    if ($("#hidden-first-name") !== null) {
+        $("#first-name").attr({"value": firstName.val()});
+    }
+    else {
+        $("#first-name").attr({"placeholder": "First name"});
+    }
+
 });
