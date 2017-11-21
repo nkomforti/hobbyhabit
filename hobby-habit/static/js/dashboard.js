@@ -3,35 +3,35 @@
 $(document).ready(function(){
     $("#user-profile > #user-profile-content").hide();
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
-    $("#social > p").hide();
-    $("#settings > p").hide();
+    $("#social > #social-content").hide();
+    $("#settings > #settings-content").hide();
 
     $("#user-profile-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").show();
         $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
-        $("#social > p").hide();
-        $("#settings > p").hide();
+        $("#social > #social-content").hide();
+        $("#settings > #settings-content").hide();
     });
 
     $("#my-hobbyhabits-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").hide();
         $("#my-hobbyhabits > #my-hobbyhabit-content").show();
-        $("#social > p").hide();
-        $("#settings > p").hide();
+        $("#social > #social-content").hide();
+        $("#settings > #settings-content").hide();
     });
 
     $("#social-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").hide();
         $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
-        $("#social > p").show();
-        $("#settings > p").hide();
+        $("#social > #social-content").show();
+        $("#settings > #settings-content").hide();
     });
 
     $("#settings-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").hide();
         $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
-        $("#social > p").hide();
-        $("#settings > p").show();
+        $("#social > #social-content").hide();
+        $("#settings > #settings-content").show();
     });
 
     $("#update-password-btn").click(function (evt) {

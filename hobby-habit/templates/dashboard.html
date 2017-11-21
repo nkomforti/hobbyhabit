@@ -121,7 +121,7 @@
 
                     {% for hobby in current_user_hobbies %}
                         <div id="my-hobbyhabit-btn">
-                            <!-- Trigger which hobbyhabbit to display details for with button. -->
+                            <!-- Trigger which hobbyhabbit to display details for with button. hidden input??-->
                             <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
                                 {{ hobby.hobby_name.title() }}
                             </button>
@@ -137,14 +137,19 @@
                     Social
                 </button>
                 <br><br>
-                <p>are</p>
+                <div id="social-content">
+                    <p>SHOW LOCAL EVENTS FOR PARTICULAR HOBBYHABIT USING EVENTBRITE API</p>
+                </div>
             </div>
 
             <div id="settings">
                 <button id="settings-menu-btn" class="btn-info btn-lg" type="button">
                     Settings
                 </button>
-                <p>you?</p>
+                <br><br>
+                <div id="settings-content">
+                    <p>SHOW USER SETTINGS</p>
+                </div>
             </div>
 
         </div>
