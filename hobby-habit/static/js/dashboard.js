@@ -86,14 +86,14 @@ $(document).ready(function(){
     $("#update-profile").click(function (evt) {
         let formData = {};
 
-    formData["first-name"] = $("#first-name").val();
-    formData["last-name"] = $("#last-name").val();
-    formData["zipcode"] = $("#zipcode").val();
-    formData["phone-number"] = $("#phone-number").val();
-    formData["txt-reminder"] = $(".txt-reminder").val();
-        
-    $.post("/dashboard", formData, function (results) {
-        window.location = "/dashboard";           
+        formData["first-name"] = $("#first-name").val();
+        formData["last-name"] = $("#last-name").val();
+        formData["zipcode"] = $("#zipcode").val();
+        formData["phone-number"] = $("#phone-number").val();
+        formData["txt-reminder"] = $(".txt-reminder").val();
+            
+        $.post("/dashboard", formData, function (results) {
+            window.location = "/dashboard";
         });
     });
 
