@@ -18,7 +18,54 @@
                     User Profile
                 </button>
                 <br><br>
-                <p>hello</p>
+
+                <div id="user-profile-content">
+                    <form id="user-profile-form">
+                        Username
+                        <br>
+                        <input id="username" type="text" name="username"> <!-- Display from DB -->
+                        <br><br>
+
+                        Email
+                        <br>
+                        <input id="email" type="email" name="email"> <!-- Display from DB -->
+                        <br><br>
+
+                        <!-- Button to trigger update password modal -->
+                        <button id="update-password-btn" class="btn btn-info active" type="button">
+                            Update password
+                        </button>
+                        <br><br>
+
+                        First name
+                        <br>
+                        <input id="first-name" type="text" name="first-name"> <!-- Display first name from DB or placeholder if not in DB -->
+                        <br><br>
+
+                        Last name
+                        <br>
+                        <input id="last-name" type="text" name="last-name"> <!-- Display last name from DB or placeholder if not in DB -->
+                        <br><br>
+
+                        Phone number
+                        <br>
+                        <input id="phone-number" type="text" name="phone-number"> <!-- Display phone from DB or placeholder if not in DB. Also add tooltip explaining why and needs to be mobile, mobile charges apply... -->
+                        <br><br>
+
+                        Text message reminder
+                        <br>
+                        <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in" value="on"> On
+                        <!-- add way to set message frequency conditions -->
+                        <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-out" value="off" checked> Off
+                        <br><br>
+
+                        <!-- make sure to add and commit these changes to the DB -->
+                        <button id="update-profile" class="btn btn-info active" type="button">
+                            Save changes to profile
+                        </button>
+
+                    </form>
+                </div>
             </div>
 
             <div id="my-hobbyhabits">
@@ -26,8 +73,8 @@
                     My HobbyHabits
                 </button>
                 <br><br>
+
                 <div id="my-hobbyhabit-content">
-                    <p>how</p>
 
                     {% for hobby in current_user_hobbies %}
                         <div id="my-hobbyhabit-btn">
