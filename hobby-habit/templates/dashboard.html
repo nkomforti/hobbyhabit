@@ -2,7 +2,7 @@
 
     {% block my_css_link %}
         <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
-        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     {% endblock my_css_link %}
 
     {% block title %}HobbyHabit: Dashboard{% endblock title %}
@@ -12,6 +12,7 @@
         {% block body_content %}
 
         <div id="flash-update-profile-status"></div>
+        <div id="flash-tracking-status"></div>
 
         <div class="menu-btns">
 
@@ -130,32 +131,39 @@
 
                 <div id="my-hobbyhabit-content">
 
-                    {% for hobby in current_user_hobbies %}
-                        <div id="my-hobbyhabit-btn">
+                    {% for user_hobby in current_user_data['user_hobbies'] %}
+                        <div id="my-hobbyhabit">
                             <!-- Trigger which hobbyhabbit to display details for with button. hidden input??-->
-                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
-                                {{ hobby.hobby_name.title() }}
+                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button" data-userhobby-id="{{ user_hobby['user_hobby_id'] }}">
+                                {{ user_hobby['hobby_name'][0].title() }}
                             </button>
                         </div>
                     {% endfor %}
+
                         <button id="add-hobbyhabit" class="btn btn-info">+</button> <!--add small modal with hobby field every time + is clicked-->
 
-                        <!-- Hidden input to grab and hold the id for the clicked hobbyhabit. -->
-                        <form id="hidden-hobby-id-form">
-                            <input id="hobby-id" type="hidden" name="hobby-id">
+                        <!-- HobbyHabit Tracker. -->
+                        <form id="hobbyhabit-tracker-form">
+                            <!-- Hidden input to grab and hold the id for the clicked hobbyhabit. -->
+                            <input id="hidden-userhobby-id" type="text" name="hidden-userhobby-id">
+                            Completion date
+                            <br>
+                            <input id="completion-date" type="text" name="completion-date" placeholder="-- Completion date --" required>
+                            <br><br>
+                            Total practice time
+                            <br>
+                            Hr: <input id="total-hours" type="number" name="total-hours" min="0" max="100" placeholder="hr" required>
+                            Min: <input id="total-minutes" type="number" name="total-minutes" min="0" max="1440" placeholder="min" required>
+                            <br><br>
+                            Notes
+                            <br>
+                            <textarea id="completion-notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
+                            <br><br>
+                            <button id="hobbyhabit-tracker-btn" class="btn btn-info">
+                                Track HobbyHabit
+                            </button>
                         </form>
 
-                        <!-- Tracker -->
-                        <form id="tracker-form">
-                            <!-- user_hobby_id -->
-                            <input id="hidden-user-hobby-id" type="hidden">
-                            <!-- completion_date -->
-                            <input id="completion-date">
-                            <!-- total_practice_time -->
-                            <!-- notes -->
-                        </form>
-
-                        <!-- Notes -->
                         <!-- Completions -->
                         <!-- Goals if any or an add goals form -->
 

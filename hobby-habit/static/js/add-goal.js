@@ -31,7 +31,7 @@ $(".add-goal-btn").click(function (evt) {
     });
 });
 
-// Select the element with class hobby-goal-btn and attach event listern to it.
+// Select the element with class hobby-goal-btn and attach event listener to it.
 $(".hobby-goal-btn").click(function (evt) {
     // On click, get value of the attribute for that clicked element ('this')
     // and bind to variable.
@@ -42,6 +42,9 @@ $(".hobby-goal-btn").click(function (evt) {
     // And, create and show modal with id goalModal.
     $("#goalModal").modal("show");
 
-    let hobbyName = $(this).text();
-    $("#hobby-name").text(hobbyName);
+    // Get html contents for clicked element with class hobby-goal-btn and save
+    // to variable.
+    let hobbyName = $(this).html();
+    // Set html contents for element with id hobby-name equal to hobbyName.
+    $("#hobby-name").html(hobbyName);
 });

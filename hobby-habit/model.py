@@ -61,33 +61,18 @@ class User(db.Model):
                                    primaryjoin="User.user_id==UserHobby.user_id",
                                    backref=db.backref("user"))
 
-########## UNUSED RELATIONSHIPS FOR REFERENCE ###########
-    # # Define relationship to user_hobbies.  # Goal is now a separate table.
-    # goals = db.relationship("UserHobby",
-    #                         primaryjoin=("and_(UserHobby.user_id == User.user_id,"
-    #                                      + " UserHobby.goal_active == True)"),
-    #                         backref=db.backref("users"))
+    def get_user_data(self):
+        """Gets helpful data for a particular user in the form of a dictionary."""
 
-    # Define relationship to completions table.  # Not necessary.
-    # completions = db.relationship("Completion",
-    #                               primaryjoin="UserHobby.user_id == User.user_id",
-    #                               secondaryjoin="UserHobby.user_hobby_id == Completion.user_hobby_id",
-    #                               viewonly=True,
-    #                               backref=db.backref("users"))
-
-    def get_user_hobby_data(self):
-        """Gets helpful hobby data for a particular user."""
-
-        user_data = {"user id": self.user_id,
+        user_data = {"user_id": self.user_id,
                      "username": self.username,
-                     # "user hobbies": {}}
                      "user_hobbies": []}
 
         user_hobbies = self.user_hobbies
 
         for user_hobby in user_hobbies:
             hobby_info = {}
-            hobby_info["user_hobby id"] = user_hobby.user_hobby_id
+            hobby_info["user_hobby_id"] = user_hobby.user_hobby_id
             hobby_info["hobby_name"] = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
             hobby_info["completions"] = []
             hobby_info["inactive_goals"] = []

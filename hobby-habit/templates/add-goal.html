@@ -27,10 +27,7 @@
                     <div id="current-user-hobby">
 
                         <!-- Trigger the modal with button. -->
-                        <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}"> <!-- should this deal with user_hobbies and user_hobby_id?? -->
-<!-- In [7]: # SELECT hobby_name FROM hobbies JOIN user_hobbies ON user_hobbies.hobby_id=hobbies.hobby_id WHERE user_hobbies.user_hobby_id = 1;
-In [8]: # uh = db.session.query(Hobby.hobby_name).join(UserHobby).filter(Hobby.hobby_id == UserHobby.hobby_id, UserHobby.user_hobby_id == 1).one() -->
-
+                        <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}"> <!-- should this deal with user_hobbies and user_hobby_id instead of hobbies directly?? -->
                             {{ hobby.hobby_name.title() }}
                         </button>
 

@@ -104,8 +104,6 @@ def process_dashboard():
     phone_number = request.form["phone-number"]
     text_reminder = request.form["txt-opt-in-out"]
 
-    print text_reminder
-
     current_user.first_name = first_name
     current_user.last_name = last_name
     current_user.zipcode = zipcode
@@ -117,8 +115,22 @@ def process_dashboard():
         current_user.text_reminder = False
 
     db.session.add(current_user)
-
     db.session.commit()
+
+    completion_date = request.form["completion-date"]
+    total_hours = request.form["total-hours"]
+    total_minutes = request.form["total-minutes"]
+    completion_notes = request.form["completion-notes"]
+    # user_hobby_id = request.form["hidden-userhobby-id"]
+
+    new_completion = Completion()  # Is this connected to the current_user??
+
+    new_completion.completion_date = completion_date
+    new_completion.total_practice_time = ((total_hours/60) + total_minutes)
+    new_completion.completion_notes = completion_notes
+
+    db.session.add(new_completion)
+    db.session.commit()  # Do i need to do this for each request or just once in the route??
 
     return "success"
 

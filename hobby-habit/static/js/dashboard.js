@@ -103,22 +103,39 @@ $(document).ready(function(){
         });
     });
 
-    // Select the element with class hobby-goal-btn and attach event listern to it.
+    // Select the element with class hobby-goal-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
         // On click, get value of the attribute for that clicked element ('this')
         // and bind to variable.
-        let hobbyId = $(this).data("hobbyId");
+        let hiddenUserhobbyId = $(this).data("userhobbyId");
         // Set the value for the selected element with id hobby-id.
-        $("#hobby-id").val(hobbyId);
-        
-        // let hobbyName = $(this).text();
-        // $("#hobby-name").text(hobbyName);
+        $("#hidden-userhobby-id").val(hiddenUserhobbyId);
     });
 
+    $("#completion-date").datepicker();
 
+    $(".hobbyhabit-tracker-btn").click(function (evt) {
+        // Create empty object, formData.
+        let formData = {};
+        // Add properties to object--the value of each property is the value of the
+        // specified selected element id.
+        formData["completion-date"] = $("#completion-date").val();
+        formData["total-hours"] = $("#total-hours").val();
+        formData["total-minutes"] = $("#total-minutes").val();
+        formData["completion-notes"] = $("#completion-notes").val();
+        formData["hidden-userhobby-id"] = $("#hidden-userhobby-id").val();
 
+        // AJAX post request to add-goal route to retrieve values from form. Then,
+        // depending on which button was clicked, either hide modal for user to
+        // select another hobbyhabit, or redirect to dashboard route.
+        $.post("/dashboard", formData, function (results) {
+            $("#user-profile > #user-profile-content").hide();
+            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+            $("#social > #social-content").hide();
+            $("#settings > #settings-content").hide();
 
-
-
+            $('#flash-tracking-status').html("HobbyHabit successfully tracked").show().fadeOut(5000);
+        });
+    });
 
 });
