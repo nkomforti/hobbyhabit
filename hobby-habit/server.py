@@ -85,14 +85,13 @@ def display_dashboard():
 
     return render_template("dashboard.html",
                            current_user=current_user,
-                           current_user_hobbies=current_user.hobbies,  # CHANGE TO .user_hobbies???
                            current_user_data=current_user_data)
 
 
-@app.route('/dashboard', methods=['POST'])
+@app.route('/update-user-profile', methods=['POST'])
 @login_required
-def process_dashboard():
-    """Process user's request for content to display on dashboard."""
+def process_user_profile_form():
+    """Process user-profile form and save changes to db."""
 
     current_user_id = session["user_id"]
 
@@ -117,22 +116,112 @@ def process_dashboard():
     db.session.add(current_user)
     db.session.commit()
 
-    completion_date = request.form["completion-date"]
-    total_hours = request.form["total-hours"]
-    total_minutes = request.form["total-minutes"]
-    completion_notes = request.form["completion-notes"]
-    # user_hobby_id = request.form["hidden-userhobby-id"]
+    return "success"
 
-    new_completion = Completion()  # Is this connected to the current_user??
+
+@app.route('/update-password-dashboard', methods=['POST'])
+def process_update_password_dashboard():
+    """Process update-password form in dashboard, user-profile and commit to db.
+    """
+
+    pass
+
+
+@app.route('/add-completion', methods=['POST'])
+@login_required
+def process_add_completion():
+    """Process tracker form and add new completion to database for selected
+    user_hobby_id.
+    """
+
+    completion_date = request.form["completion-date"]
+    total_hours = int(request.form["total-hours"])
+    total_minutes = int(request.form["total-minutes"])
+    completion_notes = request.form["completion-notes"]
+    current_user_hobby_id = request.form["user-hobby-id"]
+
+    new_completion = Completion()
 
     new_completion.completion_date = completion_date
-    new_completion.total_practice_time = ((total_hours/60) + total_minutes)
-    new_completion.completion_notes = completion_notes
+    new_completion.total_practice_time = ((total_hours * 60) + total_minutes)
+    new_completion.notes = completion_notes
+    new_completion.user_hobby_id = current_user_hobby_id
 
     db.session.add(new_completion)
-    db.session.commit()  # Do i need to do this for each request or just once in the route??
+    db.session.commit()
+
+    # import pdb; pdb.set_trace()
 
     return "success"
+
+
+@app.route('/view-completions.json', methods=['GET'])
+def display_completions():
+    """Get completions data from db for selected user_hobby to display."""
+
+    for use to display data as vis and non-vis
+
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    current_user_hobby_id = # Get user id that was clicked
+
+    user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
+
+    current_user_data = current_user.get_user_data()
+    user_hobby_completions = current_user_data["user_hobbies"]
+
+    pass
+
+    # return render_template('dashboard.html',
+    #                        user_hobby_completions=user_hobby_completions)
+
+
+@app.route('/mult-hobbies-vis.json', methods=['GET'])
+def display_mult_hobbies_vis():
+    """Get completion data from db for all of the current user's user_hobbies
+    and create data vis.
+    """
+
+    pass
+
+
+@app.route('/add-hobby-dashboard', methods=['POST'])
+def process_add_hobby_dashboard():
+    """Process add-hobby form in dashboard, my-hobbyhabits and commit to db."""
+
+    pass
+
+
+@app.route('/add-goal-dashboard', methods=['POST'])
+def process_add_goal_dashboard():
+    """Process add-goal form in dashboard, my-hobbyhabits and commit to db."""
+
+    pass
+
+
+@app.route('/view-current-goal.json', methods=['GET'])
+def display_current_goal():
+    """Get goal data from db for selected user_hobby to display."""
+
+    # for use to display data as vis and non-vis
+
+    pass
+
+
+@app.route('/social.json', methods=['GET', 'POST'])  # not sure wwhich to use yet
+def display_social_events():
+    """Get and display local events related to selected user_hobby."""
+
+    pass
+
+
+@app.route('/settings', methods=['POST'])  # May not use.
+def process_settings():
+    """Process settings-form."""
+
+    pass
 
 
 @app.route('/register', methods=['POST'])
@@ -221,11 +310,6 @@ def display_add_goal_form():
     current_user_id = session["user_id"]
 
     current_user = User.query.get(current_user_id)
-
-    # # Get subquery object of hobby ids for current user from DB.
-    # current_user_hobby_ids_obj = db.session.query(UserHobby.hobby_id).filter(UserHobby.user_id == current_user_id).subquery()
-    # # Get list of hobby names for current user by user-hobby ids from DB.
-    # current_user_hobbies = db.session.query(Hobby.hobby_name).filter(Hobby.hobby_id.in_(current_user_hobby_ids_obj)).all()
 
     # Render add goal template and pass list of hobbies to Jinja template.
     return render_template("add-goal.html",

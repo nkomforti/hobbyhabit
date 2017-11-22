@@ -85,7 +85,6 @@ $(document).ready(function(){
         $("#phone-number").attr({"placeholder": "First name"});
     }
 
-
     $("#update-profile").click(function (evt) {
         let formData = {};
 
@@ -95,7 +94,7 @@ $(document).ready(function(){
         formData["phone-number"] = $("#phone-number").val();
         formData["txt-opt-in-out"] = $(".txt-reminder").val();
             
-        $.post("/dashboard", formData, function (results) {
+        $.post("/update-user-profile", formData, function (results) {
             $("#user-profile > #user-profile-content").show();
             $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
             $("#social > #social-content").hide();
@@ -105,19 +104,20 @@ $(document).ready(function(){
         });
     });
 
-    // Select the element with class hobby-goal-btn and attach event listener to it.
+    let currentHobbyId;
+
+    // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
-        // On click, get value of the attribute for that clicked element ('this')
-        // and bind to variable.
-        let hiddenUserhobbyId = $(this).data("userhobbyId");
-        // Set the value for the selected element with id hobby-id.
-        $("#hidden-userhobby-id").val(hiddenUserhobbyId);
+
         $("#hobbyhabit-tracker").show();
+        currentHobbyId = $(this).data("userHobbyId");
+        
     });
 
     $("#completion-date").datepicker();
 
-    $(".hobbyhabit-tracker-btn").click(function (evt) {
+    $("#hobbyhabit-tracker-btn").click(function (evt) {
+        evt.preventDefault();
         // Create empty object, formData.
         let formData = {};
         // Add properties to object--the value of each property is the value of the
@@ -126,19 +126,20 @@ $(document).ready(function(){
         formData["total-hours"] = $("#total-hours").val();
         formData["total-minutes"] = $("#total-minutes").val();
         formData["completion-notes"] = $("#completion-notes").val();
-        formData["hidden-userhobby-id"] = $("#hidden-userhobby-id").val();
-
-        // AJAX post request to add-goal route to retrieve values from form. Then,
+        formData["user-hobby-id"] = currentHobbyId;
+        console.log(formData);
+        // AJAX post request to add-completion route to retrieve values from form. Then,
         // depending on which button was clicked, either hide modal for user to
         // select another hobbyhabit, or redirect to dashboard route.
-        $.post("/dashboard", formData, function (results) {
+        $.post("/add-completion", formData, function (results) {
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();
             $("#social > #social-content").hide();
             $("#settings > #settings-content").hide();
 
+            // Flash success message.
             $('#flash-tracking-status').html("HobbyHabit successfully tracked").show().fadeOut(5000);
         });
     });
 
-});
+});  //closer for document.ready
