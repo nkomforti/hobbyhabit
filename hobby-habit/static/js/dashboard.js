@@ -1,6 +1,7 @@
 "use strict";
 
 $(document).ready(function(){
+    // Set default dashboard view to see My HobbyHabit overview page (not hobbyhabit specific).
     $("#user-profile > #user-profile-content").hide();
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
@@ -93,8 +94,31 @@ $(document).ready(function(){
         formData["txt-opt-in-out"] = $(".txt-reminder").val();
             
         $.post("/dashboard", formData, function (results) {
-            window.location = "/dashboard";
+            $("#user-profile > #user-profile-content").show();
+            $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
+            $("#social > #social-content").hide();
+            $("#settings > #settings-content").hide();
+
+            $('#flash-update-profile-status').html("Successfully saved changes to profile").show().fadeOut(5000);
         });
     });
+
+    // Select the element with class hobby-goal-btn and attach event listern to it.
+    $(".hobbyhabit-btn").click(function (evt) {
+        // On click, get value of the attribute for that clicked element ('this')
+        // and bind to variable.
+        let hobbyId = $(this).data("hobbyId");
+        // Set the value for the selected element with id hobby-id.
+        $("#hobby-id").val(hobbyId);
+        
+        // let hobbyName = $(this).text();
+        // $("#hobby-name").text(hobbyName);
+    });
+
+
+
+
+
+
 
 });

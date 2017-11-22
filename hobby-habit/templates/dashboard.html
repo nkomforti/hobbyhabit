@@ -11,6 +11,8 @@
 
         {% block body_content %}
 
+        <div id="flash-update-profile-status"></div>
+
         <div class="menu-btns">
 
             <div id="user-profile">
@@ -32,7 +34,7 @@
                         <br><br>
 
                         <!-- Modal trigger button -->
-                        <button id="update-password-btn" class="btn btn-info active" type="button">
+                        <button id="update-password-btn" class="btn btn-info" type="button">
                             Update password
                         </button>
                         <br><br>
@@ -68,9 +70,10 @@
                         <br><br>
 
                         <!-- make sure to add and commit these changes to the DB -->
-                        <button id="update-profile" class="btn btn-info active" type="button">
+                        <button id="update-profile" class="btn btn-info" type="button">
                             Save changes to profile
                         </button>
+                        <br>
 
                     </form>
                     <!-- Change Password modal -->
@@ -130,13 +133,32 @@
                     {% for hobby in current_user_hobbies %}
                         <div id="my-hobbyhabit-btn">
                             <!-- Trigger which hobbyhabbit to display details for with button. hidden input??-->
-                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button"> <!-- data-hobby-id="{{ hobby.hobby_id }}" -->
+                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
                                 {{ hobby.hobby_name.title() }}
                             </button>
-
                         </div>
                     {% endfor %}
-                        <button id="add-hobbyhabit" class="btn btn-info active ">+</button> <!--add small modal with hobby field every time + is clicked-->
+                        <button id="add-hobbyhabit" class="btn btn-info">+</button> <!--add small modal with hobby field every time + is clicked-->
+
+                        <!-- Hidden input to grab and hold the id for the clicked hobbyhabit. -->
+                        <form id="hidden-hobby-id-form">
+                            <input id="hobby-id" type="hidden" name="hobby-id">
+                        </form>
+
+                        <!-- Tracker -->
+                        <form id="tracker-form">
+                            <!-- user_hobby_id -->
+                            <input id="hidden-user-hobby-id" type="hidden">
+                            <!-- completion_date -->
+                            <input id="completion-date">
+                            <!-- total_practice_time -->
+                            <!-- notes -->
+                        </form>
+
+                        <!-- Notes -->
+                        <!-- Completions -->
+                        <!-- Goals if any or an add goals form -->
+
                 </div>
             </div>
 

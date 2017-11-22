@@ -85,7 +85,7 @@ def display_dashboard():
 
     return render_template("dashboard.html",
                            current_user=current_user,
-                           current_user_hobbies=current_user.hobbies,
+                           current_user_hobbies=current_user.hobbies,  # CHANGE TO .user_hobbies???
                            current_user_data=current_user_data)
 
 
@@ -110,6 +110,7 @@ def process_dashboard():
     current_user.last_name = last_name
     current_user.zipcode = zipcode
     current_user.phone = phone_number
+
     if text_reminder == "on":
         current_user.text_reminder = True
     else:
@@ -118,8 +119,6 @@ def process_dashboard():
     db.session.add(current_user)
 
     db.session.commit()
-
-    flash("Profile successfully updated")
 
     return "success"
 
@@ -218,7 +217,7 @@ def display_add_goal_form():
 
     # Render add goal template and pass list of hobbies to Jinja template.
     return render_template("add-goal.html",
-                           current_user_hobbies=current_user.hobbies,
+                           current_user_hobbies=current_user.hobbies,  # CHANGE TO .user_hobbies???
                            current_user=current_user)
 
 
