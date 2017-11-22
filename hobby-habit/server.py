@@ -159,18 +159,18 @@ def process_add_completion():
 def display_completions():
     """Get completions data from db for selected user_hobby to display."""
 
-    for use to display data as vis and non-vis
+    # for use to display data as vis and non-vis
 
-    current_user_id = session["user_id"]
+    # current_user_id = session["user_id"]
 
-    current_user = User.query.get(current_user_id)
+    # current_user = User.query.get(current_user_id)
 
-    current_user_hobby_id = # Get user id that was clicked
+    # current_user_hobby_id = # Get user id that was clicked
 
-    user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
+    # user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
 
-    current_user_data = current_user.get_user_data()
-    user_hobby_completions = current_user_data["user_hobbies"]
+    # current_user_data = current_user.get_user_data()
+    # user_hobby_completions = current_user_data["user_hobbies"]
 
     pass
 

@@ -138,7 +138,9 @@ $(document).ready(function(){
             $("#settings > #settings-content").hide();
 
             // Flash success message.
-            $('#flash-tracking-status').html("HobbyHabit successfully tracked").show().fadeOut(5000);
+            $("#flash-tracking-status").html("HobbyHabit successfully tracked").show().fadeOut(5000);
+            // reset form
+            $("#hobbyhabit-tracker-form").reset(); // does not work
         });
     });
 
