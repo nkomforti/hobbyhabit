@@ -6,6 +6,7 @@ $(document).ready(function(){
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
     $("#settings > #settings-content").hide();
+    $("#hobbyhabit-tracker").hide();
 
     $("#user-profile-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").show();
@@ -19,6 +20,7 @@ $(document).ready(function(){
         $("#my-hobbyhabits > #my-hobbyhabit-content").show();
         $("#social > #social-content").hide();
         $("#settings > #settings-content").hide();
+        $("#hobbyhabit-tracker").hide();
     });
 
     $("#social-menu-btn").click(function (evt) {
@@ -110,6 +112,7 @@ $(document).ready(function(){
         let hiddenUserhobbyId = $(this).data("userhobbyId");
         // Set the value for the selected element with id hobby-id.
         $("#hidden-userhobby-id").val(hiddenUserhobbyId);
+        $("#hobbyhabit-tracker").show();
     });
 
     $("#completion-date").datepicker();
