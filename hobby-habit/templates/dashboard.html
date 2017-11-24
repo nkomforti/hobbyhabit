@@ -140,6 +140,7 @@
                         <button id="add-hobbyhabit" class="btn btn-info">+</button> <!--add small modal with hobby field every time + is clicked-->
 
                         <!-- HobbyHabit Tracker. -->
+                        <!-- NOT SHOWING FIELDS AS REQUIRED -->
                         <div id="hobbyhabit-tracker">
                             <form id="hobbyhabit-tracker-form">
                                 Completion date
@@ -153,7 +154,7 @@
                                 <br><br>
                                 Notes
                                 <br>
-                                <textarea id="completion-notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
+                                <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
                                 <br><br>
                                 <input type="button" id="hobbyhabit-tracker-btn" class="btn btn-info" value="Track me">
                             </form>
@@ -163,12 +164,12 @@
                         <div id="view-completions">
                             {% for user_hobby in current_user_data['user_hobbies'] %}
                                 {% for completions in user_hobby['completions'] %}
-                                    {% if user_hobby['user_hobby_id'] == 21 %}  <!-- GET ACTUAL USER HOBBY ID, DO NOT HARDCODE -->
+                                    {% if user_hobby['user_hobby_id'] == 21 %}  <!-- GET ACTUAL USER HOBBY ID FROM CLICKED USER HOBBY BTN, DO NOT HARDCODE -->
                                         <ul>
                                             <li>Tracked Completion</li>
                                             <b>Completion date:</b> {{ completions['completion_date'] }} <!-- FORMAT THE WAY TIME IS BEIND DISPLAYED -->
                                             <br>
-                                            <b>Total practice time:</b> {{ completions['total_practice_time'] }} minutes<!-- FORMAT INTO HOURS + MINUTES -->
+                                            <b>Total practice time:</b> {{ completions['total_practice_time'] }} minutes<!-- FORMAT TO DISPLAY AS HOURS + MINUTES -->
                                             <br>
                                             <b>Notes:</b> {{ completions['notes'] }}
                                         </ul>

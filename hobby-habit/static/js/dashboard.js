@@ -7,6 +7,7 @@ $(document).ready(function(){
     $("#social > #social-content").hide();
     $("#settings > #settings-content").hide();
     $("#hobbyhabit-tracker").hide();
+    $("#view-completions").hide();
 
     $("#user-profile-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").show();
@@ -108,9 +109,10 @@ $(document).ready(function(){
 
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
+        currentUserhobbyId = $(this).data("userHobbyId");
 
         $("#hobbyhabit-tracker").show();
-        currentUserhobbyId = $(this).data("userHobbyId");
+        $("#view-completions").show();
         
     });
 
@@ -128,7 +130,7 @@ $(document).ready(function(){
         formData.notes = $("#notes").val();
         formData["user-hobby-id"] = currentUserhobbyId;
 
-        $.get("/view-completions", formData, function (results) { //NOT SENDING USER_HOBBY_ID
+        $.get("/view-completions", formData["user-hobby-id"], function (results) { //NOT SENDING USER_HOBBY_ID
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();
             $("#social > #social-content").hide();
