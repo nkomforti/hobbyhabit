@@ -104,13 +104,13 @@ $(document).ready(function(){
         });
     });
 
-    let currentHobbyId;
+    let currentUserhobbyId;
 
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
 
         $("#hobbyhabit-tracker").show();
-        currentHobbyId = $(this).data("userHobbyId");
+        currentUserhobbyId = $(this).data("userHobbyId");
         
     });
 
@@ -125,9 +125,16 @@ $(document).ready(function(){
         formData["completion-date"] = $("#completion-date").val();
         formData["total-hours"] = $("#total-hours").val();
         formData["total-minutes"] = $("#total-minutes").val();
-        formData["completion-notes"] = $("#completion-notes").val();
-        formData["user-hobby-id"] = currentHobbyId;
-        console.log(formData);
+        formData.notes = $("#notes").val();
+        formData["user-hobby-id"] = currentUserhobbyId;
+
+        $.get("/view-completions", formData, function (results) { //NOT SENDING USER_HOBBY_ID
+            $("#user-profile > #user-profile-content").hide();
+            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+            $("#social > #social-content").hide();
+            $("#settings > #settings-content").hide();
+        });
+
         // AJAX post request to add-completion route to retrieve values from form. Then,
         // depending on which button was clicked, either hide modal for user to
         // select another hobbyhabit, or redirect to dashboard route.

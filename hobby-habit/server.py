@@ -137,45 +137,41 @@ def process_add_completion():
     completion_date = request.form["completion-date"]
     total_hours = int(request.form["total-hours"])
     total_minutes = int(request.form["total-minutes"])
-    completion_notes = request.form["completion-notes"]
+    notes = request.form["notes"]
     current_user_hobby_id = request.form["user-hobby-id"]
 
     new_completion = Completion()
 
     new_completion.completion_date = completion_date
     new_completion.total_practice_time = ((total_hours * 60) + total_minutes)
-    new_completion.notes = completion_notes
+    new_completion.notes = notes
     new_completion.user_hobby_id = current_user_hobby_id
 
     db.session.add(new_completion)
     db.session.commit()
 
-    # import pdb; pdb.set_trace()
-
     return "success"
 
 
-@app.route('/view-completions.json', methods=['GET'])
+@app.route('/view-completions', methods=['GET'])
 def display_completions():
     """Get completions data from db for selected user_hobby to display."""
 
     # for use to display data as vis and non-vis
 
-    # current_user_id = session["user_id"]
+    current_user_id = session["user_id"]
 
-    # current_user = User.query.get(current_user_id)
+    current_user = User.query.get(current_user_id)
 
-    # current_user_hobby_id = # Get user id that was clicked
+    user_hobby_id = request.form["user-hobby-id"]
 
     # user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
 
-    # current_user_data = current_user.get_user_data()
-    # user_hobby_completions = current_user_data["user_hobbies"]
+    current_user_data = current_user.get_user_data()
 
-    pass
-
-    # return render_template('dashboard.html',
-    #                        user_hobby_completions=user_hobby_completions)
+    return render_template("dashboard.html",
+                           user_hobby_id=user_hobby_id,
+                           current_user_data=current_user_data)
 
 
 @app.route('/mult-hobbies-vis.json', methods=['GET'])

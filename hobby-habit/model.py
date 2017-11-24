@@ -85,6 +85,7 @@ class User(db.Model):
                 completion_info['completion_id'] = completion.completion_id
                 completion_info['completion_date'] = completion.completion_date
                 completion_info['total_practice_time'] = completion.total_practice_time
+                completion_info['notes'] = completion.notes
 
                 hobby_info["completions"].append(completion_info)
 
