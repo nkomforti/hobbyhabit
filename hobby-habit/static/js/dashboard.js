@@ -38,10 +38,6 @@ $(document).ready(function(){
         $("#settings > #settings-content").show();
     });
 
-    $("#update-password-btn").click(function (evt) {
-        $("#updatePasswordModal").modal("show");
-    });
-
     let firstName = $("#hidden-first-name");
     if ($("#hidden-first-name") !== null) {
         $("#first-name").attr({"value": firstName.val()});
@@ -49,10 +45,6 @@ $(document).ready(function(){
     else {
         $("#first-name").attr({"placeholder": "First name"});
     }
-
-        $("#update-password-btn").click(function (evt) {
-        $("#updatePasswordModal").modal("show");
-    });
 
     let lastName = $("#hidden-last-name");
     if ($("#hidden-last-name") !== null) {
@@ -62,10 +54,6 @@ $(document).ready(function(){
         $("#last-name").attr({"placeholder": "Last name"});
     }
 
-        $("#update-password-btn").click(function (evt) {
-        $("#updatePasswordModal").modal("show");
-    });
-
     let zipcode = $("#hidden-zipcode");
     if ($("#hidden-zipcode") !== null) {
         $("#zipcode").attr({"value": zipcode.val()});
@@ -74,7 +62,7 @@ $(document).ready(function(){
         $("#zipcode").attr({"placeholder": "Zipcode"});
     }
 
-        $("#update-password-btn").click(function (evt) {
+    $("#update-password-trigger-btn").click(function (evt) {
         $("#updatePasswordModal").modal("show");
     });
 
@@ -107,13 +95,38 @@ $(document).ready(function(){
 
     let currentUserhobbyId;
 
+    $("#add-hobbyhabit-trigger-btn").click(function (evt) {
+        $("#addHobbyhabitModal").modal("show"); //STILL NEED TO ADD AND COMMIT TO DB
+    });
+
+    $("#add-hobbyhabit-btn").click(function (evt) {
+        let formData = {};
+
+        formData["new-hobbyhabit-name"] = $("#add-hobbyhabit-name").val();
+
+        $.post("/add-hobby-dashboard", formData, function (results) {
+            $("#addHobbyhabitModal").modal("hide"); //NOT WORKING
+            $("#flash-add-hobbyhabit-status").html("New HobbyHabit successfully added to profile").show().fadeOut(5000);
+        });
+    });
+
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
         currentUserhobbyId = $(this).data("userHobbyId");
 
+        let data = {};
+
+        data["user-hobby-id"] = currentUserhobbyId;
+        
         $("#hobbyhabit-tracker").show();
         $("#view-completions").show();
         
+        $.get("/view-completions", data, function (results) { //NOT SENDING USER_HOBBY_ID
+            $("#user-profile > #user-profile-content").hide();
+            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+            $("#social > #social-content").hide();
+            $("#settings > #settings-content").hide();
+        });
     });
 
     $("#completion-date").datepicker();
@@ -129,13 +142,6 @@ $(document).ready(function(){
         formData["total-minutes"] = $("#total-minutes").val();
         formData.notes = $("#notes").val();
         formData["user-hobby-id"] = currentUserhobbyId;
-
-        $.get("/view-completions", formData["user-hobby-id"], function (results) { //NOT SENDING USER_HOBBY_ID
-            $("#user-profile > #user-profile-content").hide();
-            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
-            $("#social > #social-content").hide();
-            $("#settings > #settings-content").hide();
-        });
 
         // AJAX post request to add-completion route to retrieve values from form. Then,
         // depending on which button was clicked, either hide modal for user to

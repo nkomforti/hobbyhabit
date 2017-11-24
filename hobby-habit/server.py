@@ -1,7 +1,7 @@
 """HobbyHabit."""
 
 from jinja2 import StrictUndefined
-from flask import Flask, g, url_for, render_template, request, flash, redirect, session
+from flask import Flask, g, url_for, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Completion, Hobby, UserHobby, Goal
 from functools import wraps
@@ -163,15 +163,22 @@ def display_completions():
 
     current_user = User.query.get(current_user_id)
 
-    user_hobby_id = request.form["user-hobby-id"]
+    user_hobby_id = int(request.args["user-hobby-id"])
 
     # user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
 
     current_user_data = current_user.get_user_data()
 
-    return render_template("dashboard.html",
-                           user_hobby_id=user_hobby_id,
-                           current_user_data=current_user_data)
+    # return render_template("dashboard.html",
+    #                        user_hobby_id=user_hobby_id,
+    #                        current_user_data=current_user_data)
+    completions = []
+
+    for user_hobby in current_user_data["user_hobbies"]:
+        if user_hobby["user_hobby_id"] == user_hobby_id:
+            completions = user_hobby["completions"]
+
+    return jsonify(completions)
 
 
 @app.route('/mult-hobbies-vis.json', methods=['GET'])
@@ -186,6 +193,11 @@ def display_mult_hobbies_vis():
 @app.route('/add-hobby-dashboard', methods=['POST'])
 def process_add_hobby_dashboard():
     """Process add-hobby form in dashboard, my-hobbyhabits and commit to db."""
+
+    new_hobbyhabit_name = request.form["new-hobbyhabit-name"]
+
+    # Add as new hobby and then add as user_hobby for current user.
+    # Add and commit to DB.
 
     pass
 
