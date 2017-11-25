@@ -188,21 +188,13 @@
                         </div>
 
                         <!-- Completions. -->
-                        <div id="view-completions">
-                            {% for user_hobby in current_user_data['user_hobbies'] %}
-                                {% for completions in user_hobby['completions'] %}
-                                    {% if user_hobby['user_hobby_id'] == 21 %}  <!-- GET ACTUAL USER HOBBY ID FROM CLICKED USER HOBBY BTN, DO NOT HARDCODE -->
-                                        <ul>
-                                            <li>Tracked Completion</li>
-                                            <b>Completion date:</b> {{ completions['completion_date'] }} <!-- FORMAT THE WAY TIME IS BEING DISPLAYED -->
-                                            <br>
-                                            <b>Total practice time:</b> {{ completions['total_practice_time'] }} minutes<!-- FORMAT TO DISPLAY AS HOURS + MINUTES -->
-                                            <br>
-                                            <b>Notes:</b> {{ completions['notes'] }}
-                                        </ul>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
+                        <div id="view-completions">  <!-- NEEDS TO BE FORMATTED STILL NOT SHOWING MORE THAN ONE  -->
+                            Tracked Completion
+                            <ul>
+                                <b>Completion date</b><li id="view-completion-date"></li>
+                                <b>Total practice time</b><li id="view-total-practice-time"></li>
+                                <b>Notes</b><li id="view-notes"></li>
+                            </ul>
                         </div>
 
                         <!-- Goals if any or an add goals form -->

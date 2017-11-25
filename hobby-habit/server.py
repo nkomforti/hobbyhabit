@@ -1,7 +1,9 @@
 """HobbyHabit."""
 
 from jinja2 import StrictUndefined
-from flask import Flask, g, url_for, render_template, request, flash, redirect, session, jsonify
+from flask import (Flask, g, url_for, render_template, request,
+                   flash, redirect, session, jsonify)
+
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Completion, Hobby, UserHobby, Goal
 from functools import wraps
@@ -153,7 +155,7 @@ def process_add_completion():
     return "success"
 
 
-@app.route('/view-completions', methods=['GET'])
+@app.route('/view-completions.json', methods=['GET'])
 def display_completions():
     """Get completions data from db for selected user_hobby to display."""
 
@@ -165,14 +167,9 @@ def display_completions():
 
     user_hobby_id = int(request.args["user-hobby-id"])
 
-    # user_hobby_completions = db.session.query(Completion).filter(Completion.user_hobby_id == current_user_hobby_id).all()
-
     current_user_data = current_user.get_user_data()
 
-    # return render_template("dashboard.html",
-    #                        user_hobby_id=user_hobby_id,
-    #                        current_user_data=current_user_data)
-    completions = []
+    completions = {}
 
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:

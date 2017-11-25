@@ -114,20 +114,44 @@ $(document).ready(function(){
     $(".hobbyhabit-btn").click(function (evt) {
         currentUserhobbyId = $(this).data("userHobbyId");
 
-        let data = {};
+        let userData = {};
 
-        data["user-hobby-id"] = currentUserhobbyId;
-        
+        userData["user-hobby-id"] = currentUserhobbyId;
+
         $("#hobbyhabit-tracker").show();
         $("#view-completions").show();
-        
-        $.get("/view-completions", data, function (results) { //NOT SENDING USER_HOBBY_ID
+        // ///////////
+        // $.get("/view-completions.json", userData, function (results) {
+        //     $("#user-profile > #user-profile-content").hide();
+        //     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+        //     $("#social > #social-content").hide();
+        //     $("#settings > #settings-content").hide();
+        // });
+
+        function viewCompletions (results) {
+            console.log(results);  // For debugging purposes.
+
+            for (let i in results) {
+                let completionDate = (results[i].completion_date);
+                let totalPracticeTime = (results[i].total_practice_time);
+                let notes = (results[i].notes);
+
+                $("#view-completion-date").text(completionDate);
+                $("#view-total-practice-time").text(totalPracticeTime);
+                $("#view-notes").text(notes);
+            }
+        }
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();
             $("#social > #social-content").hide();
             $("#settings > #settings-content").hide();
-        });
-    });
+
+        $.get("/view-completions.json", userData, viewCompletions);
+
+
+
+
+    }); //.hobbyhabit-btn click closer
 
     $("#completion-date").datepicker();
 
