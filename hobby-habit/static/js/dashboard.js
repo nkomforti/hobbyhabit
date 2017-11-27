@@ -110,6 +110,7 @@ $(document).ready(function(){
         });
     });
 
+    // Create global variable.
     let newComletions;
 
     // Select the element with class hobbyhabit-btn and attach event listener to it.
@@ -122,51 +123,37 @@ $(document).ready(function(){
 
         $("#hobbyhabit-tracker").show();
         $("#view-completions").show();
-        // ///////////
-        // $.get("/view-completions.json", userData, function (results) {
-        //     $("#user-profile > #user-profile-content").hide();
-        //     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
-        //     $("#social > #social-content").hide();
-        //     $("#settings > #settings-content").hide();
-        // });
 
         function viewCompletions (results) {
             console.log(results);  // For debugging.
 
-            for (let i in results) {
-                newComletions = "<div>" + "<p>" + (results[i].completion_date).slice(0, -13) + "</p>"
-            }
-
-
-
-
-
-
-
-
-            // ////////////
-            // Reset view to empty string to clear element every time a
+            // Clear/reset div element with the id view-completions each time a
             // different hobbyhabit is clicked.
-            $("#view-notes").html("");
-            $("#view-completion-date").html("");
-            $("#view-total-hr").html("");
-            $("#view-total-min").html("");
+            $("#view-completions").html("");
 
             for (let i in results) {
+                let completionId = (results[i].completion_id);
                 let completionDate = (results[i].completion_date).slice(0, -13);
                 let totalPracticeTime = (results[i].total_practice_time);
-                let notes = "<p>" + (results[i].notes) + "</p>";
-
-                $("#view-completion-date").append(completionDate);
-                // $("#view-total-practice-time").append(totalPracticeTime);
-                $("#view-notes").append(notes);
-
-
                 let totalHours = Math.floor(totalPracticeTime / 60);          
                 let totalMinutes = totalPracticeTime % 60;
+                let notes;
 
-                $("#view-total-hr").append("<p>" + totalHours + "</p>");
-                $("#view-total-min").append("<p>" + totalMinutes + "</p>");
+                if ((results[i].notes) === null) {
+                    notes = "<i>This completion was tracked without a note.</i>";
+                }
+                else{
+                    notes = (results[i].notes);
+                }
+
+                newComletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
+                                    "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
+                                    "<b>Total Hours</b><p id='total-hours'>" + totalHours + "</p>" +
+                                    "<b>Total Minutes</b><p id='total-minutes'>" + totalMinutes + "</p>" +
+                                    "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
+                                "</div>";
+
+                $("#view-completions").append(newComletions);
             }
         }
             $("#user-profile > #user-profile-content").hide();
@@ -176,7 +163,7 @@ $(document).ready(function(){
 
         $.get("/view-completions.json", userData, viewCompletions);
 
-    }); //.hobbyhabit-btn click closer
+    });  //.hobbyhabit-btn click closer
 
     $("#completion-date").datepicker();
 
