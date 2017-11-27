@@ -148,8 +148,7 @@ $(document).ready(function(){
 
                 newComletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
                                     "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
-                                    "<b>Total Hours</b><p id='total-hours'>" + totalHours + "</p>" +
-                                    "<b>Total Minutes</b><p id='total-minutes'>" + totalMinutes + "</p>" +
+                                    "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr. " + totalMinutes + " min." + "</p>" +
                                     "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
                                 "</div>";
 
