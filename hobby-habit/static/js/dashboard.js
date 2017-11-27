@@ -110,6 +110,8 @@ $(document).ready(function(){
         });
     });
 
+    let newComletions;
+
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
         currentUserhobbyId = $(this).data("userHobbyId");
@@ -129,16 +131,42 @@ $(document).ready(function(){
         // });
 
         function viewCompletions (results) {
-            console.log(results);  // For debugging purposes.
+            console.log(results);  // For debugging.
 
             for (let i in results) {
-                let completionDate = (results[i].completion_date);
-                let totalPracticeTime = (results[i].total_practice_time);
-                let notes = (results[i].notes);
+                newComletions = "<div>" + "<p>" + (results[i].completion_date).slice(0, -13) + "</p>"
+            }
 
-                $("#view-completion-date").text(completionDate);
-                $("#view-total-practice-time").text(totalPracticeTime);
-                $("#view-notes").text(notes);
+
+
+
+
+
+
+
+            // ////////////
+            // Reset view to empty string to clear element every time a
+            // different hobbyhabit is clicked.
+            $("#view-notes").html("");
+            $("#view-completion-date").html("");
+            $("#view-total-hr").html("");
+            $("#view-total-min").html("");
+
+            for (let i in results) {
+                let completionDate = (results[i].completion_date).slice(0, -13);
+                let totalPracticeTime = (results[i].total_practice_time);
+                let notes = "<p>" + (results[i].notes) + "</p>";
+
+                $("#view-completion-date").append(completionDate);
+                // $("#view-total-practice-time").append(totalPracticeTime);
+                $("#view-notes").append(notes);
+
+
+                let totalHours = Math.floor(totalPracticeTime / 60);          
+                let totalMinutes = totalPracticeTime % 60;
+
+                $("#view-total-hr").append("<p>" + totalHours + "</p>");
+                $("#view-total-min").append("<p>" + totalMinutes + "</p>");
             }
         }
             $("#user-profile > #user-profile-content").hide();
@@ -147,9 +175,6 @@ $(document).ready(function(){
             $("#settings > #settings-content").hide();
 
         $.get("/view-completions.json", userData, viewCompletions);
-
-
-
 
     }); //.hobbyhabit-btn click closer
 
