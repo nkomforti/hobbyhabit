@@ -237,14 +237,14 @@ def display_active_goal():
 
     current_user_data = current_user.get_user_data()
 
-    goals = {}
+    goal_data = {}
 
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
-            goals["active_goal"] = user_hobby["active_goal"]
-            goals["inactive_goals"] = user_hobby["inactive_goals"]
+            goal_data["active_goal"] = user_hobby["active_goal"]
+            goal_data["inactive_goals"] = user_hobby["inactive_goals"]
 
-    return jsonify(goals)
+    return jsonify(goal_data)
 
 
 @app.route('/social.json', methods=['GET', 'POST'])  # not sure wwhich to use yet

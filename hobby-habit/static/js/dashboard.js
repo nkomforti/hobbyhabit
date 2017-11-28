@@ -316,29 +316,37 @@ $(document).ready(function(){
     function viewGoal (results) {
         goalData = results;
 
-        let goalId = goalData
-        let goalStartDate =
-        let goalFreqNum =
-        let goalFreqTimeUnit =
-        let goalActive = 
+        for (let goal of goalData) {
 
-        if (goalActive !== []) {
-            viewActiveGoal = "<div id='" + goalId + "'>" +
-                                "<b>Goal Start Date</b><p id='goal-start-date'>" + goalStartDate + "</p>" +
-                                "<b>Goal Frequency</b><p id='goal-freq-num'>" + goalFreqNum + "</p>" +
-                                "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + goalFreqTimeUnit + "</p>" + 
-                            "</div>";
+            let activeGoalActive = goal.active_goal;
+            let activeGoalId = goalData.goal_
+            let activeGoalStartDate =
+            let activeGoalFreqNum =
+            let activeGoalFreqTimeUnit =
 
-            $("#view-active-goal").append(viewActiveGoal);
-            $("#view-active-goal").show();
-            $("#add-gaol").hide();
+            let inactiveGoalActive = goal.inactive_goal;
+            let inactiveGoalId = goalData.
+            let inactiveGoalStartDate =
+            let inactiveGoalFreqNum =
+            let inactiveGoalFreqTimeUnit =
+
+            if (goalActive !== []) {
+                viewActiveGoal = "<div id='" + activeGoalId + "'>" +
+                                    "<b>Goal Start Date</b><p id='goal-start-date'>" + goalStartDate + "</p>" +
+                                    "<b>Goal Frequency</b><p id='goal-freq-num'>" + goalFreqNum + "</p>" +
+                                    "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + goalFreqTimeUnit + "</p>" + 
+                                "</div>";
+
+                $("#view-active-goal").append(viewActiveGoal);
+                $("#view-active-goal").show();
+                $("#add-gaol").hide();
+            }
+            else {
+                addGoal = 
+                $("#add-gaol").show();
+                $("#view-active-goal").hide();
+            }
         }
-        else {
-            addGoal = 
-            $("#add-gaol").show();
-            $("#view-active-goal").hide();
-        }
-
     }
         // AJAX request to send data to route and call specified function.
         $.get("/view-active-goal.json", userData, viewGoal);
