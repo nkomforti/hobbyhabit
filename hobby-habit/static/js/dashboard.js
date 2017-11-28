@@ -96,7 +96,7 @@ $(document).ready(function(){
     let currentUserhobbyId;
 
     $("#add-hobbyhabit-trigger-btn").click(function (evt) {
-        $("#addHobbyhabitModal").modal("show"); //STILL NEED TO ADD AND COMMIT TO DB
+        $("#addHobbyhabitModal").modal("show");
     });
 
     $("#add-hobbyhabit-btn").click(function (evt) {
@@ -105,13 +105,26 @@ $(document).ready(function(){
         formData["new-hobbyhabit-name"] = $("#add-hobbyhabit-name").val();
 
         $.post("/add-hobby-dashboard", formData, function (results) {
-            $("#addHobbyhabitModal").modal("hide"); //NOT WORKING
+            $("#addHobbyhabitModal").modal("hide");
             $("#flash-add-hobbyhabit-status").html("New HobbyHabit successfully added to profile").show().fadeOut(5000);
         });
+
+        let newHobbyHabit = $("<button></button>");
+        newHobbyHabit.attr({"id": "hobbyhabit-btn",
+                            "class": "btn btn-info active hobbyhabit-btn",
+                            "type": "button",
+                            "data-user-hobby-id": "{{ user_hobby['user_hobby_id'] }}"});
+        newHobbyHabit.text(formData["new-hobbyhabit-name"]);
+
+        newHobbyHabit.insertBefore("#add-hobbyhabit-trigger-btn");
+        $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
+
     });
 
     // Create global variable.
     let newComletions;
+    let completions;
+    let startIndex;
 
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
@@ -125,35 +138,53 @@ $(document).ready(function(){
         $("#view-completions").show();
 
         function viewCompletions (results) {
-            console.log(results);  // For debugging.
+            completions = results;
+            startIndex = 0;
 
-            // Clear/reset div element with the id view-completions each time a
-            // different hobbyhabit is clicked.
-            $("#view-completions").html("");
+            // Empty element with the id view-completions.
+            $("#view-completions").empty();
 
-            for (let i in results) {
-                let completionId = (results[i].completion_id);
-                let completionDate = (results[i].completion_date).slice(0, -13);
-                let totalPracticeTime = (results[i].total_practice_time);
+            for (let completion in completions.slice(startIndex, startIndex + 5)) {
+
+                let completionId = (completions[completion].completion_id);
+                let completionDate = (completions[completion].completion_date).slice(0, -13);
+                let totalPracticeTime = (completions[completion].total_practice_time);
                 let totalHours = Math.floor(totalPracticeTime / 60);          
                 let totalMinutes = totalPracticeTime % 60;
                 let notes;
 
-                if ((results[i].notes) === null) {
+                if ((completions[completion].notes) === null) {
                     notes = "<i>This completion was tracked without a note.</i>";
                 }
                 else{
-                    notes = (results[i].notes);
+                    notes = (completions[completion].notes);
                 }
 
                 newComletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
                                     "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
-                                    "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr. " + totalMinutes + " min." + "</p>" +
+                                    "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
                                     "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
                                 "</div>";
 
                 $("#view-completions").append(newComletions);
             }
+            
+            $(".view-direction").click(function (evt){
+
+                let viewDirection = $(this).data("view-direction");
+
+                if (viewDirection === "next") {
+                    // hide this button if there are no "next" results to display  // NOT WORKING
+                    startIndex += 10;
+                    viewCompletions();
+                }
+                else {
+                    // Hide this button if on first batch  // NOT WORKING
+                    startIndex -= 10;
+                    viewCompletions();
+                }
+            });
+
         }
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();

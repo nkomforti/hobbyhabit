@@ -191,12 +191,29 @@ def display_mult_hobbies_vis():
 def process_add_hobby_dashboard():
     """Process add-hobby form in dashboard, my-hobbyhabits and commit to db."""
 
-    new_hobbyhabit_name = request.form["new-hobbyhabit-name"]
+    # Get current user from session.
+    current_user_id = session["user_id"]
 
-    # Add as new hobby and then add as user_hobby for current user.
-    # Add and commit to DB.
+    # Get data from form.
+    new_userhobby_name = request.form["new-hobbyhabit-name"]
+    hobby_obj = Hobby.query.filter(Hobby.hobby_name == new_userhobby_name).first()
 
-    pass
+    if not hobby_obj:
+        hobby_obj = Hobby(hobby_name=new_userhobby_name,
+                          autocomplete=False)
+        db.session.add(hobby_obj)
+        db.session.commit()
+
+    userhobby_obj = UserHobby.query.filter(UserHobby.hobby_id == hobby_obj.hobby_id,
+                                           UserHobby.user_id == current_user_id).first()
+
+    if not userhobby_obj:
+        userhobby_obj = UserHobby(user_id=current_user_id,
+                                  hobby_id=hobby_obj.hobby_id)
+        db.session.add(userhobby_obj)
+        db.session.commit()
+
+    return "Success"
 
 
 @app.route('/add-goal-dashboard', methods=['POST'])
@@ -290,7 +307,8 @@ def process_add_hobby_form():
 
         # If hobby not in the DB, add to DB.
         if not hobby_obj:
-            hobby_obj = Hobby(hobby_name=hobby_name)
+            hobby_obj = Hobby(hobby_name=hobby_name,
+                              autocomplete=False)  # Check this line.
             db.session.add(hobby_obj)
             db.session.commit()
 
