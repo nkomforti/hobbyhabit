@@ -76,7 +76,7 @@ class User(db.Model):
             hobby_info["hobby_name"] = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id, UserHobby.user_hobby_id == user_hobby.user_hobby_id).one()
             hobby_info["completions"] = []
             hobby_info["inactive_goals"] = []
-            hobby_info["active_goals"] = []
+            hobby_info["active_goal"] = []
 
             user_data["user_hobbies"].append(hobby_info)
 
@@ -98,7 +98,7 @@ class User(db.Model):
                 goal_info["goal_active"] = goal.goal_active
 
                 if goal.goal_active:
-                    hobby_info["active_goals"].append(goal_info)
+                    hobby_info["active_goal"].append(goal_info)
                 else:
                     hobby_info["inactive_goals"].append(goal_info)
 

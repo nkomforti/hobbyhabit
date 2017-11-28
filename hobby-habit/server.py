@@ -223,13 +223,28 @@ def process_add_goal_dashboard():
     pass
 
 
-@app.route('/view-current-goal.json', methods=['GET'])
-def display_current_goal():
-    """Get goal data from db for selected user_hobby to display."""
+@app.route('/view-active-goal.json', methods=['GET'])
+def display_active_goal():
+    """Get active goal data from db for selected user_hobby to display."""
 
     # for use to display data as vis and non-vis
 
-    pass
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    user_hobby_id = int(request.args["user-hobby-id"])
+
+    current_user_data = current_user.get_user_data()
+
+    goals = {}
+
+    for user_hobby in current_user_data["user_hobbies"]:
+        if user_hobby["user_hobby_id"] == user_hobby_id:
+            goals["active_goal"] = user_hobby["active_goal"]
+            goals["inactive_goals"] = user_hobby["inactive_goals"]
+
+    return jsonify(goals)
 
 
 @app.route('/social.json', methods=['GET', 'POST'])  # not sure wwhich to use yet

@@ -249,20 +249,20 @@ $(document).ready(function(){
     });  // hobbyhabit-btn click closer
 
     // Select all elements with specified class and attach event listener to them.
-    $(".view-direction").click(function (evt){
+    $(".page-direction").click(function (evt){
         // On click, declare variable and set value equal to value of specified
         // data attribute.
-        let viewDirection = $(this).data("view-direction");
+        let pageDirection = $(this).data("page-direction");
 
         // Check if value is equal to specified string.
-        if (viewDirection === "next") {
+        if (pageDirection === "next") {
             // If equal, increment value of global variable by 5.
             startIndex += 5;
             // Call specified function and pass in global variable.
             viewCompletions(completions);
         }
         else {
-            // If not equal, decrement value of globale variable by 5.
+            // If not equal, decrement value of global variable by 5.
             startIndex -= 5;
             // Call specified function and pass in global variable.
             viewCompletions(completions);
@@ -302,5 +302,49 @@ $(document).ready(function(){
 
         });  // add-completion post request function closer
     });  // hobbyhabit-tracker-btn click closer
+
+
+    // check if any active goal for selected userhobby
+    // yes, display goal 
+    // no, display add goal form
+    // edit goal
+    // deactivate goal
+    let goalData;
+    let viewActiveGoal;
+    let addGoal;
+
+    function viewGoal (results) {
+        goalData = results;
+
+        let goalId = goalData
+        let goalStartDate =
+        let goalFreqNum =
+        let goalFreqTimeUnit =
+        let goalActive = 
+
+        if (goalActive !== []) {
+            viewActiveGoal = "<div id='" + goalId + "'>" +
+                                "<b>Goal Start Date</b><p id='goal-start-date'>" + goalStartDate + "</p>" +
+                                "<b>Goal Frequency</b><p id='goal-freq-num'>" + goalFreqNum + "</p>" +
+                                "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + goalFreqTimeUnit + "</p>" + 
+                            "</div>";
+
+            $("#view-active-goal").append(viewActiveGoal);
+            $("#view-active-goal").show();
+            $("#add-gaol").hide();
+        }
+        else {
+            addGoal = 
+            $("#add-gaol").show();
+            $("#view-active-goal").hide();
+        }
+
+    }
+        // AJAX request to send data to route and call specified function.
+        $.get("/view-active-goal.json", userData, viewGoal);
+
+
+
+
 
 });  // document.ready closer
