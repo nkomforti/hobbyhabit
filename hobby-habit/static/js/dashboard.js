@@ -118,13 +118,46 @@ $(document).ready(function(){
 
         newHobbyHabit.insertBefore("#add-hobbyhabit-trigger-btn");
         $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
-
     });
 
     // Create global variable.
-    let newComletions;
+    let newCompletions;
     let completions;
-    let startIndex;
+    let startIndex = 0;
+
+    function viewCompletions (results) {
+        completions = results;
+        // startIndex = 0;
+
+        console.log(startIndex);
+        // Empty element with the id view-completions.
+        $("#view-completions").empty();
+        debugger;
+        for (let completion of completions.slice(startIndex, startIndex + 5)) {
+
+            let completionId = completion.completion_id;
+            let completionDate = (completion.completion_date).slice(0, -13);
+            let totalPracticeTime = completion.total_practice_time;
+            let totalHours = Math.floor(totalPracticeTime / 60);          
+            let totalMinutes = totalPracticeTime % 60;
+            let notes;
+
+            if ((completion.notes) === null) {
+                notes = "<i>This completion was tracked without a note.</i>";
+            }
+            else{
+                notes = completion.notes;
+            }
+
+            newCompletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
+                                "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
+                                "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
+                                "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
+                            "</div>";
+
+            $("#view-completions").append(newCompletions);
+        } 
+    }
 
     // Select the element with class hobbyhabit-btn and attach event listener to it.
     $(".hobbyhabit-btn").click(function (evt) {
@@ -137,55 +170,7 @@ $(document).ready(function(){
         $("#hobbyhabit-tracker").show();
         $("#view-completions").show();
 
-        function viewCompletions (results) {
-            completions = results;
-            startIndex = 0;
 
-            // Empty element with the id view-completions.
-            $("#view-completions").empty();
-
-            for (let completion in completions.slice(startIndex, startIndex + 5)) {
-
-                let completionId = (completions[completion].completion_id);
-                let completionDate = (completions[completion].completion_date).slice(0, -13);
-                let totalPracticeTime = (completions[completion].total_practice_time);
-                let totalHours = Math.floor(totalPracticeTime / 60);          
-                let totalMinutes = totalPracticeTime % 60;
-                let notes;
-
-                if ((completions[completion].notes) === null) {
-                    notes = "<i>This completion was tracked without a note.</i>";
-                }
-                else{
-                    notes = (completions[completion].notes);
-                }
-
-                newComletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
-                                    "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
-                                    "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
-                                    "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
-                                "</div>";
-
-                $("#view-completions").append(newComletions);
-            }
-            
-            $(".view-direction").click(function (evt){
-
-                let viewDirection = $(this).data("view-direction");
-
-                if (viewDirection === "next") {
-                    // hide this button if there are no "next" results to display  // NOT WORKING
-                    startIndex += 10;
-                    viewCompletions();
-                }
-                else {
-                    // Hide this button if on first batch  // NOT WORKING
-                    startIndex -= 10;
-                    viewCompletions();
-                }
-            });
-
-        }
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();
             $("#social > #social-content").hide();
@@ -194,6 +179,22 @@ $(document).ready(function(){
         $.get("/view-completions.json", userData, viewCompletions);
 
     });  //.hobbyhabit-btn click closer
+
+            $(".view-direction").click(function (evt){
+
+                let viewDirection = $(this).data("view-direction");
+
+                if (viewDirection === "next") {
+                    // hide this button if there are no "next" results to display  // NOT WORKING
+                    startIndex += 5;
+                    viewCompletions(completions);
+                }
+                else {
+                    // Hide this button if on first batch  // NOT WORKING
+                    startIndex -= 5;
+                    viewCompletions(completions);
+                }
+            });
 
     $("#completion-date").datepicker();
 
