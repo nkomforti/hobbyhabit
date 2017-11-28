@@ -105,7 +105,7 @@
                                         <br> 
                                         <input id="confirm-new-password" type="password" name="confirm-new-password" required>
                                         <br>
-                                        <a href="">Forgot password</a> <!-- Add link and and add and commit to DB -->
+                                        <a href="">Forgot password</a>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -195,8 +195,35 @@
                         <button id="next-view-btn" class="btn btn-info view-direction" type="button" data-view-direction="next">
                             Next</button>
 
-                        <!-- Goals if any or an add goals form -->
-                        <!-- Goals if any or an add goals form -->
+                        <!-- Goals. -->
+                        <div id="view-active-goal"></div>
+                        
+                        <div id="add-goal">
+                            <form id="add-goal-form">
+                                <input id="user-hobby-id" type="hidden" name="user-hobby-id"> <!-- ???DO I NEED THIS  -->
+                                Goal start date: 
+                                <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
+                                <br>
+                                <br>
+                                Goal frequency: 
+                                <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
+                                <br>
+                                <br>
+                                Goal time-unit: 
+                                <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
+                                    <option value="" disabled selected>-- Time unit --</option>
+                                    <option value="Day">Day</option>
+                                    <option value="Week">Week</option>
+                                    <option value="Month">Month</option>
+                                    <option value="Year">Year</option>
+                                </select>
+                                <br>
+                                <br>
+                                <button class="add-goal-btn btn-info btn-sm">
+                                    Set goal
+                                </button>
+                            </form>
+                        </div>                        
 
                 </div>
             </div>

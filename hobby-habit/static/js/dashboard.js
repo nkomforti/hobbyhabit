@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(function(){
-    // Set default dashboard view to see My HobbyHabit overview page (not hobbyhabit specific).
+    // Set default dashboard view to see My HobbyHabit overview page.
     $("#user-profile > #user-profile-content").hide();
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
@@ -256,14 +256,12 @@ $(document).ready(function(){
 
         // Check if value is equal to specified string.
         if (viewDirection === "next") {
-            // hide this button if there are no "next" results to display  // NOT WORKING
             // If equal, increment value of global variable by 5.
             startIndex += 5;
             // Call specified function and pass in global variable.
             viewCompletions(completions);
         }
         else {
-            // Hide this button if on first batch  // NOT WORKING
             // If not equal, decrement value of globale variable by 5.
             startIndex -= 5;
             // Call specified function and pass in global variable.

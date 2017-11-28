@@ -33,7 +33,7 @@ $("#plus-btn").click(function (evt) {
     $("#plus-btn").prop("disabled", true);
 });
 
-// Select entire page/document and attach an event listenter to it that will
+// Select entire page/document and attach an event listener to it that will
 // call the following anonymous function when a key on the keyboard is released.
 $(document).on("keyup", "#add-hobby input", function (evt) {
 
@@ -61,10 +61,3 @@ $(document).on("keyup", "#add-hobby input", function (evt) {
             $("#plus-btn").prop("disabled", false);
         }
 });
-
-// $("#hobby-form").submit(function (evt) {
-//     if ($("#hobby-name-1").val() === "") {
-//         evt.preventDefault();
-//     }
-// });
-
