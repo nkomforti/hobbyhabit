@@ -96,13 +96,13 @@
                                         Old password
                                         <br>
                                         <input id="old-password" type="password" name="old-password" required>
-                                        <br>
-                                        <br>
+                                        <br><br>
+
                                         New password
                                         <br> 
                                         <input id="new-password" type="password" name="new-password" required>
-                                        <br>
-                                        <br>
+                                        <br><br>
+
                                         Confirm new password
                                         <br> 
                                         <input id="confirm-new-password" type="password" name="confirm-new-password" required>
@@ -176,11 +176,13 @@
                                 <br>
                                 <input id="completion-date" type="text" name="completion-date" placeholder="-- Completion date --" required>
                                 <br><br>
+
                                 Total practice time
                                 <br>
                                 Hr: <input id="total-hours" type="number" name="total-hours" min="0" max="100" placeholder="hr" required>
                                 Min: <input id="total-minutes" type="number" name="total-minutes" min="0" max="1440" placeholder="min" required>
                                 <br><br>
+
                                 Notes
                                 <br>
                                 <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
@@ -198,19 +200,49 @@
                             Next</button>
 
                         <!-- Goals. -->
-                        <div id="view-active-goal"></div>
+                        <div id="active-goal" hidden>
+                            <div id="view-active-goal"></div>
+                            <button id="edit-goal-btn" class="btn btn-info">Edit goal</button>
+                            <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+                        </div>
+
+                        <!-- <div id="active-goal" hidden>
+                            <form id="view-active-goal">
+                                Goal Start Date
+                                <br>
+                                <input id="active-goal-start-date" type="text">
+                                <br><br>
+
+                                Goal Frequency
+                                <br>
+                                <input id="active-goal-freq-num" type="text">
+                                <br><br>
+
+                                Goal Time Unit
+                                <br>
+                                <input id="active-goal-freq-time-unit" type="text">
+                                <br>
+
+                            <button id="edit-goal-btn" class="btn btn-info">Edit goal</button>
+                            <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+                            </form>
+                        </div> -->
+
 
                         <div id="add-goal" hidden>
                             <form id="add-goal-form">
-                                Goal start date: 
+                                Goal start date
+                                <br>
                                 <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
+                                <br><br>
+
+                                Goal frequency
                                 <br>
-                                <br>
-                                Goal frequency: 
                                 <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
-                                <br>
-                                <br>
-                                Goal time-unit: 
+                                <br><br>
+
+                                Goal time-unit
+                                <br> 
                                 <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
                                     <option value="" disabled selected>-- Time unit --</option>
                                     <option value="Day">Day</option>
@@ -219,7 +251,7 @@
                                     <option value="Year">Year</option>
                                 </select>
                                 <br>
-                                <br>
+
                                 <button class="btn btn-info add-goal-btn ">
                                     Set goal
                                 </button>

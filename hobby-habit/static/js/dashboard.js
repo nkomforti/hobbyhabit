@@ -166,7 +166,6 @@ $(document).ready(function(){
 
         // Empty element with the id view-completions.
         $("#view-completions").empty();
-            // ADD COMMENTS ADD CONDITION FOR PREVIOUS
             if (completions.length < 5 || startIndex + 5 >= completions.length) {
                 $("#next-page-btn").hide();
             }
@@ -180,11 +179,8 @@ $(document).ready(function(){
                 $("#previous-page-btn").hide();
             }
 
-
-        // Iterate over slice of completions completion-by-completion; declare
-        // variable completion.
+        // Iterate over slice of completions completion-by-completion.
         for (let completion of completions.slice(startIndex, startIndex + 5)) {
-
             // Declare variable and bind result at specified key.
             let completionId = completion.completion_id;
             // Declare variable and bind result slice at specified key.
@@ -277,11 +273,13 @@ $(document).ready(function(){
         }
     });  // view-direction click closer
 
+
     // Select element by id and attach datepicker widget to it.
     $("#completion-date").datepicker();
 
+
     // Select element by id and attache event listener to it.
-    $("#hobbyhabit-tracker-btn").on('click', function (evt) {
+    $("#hobbyhabit-tracker-btn").click(function (evt) {
         // On click, prevent form submission.
         evt.preventDefault();
         
@@ -311,49 +309,60 @@ $(document).ready(function(){
     });  // hobbyhabit-tracker-btn click closer
     
 
+    $("#goal-start-date").datepicker();
+
     let viewActiveGoal;
     let addGoal;
 
     function viewGoal (results) {  
         let goalData = results;
-        console.log("hello");
         $("#view-active-goal").empty();
 
         if (goalData.active_goal.length !== 0) {
             
             let activeGoal = goalData.active_goal[0];
         
-            // let activeGoalActive = activeGoal.goal_active;
             let activeGoalId = activeGoal.goal_id;
-            let activeGoalStartDate = activeGoal.goal_start_date;
+            let activeGoalStartDate = activeGoal.goal_start_date.slice(0, -13);
             let activeGoalFreqNum = activeGoal.goal_freq_num;
             let activeGoalFreqTimeUnit = activeGoal.goal_freq_time_unit;
 
             viewActiveGoal = "<div id='" + activeGoalId + "'>" +
                                 "<b>Goal Start Date</b><p id='goal-start-date'>" + activeGoalStartDate + "</p>" +
                                 "<b>Goal Frequency</b><p id='goal-freq-num'>" + activeGoalFreqNum + "</p>" +
-                                "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" + 
-                            "</div>";
+                                "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
+                             "</div>";
 
-            $("#view-active-goal").append(viewActiveGoal);
-            $("#view-active-goal").show();
+            // $("#active-goal-start-date").val(activeGoalStartDate);
+            // $("#active-goal-freq-num").val(activeGoalFreqNum);
+            // $("#active-goal-freq-time-unit").val(activeGoalFreqTimeUnit);            
+
+            $("#active-goal").append(viewActiveGoal);
+            $("#active-goal").show();
             $("#add-goal").hide();
         }
-
         else if (goalData.active_goal.length === 0) {
             $("#add-goal").show();
-            $("#view-active-goal").hide();
+            $("#active-goal").hide();
         }
 
         // FOR DATA VIS.
         for (let inactiveGoals of goalData.inactive_goals) {
 
-            let inactiveGoalActive = inactiveGoals.goal_active;
             let inactiveGoalId = inactiveGoals.goal_id;
             let inactiveGoalStartDate = inactiveGoals.goal_start_date;
             let inactiveGoalFreqNum = inactiveGoals.goal_freq_num;
             let inactiveGoalFreqTimeUnit = inactiveGoals.goal_freq_time_unit;     
         }
     }
+
+    $("#edit-goal-btn").click(function (evt) {
+        // ADD ABILITY TO EDIT GOAL
+    });
+
+    $("#deactivate-goal-btn").click(function (evt) {
+        // ADD ABILITY TO DEACTIVATE GOAL
+        // MAKE GOAL_ACTIVE FOR THIS GOAL_ID FALSE
+    });
 
 });  // document.ready closer
