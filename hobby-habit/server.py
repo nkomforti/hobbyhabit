@@ -11,7 +11,7 @@ from functools import wraps
 
 app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined  # Raises an error if an undefined variable is used in Jinja 2.
-app.jinja_env.auto_reload = True  # What does this do??
+app.jinja_env.auto_reload = True
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 
 
@@ -220,9 +220,6 @@ def process_add_hobby_dashboard():
 def process_add_goal_dashboard():
     """Process add-goal form in dashboard, my-hobbyhabits and commit to db."""
 
-    # Get current user from session.
-    current_user_id = session["user_id"]
-
     # Get data from form.
     goal_start_date = request.form["goal-start-date"]
     goal_freq_num = request.form["goal-freq-num"]
@@ -376,7 +373,7 @@ def display_add_goal_form():
 
     # Render add goal template and pass list of hobbies to Jinja template.
     return render_template("add-goal.html",
-                           current_user_hobbies=current_user.hobbies,  # CHANGE TO .user_hobbies???
+                           current_user_hobbies=current_user.hobbies,
                            current_user=current_user)
 
 
@@ -406,7 +403,7 @@ def process_add_goal_form():
     db.session.add(new_goal)
 
     active_goal = db.session.query(Goal).filter(Goal.user_hobby_id == user_hobby_id,
-                                                Goal.goal_active.is_(True)).first()  # or Goal.goal_active == True).first()
+                                                Goal.goal_active.is_(True)).first()
 
     if active_goal:
         active_goal.goal_active = False
