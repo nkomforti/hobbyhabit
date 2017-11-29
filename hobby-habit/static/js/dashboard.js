@@ -91,7 +91,7 @@ $(document).ready(function(){
         let formData = {};
 
         // Add properties to object from profile form--the value of each
-        // property is the value of the specified selected element id..
+        // property is the value of the specified selected element id.
         formData["first-name"] = $("#first-name").val();
         formData["last-name"] = $("#last-name").val();
         formData.zipcode = $("#zipcode").val();
@@ -179,8 +179,10 @@ $(document).ready(function(){
                 $("#previous-page-btn").hide();
             }
 
+
         // Iterate over slice of completions completion-by-completion.
         for (let completion of completions.slice(startIndex, startIndex + 5)) {
+
             // Declare variable and bind result at specified key.
             let completionId = completion.completion_id;
             // Declare variable and bind result slice at specified key.
@@ -278,7 +280,7 @@ $(document).ready(function(){
     $("#completion-date").datepicker();
 
 
-    // Select element by id and attache event listener to it.
+    // Select element by id and attach event listener to it.
     $("#hobbyhabit-tracker-btn").click(function (evt) {
         // On click, prevent form submission.
         evt.preventDefault();
@@ -308,15 +310,18 @@ $(document).ready(function(){
         });  // add-completion post request function closer
     });  // hobbyhabit-tracker-btn click closer
     
-
+    
+    // Select element by id and attach datepicker widget to it.
     $("#goal-start-date").datepicker();
+
 
     let viewActiveGoal;
     let addGoal;
 
     function viewGoal (results) {  
-        let goalData = results;
         $("#view-active-goal").empty();
+
+        let goalData = results;
 
         if (goalData.active_goal.length !== 0) {
             
@@ -333,11 +338,11 @@ $(document).ready(function(){
                                 "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
                              "</div>";
 
-            // $("#active-goal-start-date").val(activeGoalStartDate);
-            // $("#active-goal-freq-num").val(activeGoalFreqNum);
-            // $("#active-goal-freq-time-unit").val(activeGoalFreqTimeUnit);            
+            // $("#goal-start-date").attr({"value": activeGoalStartDate});
+            // $("#goal-freq-num").val(activeGoalFreqNum);
+            // $("#goal-freq-time-unit").val(activeGoalFreqTimeUnit);            
 
-            $("#active-goal").append(viewActiveGoal);
+            $("#view-active-goal").append(viewActiveGoal);
             $("#active-goal").show();
             $("#add-goal").hide();
         }
@@ -355,10 +360,42 @@ $(document).ready(function(){
             let inactiveGoalFreqTimeUnit = inactiveGoals.goal_freq_time_unit;     
         }
     }
+    
+
+    // Select element by id and attach event listener to it.
+    $("#add-goal-btn").click(function (evt) {
+        // On click, prevent form submission.
+        evt.preventDefault();
+        
+        // Create empty object, formData.
+        let formData = {};
+        // Add properties to object.
+        formData["goal-start-date"] = $("#goal-start-date").val();
+        formData["goal-freq-num"] = $("#goal-freq-num").val();
+        formData["goal-freq-time-unit"] = $("#goal-freq-time-unit").val();
+        formData["user-hobby-id"] = currentUserhobbyId;
+
+        // AJAX request to send form data to route and call anonymous function
+        // passing in the response/results from request.
+        $.post("/add-goal-dashboard", formData, function (results) {
+            // Show/hide elements at specified ids.
+            $("#user-profile > #user-profile-content").hide();
+            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+            $("#social > #social-content").hide();
+
+            // Set value of html for success message. Show and fade-out message.
+            $("#flash-add-goal-status").html("Goal successfully added").show().fadeOut(5000);
+            // Reset form after submission.
+            $("#add-goal-form")[0].reset();
+            viewUserHobbyData();
+        });  // add-completion post request function closer
+    });  // hobbyhabit-tracker-btn click closer
+
 
     $("#edit-goal-btn").click(function (evt) {
         // ADD ABILITY TO EDIT GOAL
     });
+
 
     $("#deactivate-goal-btn").click(function (evt) {
         // ADD ABILITY TO DEACTIVATE GOAL

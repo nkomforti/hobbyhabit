@@ -14,6 +14,7 @@
         <div id="flash-update-profile-status"></div>
         <div id="flash-tracking-status"></div>
         <div id="flash-add-hobbyhabit-status"></div>
+        <div id="flash-add-goal-status"></div>
 
         <!-- Dashboard Menu. -->
         <div class="menu-btns">
@@ -187,6 +188,7 @@
                                 <br>
                                 <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
                                 <br><br>
+
                                 <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track completion" data>
                             </form>
                         </div>
@@ -206,33 +208,31 @@
                             <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
                         </div>
 
-                        <!-- <div id="active-goal" hidden>
+                        <!-- <div id="active-goal">
                             <form id="view-active-goal">
                                 Goal Start Date
                                 <br>
-                                <input id="active-goal-start-date" type="text">
+                                <input id="goal-start-date" type="text">
                                 <br><br>
 
                                 Goal Frequency
                                 <br>
-                                <input id="active-goal-freq-num" type="text">
+                                <input id="goal-freq-num" type="text" value="">
                                 <br><br>
 
                                 Goal Time Unit
                                 <br>
-                                <input id="active-goal-freq-time-unit" type="text">
+                                <input id="goal-freq-time-unit" type="text" value="">
                                 <br>
-
+                            </form>
                             <button id="edit-goal-btn" class="btn btn-info">Edit goal</button>
                             <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
-                            </form>
                         </div> -->
-
 
                         <div id="add-goal" hidden>
                             <form id="add-goal-form">
                                 Goal start date
-                                <br>
+                                <br> 
                                 <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
                                 <br><br>
 
@@ -250,9 +250,9 @@
                                     <option value="Month">Month</option>
                                     <option value="Year">Year</option>
                                 </select>
-                                <br>
+                                <br><br>
 
-                                <button class="btn btn-info add-goal-btn ">
+                                <button id="add-goal-btn" class="btn btn-info add-goal-btn ">
                                     Set goal
                                 </button>
                             </form>

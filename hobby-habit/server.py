@@ -220,7 +220,32 @@ def process_add_hobby_dashboard():
 def process_add_goal_dashboard():
     """Process add-goal form in dashboard, my-hobbyhabits and commit to db."""
 
-    pass
+    # Get current user from session.
+    current_user_id = session["user_id"]
+
+    # Get data from form.
+    goal_start_date = request.form["goal-start-date"]
+    goal_freq_num = request.form["goal-freq-num"]
+    goal_freq_time_unit = request.form["goal-freq-time-unit"]
+    current_user_hobby_id = request.form["user-hobby-id"]
+
+    new_goal = Goal(goal_start_date=goal_start_date,
+                    goal_freq_num=goal_freq_num,
+                    goal_freq_time_unit=goal_freq_time_unit,
+                    user_hobby_id=current_user_hobby_id,
+                    goal_active=True)
+
+    db.session.add(new_goal)
+
+    active_goal = db.session.query(Goal).filter(Goal.user_hobby_id == current_user_hobby_id,
+                                                Goal.goal_active.is_(True)).first()
+
+    if active_goal:
+        active_goal.goal_active = False
+
+    db.session.commit()
+
+    return "success"
 
 
 @app.route('/view-active-goal.json', methods=['GET'])
