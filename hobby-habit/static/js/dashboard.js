@@ -1,20 +1,19 @@
 "use strict";
 
 $(document).ready(function(){
-    // Set default dashboard view to see My HobbyHabit overview page.
+    // Default dashboard view.  // CREATE WELCOME CONTENT/MESSAGE
     $("#user-profile > #user-profile-content").hide();
-    $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+    $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
     $("#social > #social-content").hide();
-    $("#settings > #settings-content").hide();
     $("#hobbyhabit-tracker").hide();
     $("#view-completions").hide();
+    $(".page-direction").hide();
 
     // Show/hide elements based on menu button that was clicked.
     $("#user-profile-menu-btn").click(function (evt) {
         $("#user-profile > #user-profile-content").show();
         $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
         $("#social > #social-content").hide();
-        $("#settings > #settings-content").hide();
     });
 
     // Show/hide elements based on menu button that was clicked.
@@ -22,7 +21,6 @@ $(document).ready(function(){
         $("#user-profile > #user-profile-content").hide();
         $("#my-hobbyhabits > #my-hobbyhabit-content").show();
         $("#social > #social-content").hide();
-        $("#settings > #settings-content").hide();
         $("#hobbyhabit-tracker").hide();
     });
 
@@ -31,16 +29,8 @@ $(document).ready(function(){
         $("#user-profile > #user-profile-content").hide();
         $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
         $("#social > #social-content").show();
-        $("#settings > #settings-content").hide();
     });
 
-    // Show/hide elements based on menu button that was clicked.
-    $("#settings-menu-btn").click(function (evt) {
-        $("#user-profile > #user-profile-content").hide();
-        $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
-        $("#social > #social-content").hide();
-        $("#settings > #settings-content").show();
-    });
 
     // Select (hidden) element by id and save to variable.
     let firstName = $("#hidden-first-name");
@@ -94,6 +84,7 @@ $(document).ready(function(){
         $("#phone-number").attr({"placeholder": "Phone number"});
     }
 
+
     // Select element by id and attach event listener.
     $("#update-profile").click(function (evt) {
         // Create empty object.
@@ -108,27 +99,24 @@ $(document).ready(function(){
         formData["txt-opt-in-out"] = $(".txt-reminder").val();
         
         // AJAX request to send form data to route and call anonymous function
-        // to show/hide elements elements and flash success message and get
-        // request response/results containing data from database.
+        // passing in the response/results from request.
         $.post("/update-user-profile", formData, function (results) {
             $("#user-profile > #user-profile-content").show();
             $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
             $("#social > #social-content").hide();
-            $("#settings > #settings-content").hide();
 
             // Set html value for success message.
             $('#flash-update-profile-status').html("Successfully saved changes to profile").show().fadeOut(5000);
         });
     });  // update-profile click closer
 
-    // Declare global variable.
-    let currentUserhobbyId;
 
     // Select element by id and attach event listener to it.
     $("#add-hobbyhabit-trigger-btn").click(function (evt) {
         // On click show modal.
         $("#addHobbyhabitModal").modal("show");
     });
+
 
     // Select element by id and attach event listener to it.
     $("#add-hobbyhabit-btn").click(function (evt) {
@@ -145,7 +133,6 @@ $(document).ready(function(){
 
             // Set html value for success message. Show and fade-out message.
             $("#flash-add-hobbyhabit-status").html("New HobbyHabit successfully added to profile").show().fadeOut(5000);
-
         });  // add-hobby-dashboard post request function closer
 
         // Create html button element and save to variable.
@@ -162,8 +149,8 @@ $(document).ready(function(){
         newHobbyHabit.insertBefore("#add-hobbyhabit-trigger-btn");
         // Create break element and insert before at selected id.
         $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
-
     });  // add-hobbyhabit-btn click closer
+
 
     // Declare global variable.
     let newCompletions;
@@ -179,6 +166,20 @@ $(document).ready(function(){
 
         // Empty element with the id view-completions.
         $("#view-completions").empty();
+            // ADD COMMENTS ADD CONDITION FOR PREVIOUS
+            if (completions.length < 5 || startIndex + 5 >= completions.length) {
+                $("#next-page-btn").hide();
+            }
+            else {
+                $("#next-page-btn").show();
+            }
+            if (startIndex > 0) {
+                $("#previous-page-btn").show();
+            }
+            else {
+                $("#previous-page-btn").hide();
+            }
+
 
         // Iterate over slice of completions completion-by-completion; declare
         // variable completion.
@@ -216,37 +217,44 @@ $(document).ready(function(){
 
             // Append value of global variable to element with specified id.
             $("#view-completions").append(newCompletions);
-
         }  // for loop closer 
     }  // viewCompletions function closer
 
-    // Select the element by id and attach event listener to it.
-    $(".hobbyhabit-btn").click(function (evt) {
-        // On click, declare variable and set value equal to value of specified
-        // data attribute.
-        currentUserhobbyId = $(this).data("userHobbyId");
 
+    // Declare global variable.
+    let currentUserhobbyId;
+
+    function viewUserHobbyData () {
+        startIndex = 0;
+     
         // Create empty object.
         let userData = {};
 
         // Add property to object.
         userData["user-hobby-id"] = currentUserhobbyId;
 
-        // Show element at specified id.
+        // Show/hide elements at specified ids.
         $("#hobbyhabit-tracker").show();
-        // Show element at specified id.
         $("#view-completions").show();
-
-            // Show/hide elements at specified ids.
-            $("#user-profile > #user-profile-content").hide();
-            $("#my-hobbyhabits > #my-hobbyhabit-content").show();
-            $("#social > #social-content").hide();
-            $("#settings > #settings-content").hide();
+        $("#user-profile > #user-profile-content").hide();
+        $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+        $("#social > #social-content").hide();
 
         // AJAX request to send data to route and call specified function.
         $.get("/view-completions.json", userData, viewCompletions);
 
-    });  // hobbyhabit-btn click closer
+        // AJAX request to send data to route and call specified function.
+        $.get("/view-active-goal.json", userData, viewGoal);
+
+    }  // viewUserHobbyData function closer
+
+
+    // Select the element by class and attach event listener to it.
+    $(".hobbyhabit-btn").click(function (evt) {
+        currentUserhobbyId = evt.target.dataset.userHobbyId;
+        viewUserHobbyData();
+    });
+
 
     // Select all elements with specified class and attach event listener to them.
     $(".page-direction").click(function (evt){
@@ -273,12 +281,12 @@ $(document).ready(function(){
     $("#completion-date").datepicker();
 
     // Select element by id and attache event listener to it.
-    $("#hobbyhabit-tracker-btn").click(function (evt) {
+    $("#hobbyhabit-tracker-btn").on('click', function (evt) {
         // On click, prevent form submission.
         evt.preventDefault();
+        
         // Create empty object, formData.
         let formData = {};
-
         // Add properties to object.
         formData["completion-date"] = $("#completion-date").val();
         formData["total-hours"] = $("#total-hours").val();
@@ -293,66 +301,59 @@ $(document).ready(function(){
             $("#user-profile > #user-profile-content").hide();
             $("#my-hobbyhabits > #my-hobbyhabit-content").show();
             $("#social > #social-content").hide();
-            $("#settings > #settings-content").hide();
 
             // Set value of html for success message. Show and fade-out message.
             $("#flash-tracking-status").html("HobbyHabit successfully tracked").show().fadeOut(5000);
             // Reset form after submission.
             $("#hobbyhabit-tracker-form")[0].reset();
-
+            viewUserHobbyData();
         });  // add-completion post request function closer
     });  // hobbyhabit-tracker-btn click closer
+    
 
-
-    // check if any active goal for selected userhobby
-    // yes, display goal 
-    // no, display add goal form
-    // edit goal
-    // deactivate goal
-    let goalData;
     let viewActiveGoal;
     let addGoal;
 
-    function viewGoal (results) {
-        goalData = results;
+    function viewGoal (results) {  
+        let goalData = results;
+        console.log("hello");
+        $("#view-active-goal").empty();
 
-        for (let goal of goalData) {
+        if (goalData.active_goal.length !== 0) {
+            
+            let activeGoal = goalData.active_goal[0];
+        
+            // let activeGoalActive = activeGoal.goal_active;
+            let activeGoalId = activeGoal.goal_id;
+            let activeGoalStartDate = activeGoal.goal_start_date;
+            let activeGoalFreqNum = activeGoal.goal_freq_num;
+            let activeGoalFreqTimeUnit = activeGoal.goal_freq_time_unit;
 
-            let activeGoalActive = goal.active_goal;
-            let activeGoalId = goalData.goal_
-            let activeGoalStartDate =
-            let activeGoalFreqNum =
-            let activeGoalFreqTimeUnit =
+            viewActiveGoal = "<div id='" + activeGoalId + "'>" +
+                                "<b>Goal Start Date</b><p id='goal-start-date'>" + activeGoalStartDate + "</p>" +
+                                "<b>Goal Frequency</b><p id='goal-freq-num'>" + activeGoalFreqNum + "</p>" +
+                                "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" + 
+                            "</div>";
 
-            let inactiveGoalActive = goal.inactive_goal;
-            let inactiveGoalId = goalData.
-            let inactiveGoalStartDate =
-            let inactiveGoalFreqNum =
-            let inactiveGoalFreqTimeUnit =
+            $("#view-active-goal").append(viewActiveGoal);
+            $("#view-active-goal").show();
+            $("#add-goal").hide();
+        }
 
-            if (goalActive !== []) {
-                viewActiveGoal = "<div id='" + activeGoalId + "'>" +
-                                    "<b>Goal Start Date</b><p id='goal-start-date'>" + goalStartDate + "</p>" +
-                                    "<b>Goal Frequency</b><p id='goal-freq-num'>" + goalFreqNum + "</p>" +
-                                    "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + goalFreqTimeUnit + "</p>" + 
-                                "</div>";
+        else if (goalData.active_goal.length === 0) {
+            $("#add-goal").show();
+            $("#view-active-goal").hide();
+        }
 
-                $("#view-active-goal").append(viewActiveGoal);
-                $("#view-active-goal").show();
-                $("#add-gaol").hide();
-            }
-            else {
-                addGoal = 
-                $("#add-gaol").show();
-                $("#view-active-goal").hide();
-            }
+        // FOR DATA VIS.
+        for (let inactiveGoals of goalData.inactive_goals) {
+
+            let inactiveGoalActive = inactiveGoals.goal_active;
+            let inactiveGoalId = inactiveGoals.goal_id;
+            let inactiveGoalStartDate = inactiveGoals.goal_start_date;
+            let inactiveGoalFreqNum = inactiveGoals.goal_freq_num;
+            let inactiveGoalFreqTimeUnit = inactiveGoals.goal_freq_time_unit;     
         }
     }
-        // AJAX request to send data to route and call specified function.
-        $.get("/view-active-goal.json", userData, viewGoal);
-
-
-
-
 
 });  // document.ready closer

@@ -15,8 +15,10 @@
         <div id="flash-tracking-status"></div>
         <div id="flash-add-hobbyhabit-status"></div>
 
+        <!-- Dashboard Menu. -->
         <div class="menu-btns">
 
+            <!-- User Profile. -->
             <div id="user-profile">
                 <button id="user-profile-menu-btn" class="btn-info btn-lg" type="button">
                     User Profile
@@ -79,7 +81,7 @@
                     </form>
                     <!-- Update password modal. -->
                     <div id="updatePasswordModal" class="modal fade">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-sm">
 
                             <!-- Update password modal content.-->
                             <div class="modal-content">
@@ -109,7 +111,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="update-password-btn" class="btn-info btn-sm">
+                                    <button id="update-password-btn" class="btn btn-info">
                                             Update password
                                     </button>
                                 </div>
@@ -119,13 +121,13 @@
                 </div>
 
             </div>
-
+            <!-- My HobbyHabits -->
             <div id="my-hobbyhabits">
-                <button id="my-hobbyhabits-menu-btn" class="btn-info btn-lg" type="button">
+                <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
                     My HobbyHabits
                 </button>
                 <br><br>
-
+                <!-- My HobbyHabit content will have: view all HobbyHabits, add HobbyHabit, track completions, view completions, view active goal or add new goal. -->
                 <div id="my-hobbyhabit-content">
 
                     {% for user_hobby in current_user_data['user_hobbies'] %}
@@ -166,7 +168,7 @@
                             </div>
                         </div>
 
-                        <!-- HobbyHabit Tracker. -->
+                        <!-- Track Completions. -->
                         <!-- NOT SHOWING FIELDS REQUIRED WARNING WHEN LEFT EMPTY AND ATTEMPTING TO SUBMIT -->
                         <div id="hobbyhabit-tracker">
                             <form id="hobbyhabit-tracker-form">
@@ -183,11 +185,11 @@
                                 <br>
                                 <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
                                 <br><br>
-                                <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track me">
+                                <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track completion" data>
                             </form>
                         </div>
 
-                        <!-- Completions. -->
+                        <!-- View Completions. -->
                         <div id="view-completions"></div>
                         <button id="previous-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="previous">
                             Previous
@@ -198,9 +200,8 @@
                         <!-- Goals. -->
                         <div id="view-active-goal"></div>
 
-                        <div id="add-goal">
+                        <div id="add-goal" hidden>
                             <form id="add-goal-form">
-                                <input id="user-hobby-id" type="hidden" name="user-hobby-id"><!-- ???DO I NEED THIS  -->
                                 Goal start date: 
                                 <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
                                 <br>
@@ -219,7 +220,7 @@
                                 </select>
                                 <br>
                                 <br>
-                                <button class="add-goal-btn btn-info btn-sm">
+                                <button class="btn btn-info add-goal-btn ">
                                     Set goal
                                 </button>
                             </form>
@@ -235,16 +236,6 @@
                 <br><br>
                 <div id="social-content">
                     <p>SHOW LOCAL EVENTS FOR PARTICULAR HOBBYHABIT USING EVENTBRITE API</p>
-                </div>
-            </div>
-
-            <div id="settings">
-                <button id="settings-menu-btn" class="btn-info btn-lg" type="button">
-                    Settings
-                </button>
-                <br><br>
-                <div id="settings-content">
-                    <p>SHOW USER SETTINGS</p>
                 </div>
             </div>
 
