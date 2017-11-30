@@ -34,18 +34,17 @@ $(".social-hobbyhabit-btn").click(function (evt) {
                 // e.end.local, e.end.timezone
             $("#events").empty();
             
-            for (i in events) {
-                eventInfo += "<h2>" + events[i].name.text + "</h2>" + "<br>" +
-                             "<p>" + events[i].url + "</p>" + "<br>" +
-                             "<p>" + events[i].start.local + "</p>" + "<br>" +
-                             "<p>" + events[i].start.timezone + "</p>" + "<br><br>";
+            let eventsHeading = "<h3>Potential Events</h3>" + "<br>";
 
-                // eventInfo += "<h2>" + events[i].name.text + "</h2>" + "<br>";
-                // eventInfo += "<p>" + events[i].url + "</p>" + "<br>";
-                // eventInfo += "<p>" + events[i].start.local + "</p>" + "<br>";
-                // eventInfo += "<p>" + events[i].start.timezone + "</p>" + "<br>";
+            for (i in events) {
+                eventInfo += "<ul>" +
+                                "<li><a href='" + events[i].url + "'>" + events[i].name.text + "</a></li>" +
+                                "<li>" + events[i].description.text.slice(0,300) + "..." + "</li>" +
+                                "<li>" + events[i].start.local.slice(0, -9) + "</li>" +
+                            "</ul>" + "<br>";
             }
 
+            $("#events").append(eventsHeading);
             $("#events").append(eventInfo);
         }
     });
