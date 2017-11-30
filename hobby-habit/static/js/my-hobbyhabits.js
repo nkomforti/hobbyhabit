@@ -227,9 +227,9 @@ function viewGoal (results) {
                             "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
                          "</div>";
 
-        // $("#goal-start-date").attr({"value": activeGoalStartDate});
-        // $("#goal-freq-num").val(activeGoalFreqNum);
-        // $("#goal-freq-time-unit").val(activeGoalFreqTimeUnit);            
+        // $("#active-goal-start-date").attr({"value": activeGoalStartDate});
+        // $("#active-goal-freq-num").attr({"value": activeGoalFreqNum});
+        // $("#active-goal-freq-time-unit").attr({"value": activeGoalFreqTimeUnit});            
 
         $("#view-active-goal").append(viewActiveGoal);
         $("#active-goal").show();
@@ -279,11 +279,6 @@ $("#add-goal-btn").click(function (evt) {
         viewUserHobbyData();
     });  // add-completion post request function closer
 });  // hobbyhabit-tracker-btn click closer
-
-
-$("#edit-goal-btn").click(function (evt) {
-    // ADD ABILITY TO EDIT GOAL
-});
 
 
 $("#deactivate-goal-btn").click(function (evt) {

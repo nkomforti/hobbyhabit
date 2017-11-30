@@ -7,9 +7,9 @@
 
     {% block title %}HobbyHabit: Dashboard{% endblock title %}
 
-    <div class="dashboard">
 
         {% block body_content %}
+    <div class="dashboard">
 
         <div id="flash-update-profile-status"></div>
         <div id="flash-tracking-status"></div>
@@ -26,7 +26,7 @@
                 </button>
                 <br><br>
 
-                <div id="user-profile-content">
+                <div id="user-profile-content" hidden>
                     <form id="user-profile-form">
                         Username
                         <br>
@@ -129,18 +129,18 @@
                 </button>
                 <br><br>
                 <!-- My HobbyHabit content will have: view all HobbyHabits, add HobbyHabit, track completions, view completions, view active goal or add new goal. -->
-                <div id="my-hobbyhabit-content">
+                <div id="my-hobbyhabit-content" hidden>
 
                     {% for user_hobby in current_user_data['user_hobbies'] %}
-                        <div id="my-hobbyhabit">
-                            <button id="hobbyhabit-btn" class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                        <div class="my-hobbyhabit">
+                            <button class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
                                 {{ user_hobby['hobby_name'][0].title() }}
                             </button>
                         </div>
                     {% endfor %}
 
                         <!-- Trigger button for add-hobbyhabit modal. -->
-                        <button id="add-hobbyhabit-trigger-btn" class="btn btn-info" type="button">
+                        <button id="add-hobbyhabit-trigger-btn" class="btn btn-info my-hobbyhabit" type="button">
                             +
                         </button>
 
@@ -204,29 +204,30 @@
                         <!-- Goals. -->
                         <div id="active-goal" hidden>
                             <div id="view-active-goal"></div>
-                            <button id="edit-goal-btn" class="btn btn-info">Edit goal</button>
                             <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
                         </div>
-
-                        <!-- <div id="active-goal">
+                        
+                        <!-- <div id="active-goal">  MAY NOT NEED HIDDEN INPUTS SINCE NOT USING JINJA BUT GETTING DATA FROM AJAX REQUEST
                             <form id="view-active-goal">
                                 Goal Start Date
                                 <br>
-                                <input id="goal-start-date" type="text">
+                                <input id="active-goal-start-date" type="text" value="">
+                                <input id="hidden-active-goal-start-date" type="hidden" value="">
                                 <br><br>
 
                                 Goal Frequency
                                 <br>
-                                <input id="goal-freq-num" type="text" value="">
+                                <input id="active-goal-freq-num" type="text" value="">
+                                <input id="hidden-active-goal-freq-num" type="hidden" value="">
                                 <br><br>
 
                                 Goal Time Unit
                                 <br>
-                                <input id="goal-freq-time-unit" type="text" value="">
+                                <input id="active-goal-freq-time-unit" type="text" value="">
+                                <input id="hidden-active-goal-freq-time-unit" type="hidden" value="">
                                 <br>
+                                <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
                             </form>
-                            <button id="edit-goal-btn" class="btn btn-info">Edit goal</button>
-                            <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
                         </div> -->
 
                         <div id="add-goal" hidden>
@@ -261,21 +262,30 @@
                 </div>
             </div>
 
+            <!-- Social. -->
             <div id="social">
                 <button id="social-menu-btn" class="btn-info btn-lg" type="button">
                     Social
                 </button>
                 <br><br>
-                <div id="social-content">
-                    <p>SHOW LOCAL EVENTS FOR PARTICULAR HOBBYHABIT USING EVENTBRITE API</p>
+                <div id="social-content" hidden>
+
+                    {% for user_hobby in current_user_data['user_hobbies'] %}
+                        <div class="social-hobbyhabit">
+                            <button class="btn btn-info active social-hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                                {{ user_hobby['hobby_name'][0].title() }}
+                            </button>
+                        </div>
+                    {% endfor %}
+
                 </div>
             </div>
 
         </div>
 
+    </div>
         {% endblock body_content %}
 
-    </div>
 
     {% block js_link %}  
    <!-- <script type="text/javascript" src="static/js/dashboard.js"></script> -->

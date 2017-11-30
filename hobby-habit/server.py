@@ -4,6 +4,9 @@ from jinja2 import StrictUndefined
 from flask import (Flask, g, url_for, render_template, request,
                    flash, redirect, session, jsonify)
 
+from pprint import pformat
+import os
+import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Completion, Hobby, UserHobby, Goal
 from functools import wraps
@@ -13,6 +16,9 @@ app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined  # Raises an error if an undefined variable is used in Jinja 2.
 app.jinja_env.auto_reload = True
 app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
+
+EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
+EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
 
 
 def login_required(f):
@@ -269,18 +275,62 @@ def display_active_goal():
     return jsonify(goal_data)
 
 
-@app.route('/social.json', methods=['GET', 'POST'])  # not sure wwhich to use yet
-def display_social_events():
-    """Get and display local events related to selected user_hobby."""
+@app.route('/social.json', methods=['GET'])
+def find_social_events():
+    """Search for local events related to selected user_hobby."""
 
-    pass
+    # Get current user_id from session.
+    current_user_id = session["user_id"]
+    # Get user object by user_id.
+    current_user = User.query.get(current_user_id)
+    # Get user_hobby_id from click event.
+    current_user_hobby_id = int(request.args["user-hobby-id"])
+    # Get hobby_name from db by user_hobby_id.
+    hobby_name = db.session.query(Hobby.hobby_name).join(UserHobby).filter(UserHobby.hobby_id == Hobby.hobby_id,
+                                                                           UserHobby.user_hobby_id == current_user_hobby_id).one()
+    # Get zipcode of user object.
+    zipcode = current_user.zipcode
+    # Preset distance for API request.
+    distance = "10mi"
 
+    # Preset sort for API request.
+    sort = "date"
 
-@app.route('/settings', methods=['POST'])  # May not use.
-def process_settings():
-    """Process settings-form."""
+    # If the required information is in the request, look for events
+    if zipcode and hobby_name:
 
-    pass
+        payload = {'q': hobby_name,
+                   'location.address': zipcode,
+                   'location.within': distance,
+                   'sort_by': sort,
+                   }
+
+        # Send API token.
+        headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
+
+        response = requests.get(EVENTBRITE_URL + "events/search/",
+                                params=payload,
+                                headers=headers)
+        data = response.json()
+
+        # If the response was successful (with a status code of less than 400),
+        # use the list of events from the returned JSON
+        if response.ok:
+            # events = data['events']
+            return jsonify(data)
+
+        # If there was an error (status code between 400 and 600), use an empty list
+        else:
+            # flash(":( No related events are scheduled in your area at this time: " + data['error_description'])
+            # events = []
+            return []
+
+        # return jsonify(data)
+
+    # If the required info isn't in request, redirect to the user profile form.
+    else:
+        # flash("Please provide your zipcode to see any related events in your area.")
+        return redirect("/update-user-profile")
 
 
 @app.route('/register', methods=['POST'])
