@@ -6,41 +6,39 @@
 
     {% block title %}HobbyHabit{% endblock title %}
 
-    <div class="homepage">
+    {% block body_content %}
+        <div class="homepage">
 
-        {% block body_content %}
+                <span id="login-link"><a href="/login">Login</a></span>
+                <!-- <button type="button" class="btn">Log in</button> -->
 
-            <span id="login-link"><a href="/login">Login</a></span>
-            <!-- <button type="button" class="btn">Log in</button> -->
+                <h1>HobbyHabit is a place to...</h1> 
+                <br>
+                <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
+                <br>
+                <br>
 
-            <h1>HobbyHabit is a place to...</h1> 
-            <br>
-            <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
-            <br>
-            <br>
+                <form id="register-form" action="/register" method="POST">
+                    Username
+                    <br>
+                    <input type="text" name="username" placeholder="Pick a username" required>
+                    <br>
+                    <br>
+                    Email
+                    <br>
+                    <input type="email" name="email" placeholder="you@example.com" required>
+                    <br>
+                    <br>
+                    Password
+                    <br>
+                    <input type="password" name="password" placeholder="Create a password" required>
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-info" value="Sign up for HobbyHabit">
+                </form>
 
-            <form id="register-form" action="/register" method="POST">
-                Username
-                <br>
-                <input type="text" name="username" placeholder="Pick a username" required>
-                <br>
-                <br>
-                Email
-                <br>
-                <input type="email" name="email" placeholder="you@example.com" required>
-                <br>
-                <br>
-                Password
-                <br>
-                <input type="password" name="password" placeholder="Create a password" required>
-                <br>
-                <br>
-                <input type="submit" value="Sign up for HobbyHabit">
-            </form>
-
-        {% endblock body_content %}
-
-    </div>
+        </div>
+    {% endblock body_content %}
 
 
     {% block js_link %}

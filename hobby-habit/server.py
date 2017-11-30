@@ -124,7 +124,7 @@ def process_user_profile_form():
     db.session.add(current_user)
     db.session.commit()
 
-    return "success"
+    return "Success"
 
 
 @app.route('/update-password-dashboard', methods=['POST'])
@@ -158,7 +158,7 @@ def process_add_completion():
     db.session.add(new_completion)
     db.session.commit()
 
-    return "success"
+    return "Success"
 
 
 @app.route('/view-completions.json', methods=['GET'])
@@ -248,7 +248,7 @@ def process_add_goal_dashboard():
 
     db.session.commit()
 
-    return "success"
+    return "Success"
 
 
 @app.route('/view-active-goal.json', methods=['GET'])
@@ -313,24 +313,20 @@ def find_social_events():
                                 headers=headers)
         data = response.json()
 
-        # If the response was successful (with a status code of less than 400),
-        # use the list of events from the returned JSON
+        # Check if the response was successful (status code of less than 400).
         if response.ok:
-            # events = data['events']
-            return jsonify(data)
+            # If ok, use the list of events from the returned JSON.
+            data = data
 
-        # If there was an error (status code between 400 and 600), use an empty list
+        # If error (status code between 400 and 600), use an empty dictionary
         else:
-            # flash(":( No related events are scheduled in your area at this time: " + data['error_description'])
-            # events = []
-            return []
+            data = {}
 
-        # return jsonify(data)
+        return jsonify(data)  # Results.
 
     # If the required info isn't in request, redirect to the user profile form.
     else:
-        # flash("Please provide your zipcode to see any related events in your area.")
-        return redirect("/update-user-profile")
+        return "Does not meet requirements"  # Results.
 
 
 @app.route('/register', methods=['POST'])

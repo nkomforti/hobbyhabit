@@ -195,6 +195,7 @@ $("#hobbyhabit-tracker-btn").click(function (evt) {
         $("#flash-tracking-status").html("HobbyHabit successfully tracked").show().fadeOut(5000);
         // Reset form after submission.
         $("#hobbyhabit-tracker-form")[0].reset();
+        
         viewUserHobbyData();
     });  // add-completion post request function closer
 });  // hobbyhabit-tracker-btn click closer
@@ -276,6 +277,7 @@ $("#add-goal-btn").click(function (evt) {
         $("#flash-add-goal-status").html("Goal successfully added").show().fadeOut(5000);
         // Reset form after submission.
         $("#add-goal-form")[0].reset();
+
         viewUserHobbyData();
     });  // add-completion post request function closer
 });  // hobbyhabit-tracker-btn click closer
