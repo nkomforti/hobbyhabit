@@ -19,6 +19,16 @@
 
     <body>
 
+        {% if "user_id" in session %}
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+        {% endif %}
+        <hr>
+        {% for flash in get_flashed_messages() %} 
+            {{ flash }}
+        {% endfor %}
+
         <div id="body-content">
             {% block body_content %}BODY GOES HERE{% endblock body_content %}
         </div>
