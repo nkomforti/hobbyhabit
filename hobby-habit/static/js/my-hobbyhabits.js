@@ -143,6 +143,33 @@ $(".hobbyhabit-btn").click(function (evt) {
 });
 
 
+
+
+
+// Select the element by class and attach event listener to it.
+$(".hobbyhabit-btn").click(function (evt) {
+    currentUserhobbyId = evt.target.dataset.userHobbyId;
+    let userData = {'user-hobby-id': currentUserhobbyId};
+
+    let options = { responsive: true };
+
+    // Make Line Chart of user's HobbyHabit completions over time.
+    let ctx_line = $("#lineChart").get(0).getContext("2d");
+
+    $.get("/view-completions-vis.json", userData, function (data) {
+        let myLineChart = new Chart.Line(ctx_line, {
+                                                    data: data,
+                                                    options: options
+                                                   });
+
+        $("#lineLegend").html(myLineChart.generateLegend());
+    });
+});
+
+
+
+
+
 // Select all elements with specified class and attach event listener to them.
 $(".page-direction").click(function (evt){
     // On click, declare variable and set value equal to value of specified
@@ -242,13 +269,13 @@ function viewGoal (results) {
     }
 
     // FOR DATA VIS.
-    for (let inactiveGoals of goalData.inactive_goals) {
+    // for (let inactiveGoals of goalData.inactive_goals) {
 
-        let inactiveGoalId = inactiveGoals.goal_id;
-        let inactiveGoalStartDate = inactiveGoals.goal_start_date;
-        let inactiveGoalFreqNum = inactiveGoals.goal_freq_num;
-        let inactiveGoalFreqTimeUnit = inactiveGoals.goal_freq_time_unit;     
-    }
+    //     let inactiveGoalId = inactiveGoals.goal_id;
+    //     let inactiveGoalStartDate = inactiveGoals.goal_start_date;
+    //     let inactiveGoalFreqNum = inactiveGoals.goal_freq_num;
+    //     let inactiveGoalFreqTimeUnit = inactiveGoals.goal_freq_time_unit;     
+    // }
 }
 
 

@@ -4,7 +4,7 @@ from jinja2 import StrictUndefined
 from flask import (Flask, g, url_for, render_template, request,
                    flash, redirect, session, jsonify)
 
-from pprint import pformat
+# from pprint import pformat
 import os
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
@@ -165,8 +165,6 @@ def process_add_completion():
 def display_completions():
     """Get completions data from db for selected user_hobby to display."""
 
-    # for use to display data as vis and non-vis
-
     current_user_id = session["user_id"]
 
     current_user = User.query.get(current_user_id)
@@ -182,6 +180,63 @@ def display_completions():
             completions = user_hobby["completions"]
 
     return jsonify(completions)
+
+
+@app.route('/view-completions-vis.json', methods=['GET'])
+def display_completions_vis():
+    """Get completions data from db for selected user_hobby to display data vis."""
+
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    user_hobby_id = int(request.args["user-hobby-id"])
+
+    current_user_data = current_user.get_user_data()
+
+    completions = {}
+
+    for user_hobby in current_user_data["user_hobbies"]:
+        if user_hobby["user_hobby_id"] == user_hobby_id:
+            completions = user_hobby["completions"]
+
+    total_practice_time = []
+    completion_date = []
+
+    for completion in completions:
+        total_practice_time.append(completion['total_practice_time'])
+
+    for completion in completions:
+        completion_date.append(completion['completion_date'])
+
+    data_dict = {
+        "labels": completion_date,
+        "datasets": [
+            {
+                "label": "HOBBY NAME",
+                "fill": True,
+                "lineTension": 0.5,
+                "backgroundColor": "rgba(220,220,220,0.2)",
+                "borderColor": "rgba(220,220,220,1)",
+                "borderCapStyle": 'butt',
+                "borderDash": [],
+                "borderDashOffset": 0.0,
+                "borderJoinStyle": 'miter',
+                "pointBorderColor": "rgba(220,220,220,1)",
+                "pointBackgroundColor": "#fff",
+                "pointBorderWidth": 1,
+                "pointHoverRadius": 5,
+                "pointHoverBackgroundColor": "#fff",
+                "pointHoverBorderColor": "rgba(220,220,220,1)",
+                "pointHoverBorderWidth": 2,
+                "pointRadius": 3,
+                "pointHitRadius": 10,
+                "data": total_practice_time,
+                "spanGaps": False},
+        ]
+    }
+
+    return jsonify(data_dict)
 
 
 @app.route('/mult-hobbies-vis.json', methods=['GET'])
@@ -367,7 +422,10 @@ def register_user():
 def display_add_hobby_form():
     """Display add-hobby form."""
 
-    return render_template("add-hobby.html")
+    autocomplete_hobby_objects = db.session.query(Hobby).filter(Hobby.autocomplete == True).all()
+
+    return render_template("add-hobby.html",
+                           autocomplete_hobby_objects=autocomplete_hobby_objects)
 
 
 @app.route('/add-hobby', methods=['POST'])

@@ -1,7 +1,6 @@
 "use strict";
 
-// Select element with id plus-button and attach an event listener to it that
-// will call the following anonymous function when clicked.
+// Select element with id plus-button and attach an event listener to it.
 $("#plus-btn").click(function (evt) {
 
     // Get the vlaue for the input with the id numHobbies and bind to variable.
@@ -33,6 +32,7 @@ $("#plus-btn").click(function (evt) {
     $("#plus-btn").prop("disabled", true);
 });
 
+
 // Select entire page/document and attach an event listener to it that will
 // call the following anonymous function when a key on the keyboard is released.
 $(document).on("keyup", "#add-hobby input", function (evt) {
@@ -60,4 +60,28 @@ $(document).on("keyup", "#add-hobby input", function (evt) {
         if (empty === false) {
             $("#plus-btn").prop("disabled", false);
         }
+
+
+
+
+
+
+    // function autocompleteHobbyName(evt) {
+    //     let hobbies = {};
+
+    //     let hobby = "{% for hobby in autocomplete_hobby_objects %}" + 
+    //                     "{{ hobby.hobby_name }}" +
+    //                 "{% endfor %}";
+
+    //     let autocompleteHobby = $(".autocomplete-hobby");
+
+
+    //     $( ".hobby-name" ).autocomplete({
+    //       source: autocompleteHobby
+    //     });
+    // });
+
+
+
+
 });

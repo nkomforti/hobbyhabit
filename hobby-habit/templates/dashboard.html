@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
     {% block my_css_link %}
-        <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link href="/static/css/style.css" rel="stylesheet"></link>
     {% endblock my_css_link %}
 
     {% block title %}HobbyHabit: Dashboard{% endblock title %}
@@ -202,6 +202,26 @@
                             </button>
                             <button id="next-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="next">
                                 Next</button>
+
+
+
+
+
+
+
+
+                            <!-- Completions Visualizations -->
+                            <h2> ENTER CHART NAME HERE</h2>
+
+                            <div class="completion-chart">
+                                <canvas id="lineChart"></canvas>
+                                <div id="lineLegend" class="chart-legend"></div>
+                            </div>
+
+
+
+
+
 
                             <!-- Goals. -->
                             <div id="active-goal" hidden>

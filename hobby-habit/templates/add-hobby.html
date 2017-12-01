@@ -13,13 +13,13 @@
                     Get Started
                 </h1>
                 <h2>
-                    Add a hobby or habit you want to track. Click the '+' to add multiple hobbies or habits.
+                    Add a HobbyHabit you want to track. Click the '+' for every additional HobbyHabit you want to track.
                 </h2>
 
                 <form id="hobby-form" action="/add-hobby" method="POST">
                     <div id="add-hobby">
                         <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
-                        <input id="hobby-name-1" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
+                        <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
                         <button id="plus-btn" class="btn-info btn-sm" type="button" disabled>+</button>
                     </div>
                     <br><br>
