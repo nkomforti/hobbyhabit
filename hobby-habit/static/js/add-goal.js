@@ -48,3 +48,7 @@ $(".hobby-goal-btn").click(function (evt) {
     // Set html contents for element with id hobby-name equal to hobbyName.
     $("#hobby-name").html(hobbyName);
 });
+
+$("#skip-goal-btn").click(function (evt){
+    window.location = "/dashboard";
+});

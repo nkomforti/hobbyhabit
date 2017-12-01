@@ -7,6 +7,16 @@ $("#add-hobbyhabit-trigger-btn").click(function (evt) {
 });
 
 
+$.get("/get-hobbies.json", function (results) {
+    let hobbies = results;
+
+    $("#add-hobbyhabit-name").autocomplete({
+          source: hobbies,
+          appendTo : $("#addHobbyhabitModal"),
+        });
+});
+
+
 // Select element by id and attach event listener to it.
 $("#add-hobbyhabit-btn").click(function (evt) {
     // Create empty object.

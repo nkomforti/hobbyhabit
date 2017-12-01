@@ -17,6 +17,7 @@ $("#plus-btn").click(function (evt) {
                             "type": "text",
                             "name": "hobby-name-" + numHobbies,
                             "placeholder": "HobbyHabit No. " + numHobbies,
+                            "class": "hobby-name",
     });
 
     newHobbyNameField.prop("required", true);
@@ -61,27 +62,12 @@ $(document).on("keyup", "#add-hobby input", function (evt) {
             $("#plus-btn").prop("disabled", false);
         }
 
+    $.get("/get-hobbies.json", function (results) {
+        let hobbies = results;
 
-
-
-
-
-    // function autocompleteHobbyName(evt) {
-    //     let hobbies = {};
-
-    //     let hobby = "{% for hobby in autocomplete_hobby_objects %}" + 
-    //                     "{{ hobby.hobby_name }}" +
-    //                 "{% endfor %}";
-
-    //     let autocompleteHobby = $(".autocomplete-hobby");
-
-
-    //     $( ".hobby-name" ).autocomplete({
-    //       source: autocompleteHobby
-    //     });
-    // });
-
-
-
+        $( ".hobby-name" ).autocomplete({
+              source: hobbies
+            });
+    });
 
 });

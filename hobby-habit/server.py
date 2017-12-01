@@ -3,6 +3,7 @@
 from jinja2 import StrictUndefined
 from flask import (Flask, g, url_for, render_template, request,
                    flash, redirect, session, jsonify)
+from titlecase import titlecase
 
 # from pprint import pformat
 import os
@@ -160,6 +161,19 @@ def process_add_completion():
 
     return "Success"
 
+@app.route('/get-hobbies.json', methods=['GET'])
+def get_hobbies():
+    """"""
+
+    hobbies = Hobby.query.filter(Hobby.autocomplete == True).all()
+
+    hobby_names = []
+
+    for hobby in hobbies:
+        hobby_names.append(hobby.hobby_name)
+
+    return jsonify(hobby_names)
+
 
 @app.route('/view-completions.json', methods=['GET'])
 def display_completions():
@@ -293,10 +307,9 @@ def process_add_goal_dashboard():
                     user_hobby_id=current_user_hobby_id,
                     goal_active=True)
 
-    db.session.add(new_goal)
-
     active_goal = db.session.query(Goal).filter(Goal.user_hobby_id == current_user_hobby_id,
                                                 Goal.goal_active.is_(True)).first()
+    db.session.add(new_goal)
 
     if active_goal:
         active_goal.goal_active = False
@@ -346,10 +359,10 @@ def find_social_events():
     # Get zipcode of user object.
     zipcode = current_user.zipcode
     # Preset distance for API request.
-    distance = "10mi"
+    distance = "25mi"
 
     # Preset sort for API request.
-    sort = "date"
+    sort = "best"
 
     # If the required information is in the request, look for events
     if zipcode and hobby_name:
@@ -437,7 +450,7 @@ def process_add_hobby_form():
     current_user_id = session["user_id"]
 
     # Get data from form.
-    num_hobbies = request.form["num-hobbies"]
+    num_hobbies = titlecase(request.form["num-hobbies"])
 
     # Make as many new goals as user adds to form.
     for hobby_num in range(int(num_hobbies)):
