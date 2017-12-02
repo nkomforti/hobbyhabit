@@ -129,7 +129,7 @@ def load_goals():
             # Convert date string to a datetime object.
             if goal_start_date_str:
                 goal_start_date = datetime.datetime.strptime(goal_start_date_str,
-                                                             "%d-%m-%Y")
+                                                             "%Y-%m-%d %H:%M:%S")
             else:
                 goal_start_date = None
 
@@ -171,7 +171,7 @@ def load_completions():
             completion_data = completion_data.rstrip()
             user_hobby_id, completion_date_str, total_practice_time, notes = completion_data.split("|")
 
-            completion_date = datetime.datetime.strptime(completion_date_str, "%d-%m-%Y")
+            completion_date = datetime.datetime.strptime(completion_date_str, "%Y-%m-%d %H:%M:%S")
 
             if total_practice_time:
                 total_practice_time = int(total_practice_time)

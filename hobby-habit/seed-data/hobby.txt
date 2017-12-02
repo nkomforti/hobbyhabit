@@ -1,20 +1,136 @@
-Swim|True
+Swimming|True
 Ballet|True
-Run|True
+Running|True
 Yoga|True
-Water plants|
-Walk dog|
-Floss|
-Change water filter|
-Paint|True
-Draw|True
-Write|True
-Journal|True
-Jump rope|
+Water Plants|True
+Walk Dog|
+Floss|True
+Change Water Filter|
+Painting|True
+Drawing|True
+Writing|True
+Journaling|True
+Jumping Rope|True
 Pilates|True
 Guitar|True
 Saxaphone|True
 Piano|True
-Knit|True
+Knitting|True
 Basketball|True
+Clarinet|True
+Songwriting|True
+Triathalon|True
+5K|True
 Golf|True
+Cooking|True
+Reading|True
+Scrapbooking|True
+Gardening|True
+Workout|True
+Exercise|True
+Weightlifting|True
+Traveling|True
+Sleeping|True
+Hiking|True
+Sewing|True
+Skiing|True
+Sailing|True
+Volunteer Work|True
+Crafts|True
+Walking|True
+Dancing|True
+Singing|True
+Calligraphy|True
+Coding|True
+Chess|True
+Call Mom|True
+Meditate|True
+Origami|True
+Photography|True
+Rock Climbing|True
+Rafting|True
+Kayaking|True
+Rowing|True
+Skateboarding|True
+Snowboarding|True
+Surfing|True
+Woodworking|True
+Wine Tasting|True
+Wine Making|True
+Wakeboarding|True
+Kite Surfing|True
+Computer Programming|True
+Cosplaying|True
+Crocheting|True
+Acting|True
+Embroidery|True
+Screen Printing|True
+Printmaking|True
+Coloring|True
+Board Games|True
+Gaming|True
+Candle-making|True
+Creative Writing|True
+Cryptography|True
+Fishing|True
+Deep Sea Fishing|True
+Crossword Puzzles|True
+Tinkering|True
+Glassblowing|True
+Household Chores|True
+Chores|True
+Homebrewing|True
+Ice Skating|True
+Jewelry Making|True
+Puzzles|True
+Napping|True
+Metalworking|True
+Machining|True
+Legos|True
+Lego Building|True
+Macrame|True
+Model Building|True
+Magic|True
+Pottery|True
+Quilting|True
+Sketching|True
+Stand-up Comedy|True
+Table Tennis|True
+Tennis|True
+Paddleball|True
+Wood Carving|True
+Whittling|True
+Yo-yoing|True
+Bird Watching|True
+Archery|True
+Beekeeping|True
+Baseball|True
+Geocahing|True
+LARPing|True
+Jogging|True
+Hiking|True
+Rugby|True
+Paintball|True
+Skating|True
+Vacation|True
+Skydiving|True
+Slacklining|True
+Fossil Hunting|True
+Volleyball|True
+Beach Volleyball|True
+Cycling|True
+Sculling|True
+Racquetball|True
+Squash|True
+Car Racing|True
+Astronomy|True
+Stargazing|True
+Backpacking|True
+Whale Watching|True
+Call Grandma|True
+Grocery Shopping|True
+Take Out Trash|
+Compost|
+Recycle|
+Pickup Drycleaning|
+Drop Off Rent Check|

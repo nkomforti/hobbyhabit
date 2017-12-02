@@ -220,7 +220,7 @@ def display_completions_vis():
     completion_date = []
 
     for completion in completions:
-        total_practice_time.append(completion['total_practice_time'])
+        total_practice_time.append(completion['total_practice_time'])  # format with strftime
 
     for completion in completions:
         completion_date.append(completion['completion_date'])
@@ -230,23 +230,23 @@ def display_completions_vis():
         "datasets": [
             {
                 "label": "HOBBY NAME",
-                # "fill": True,
-                # "lineTension": 0.5,
-                # "backgroundColor": "rgba(220,220,220,0.2)",
-                # "borderColor": "rgba(220,220,220,1)",
-                # "borderCapStyle": 'butt',
-                # "borderDash": [],
-                # "borderDashOffset": 0.0,
-                # "borderJoinStyle": 'miter',
-                # "pointBorderColor": "rgba(220,220,220,1)",
-                # "pointBackgroundColor": "#fff",
-                # "pointBorderWidth": 1,
-                # "pointHoverRadius": 5,
-                # "pointHoverBackgroundColor": "#fff",
-                # "pointHoverBorderColor": "rgba(220,220,220,1)",
-                # "pointHoverBorderWidth": 2,
-                # "pointRadius": 3,
-                # "pointHitRadius": 10,
+                "fill": True,
+                "lineTension": 0.5,
+                "backgroundColor": "rgba(220,220,220,0.2)",
+                "borderColor": "rgba(220,220,220,1)",
+                "borderCapStyle": 'butt',
+                "borderDash": [],
+                "borderDashOffset": 0.0,
+                "borderJoinStyle": 'miter',
+                "pointBorderColor": "rgba(220,220,220,1)",
+                "pointBackgroundColor": "#fff",
+                "pointBorderWidth": 1,
+                "pointHoverRadius": 5,
+                "pointHoverBackgroundColor": "#fff",
+                "pointHoverBorderColor": "rgba(220,220,220,1)",
+                "pointHoverBorderWidth": 2,
+                "pointRadius": 3,
+                "pointHitRadius": 10,
                 "data": total_practice_time,
                 "spanGaps": False},
         ]
