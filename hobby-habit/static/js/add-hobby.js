@@ -3,34 +3,34 @@
 // Select element with id plus-button and attach an event listener to it.
 $("#plus-btn").click(function (evt) {
 
-    // Get the vlaue for the input with the id numHobbies and bind to variable.
-    let numHobbies = $("#num-hobbies").val();
-    // Convert string to integer.
-    numHobbies = parseInt(numHobbies, 10);
-    // Increment numHobbies.
-    numHobbies += 1;
+  // Get the vlaue for the input with the id numHobbies and bind to variable.
+  let numHobbies = $("#num-hobbies").val();
+  // Convert string to integer.
+  numHobbies = parseInt(numHobbies, 10);
+  // Increment numHobbies.
+  numHobbies += 1;
 
-    // Every time the plus button is clicked, create new add hobby input field.
-    let newHobbyNameField = $("<input>");
-    // Add attributes and values to the new input field.
-    newHobbyNameField.attr({"id": "hobby-name-" + numHobbies,
-                            "type": "text",
-                            "name": "hobby-name-" + numHobbies,
-                            "placeholder": "HobbyHabit No. " + numHobbies,
-                            "class": "hobby-name",
-    });
+  // Every time the plus button is clicked, create new add hobby input field.
+  let newHobbyNameField = $("<input>");
+  // Add attributes and values to the new input field.
+  newHobbyNameField.attr({"id": "hobby-name-" + numHobbies,
+                          "type": "text",
+                          "name": "hobby-name-" + numHobbies,
+                          "placeholder": "HobbyHabit No. " + numHobbies,
+                          "class": "hobby-name",
+  });
 
-    newHobbyNameField.prop("required", true);
-                            
-    // Put the new input into the DOM.
-    $("<br>").insertBefore("#plus-btn");
-    newHobbyNameField.insertBefore("#plus-btn");
+  newHobbyNameField.prop("required", true);
+                          
+  // Put the new input into the DOM.
+  $("<br>").insertBefore("#plus-btn");
+  newHobbyNameField.insertBefore("#plus-btn");
 
 
-    // Get the value for the input witht the id num-hobbies.
-    $("#num-hobbies").val(numHobbies);
-    // Disable the properties for the element with the id plus-btn.
-    $("#plus-btn").prop("disabled", true);
+  // Get the value for the input witht the id num-hobbies.
+  $("#num-hobbies").val(numHobbies);
+  // Disable the properties for the element with the id plus-btn.
+  $("#plus-btn").prop("disabled", true);
 });
 
 
@@ -38,36 +38,35 @@ $("#plus-btn").click(function (evt) {
 // call the following anonymous function when a key on the keyboard is released.
 $(document).on("keyup", "#add-hobby input", function (evt) {
 
-        // Create variable to track input field values; set to false to start.
-        let empty = false;
+  // Create variable to track input field values; set to false at start.
+  let empty = false;
 
-        // Select all elements with the id add-hobby that are also input
-        // elements, and run method to iterate over the collection of elements
-        // and will call the following function. 
-        $("#add-hobby input").each(function (evt){
+  // Select all elements with the id add-hobby that are also input
+  // elements, and run method to iterate over the collection of elements
+  // and will call the following function. 
+  $("#add-hobby input").each(function (evt){
 
-            // Check if the input value of the current loop iteration (object
-            // that currently "owns" the function) is equal to an empty string.
-            if ($(this).val() === "" ) {
-                // If value equals empty string, disable plus button, and set
-                // tracking variable equal to true (because field is empty).
-                $("#plus-btn").prop("disabled", true);
-                empty = true;
-            }
-        });
+    // Check if the input value of the current loop iteration (object
+    // that currently "owns" the function) is equal to an empty string.
+    if ($(this).val() === "" ) {
+        // If value equals empty string, disable plus button, and set
+        // tracking variable equal to true (because field is empty).
+        $("#plus-btn").prop("disabled", true);
+        empty = true;
+    }
+  });
 
-        // Check if tracking variable equals false (input fields not empty).
-        // If false enable plus button.
-        if (empty === false) {
-            $("#plus-btn").prop("disabled", false);
-        }
+  // Check if tracking variable equals false (input fields not empty).
+  // If false enable plus button.
+  if (empty === false) {
+      $("#plus-btn").prop("disabled", false);
+  }
 
-    $.get("/get-hobbies.json", function (results) {
-        let hobbies = results;
+  $.get("/get-hobbies.json", function (results) {
+    let hobbies = results;
 
-        $( ".hobby-name" ).autocomplete({
-              source: hobbies
-            });
+    $( ".hobby-name" ).autocomplete({
+      source: hobbies
     });
-
+  });
 });

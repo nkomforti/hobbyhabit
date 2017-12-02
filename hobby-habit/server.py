@@ -21,11 +21,13 @@ app.secret_key = "ABC"  # Required to use Flask sessions and the debug toolbar.
 EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
 EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
 
+# TODO: Add more comments, clean up route names and view function names.
+
 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if g.user is None:  # g is short for global
+        if g.user is None:  # g is short for global.
             return redirect(url_for('process_login_form', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
@@ -288,7 +290,9 @@ def process_add_hobby_dashboard():
         db.session.add(userhobby_obj)
         db.session.commit()
 
-    return "Success"
+    userhobby_id = {"id": userhobby_obj.user_hobby_id}
+
+    return jsonify(userhobby_id)
 
 
 @app.route('/add-goal-dashboard', methods=['POST'])
@@ -322,8 +326,6 @@ def process_add_goal_dashboard():
 @app.route('/view-active-goal.json', methods=['GET'])
 def display_active_goal():
     """Get active goal data from db for selected user_hobby to display."""
-
-    # for use to display data as vis and non-vis
 
     current_user_id = session["user_id"]
 
@@ -364,7 +366,7 @@ def find_social_events():
     # Preset sort for API request.
     sort = "best"
 
-    # If the required information is in the request, look for events
+    # If the required information is in the request, look for events.
     if zipcode and hobby_name:
 
         payload = {'q': hobby_name,

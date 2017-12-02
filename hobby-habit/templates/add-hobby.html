@@ -1,34 +1,30 @@
 {% extends 'base.html' %}
 
-    {% block my_css_link %}
-        <!-- <link rel="stylesheet" type="text/css" href=""> -->
-    {% endblock my_css_link %}
+  {% block title %}HobbyHabit: Add HobbyHabits{% endblock title %}
 
-    {% block title %}HobbyHabit: Add HobbyHabits{% endblock title %}
+  {% block body_content %}
+    <div class="add-hobby">
 
-    {% block body_content %}
-        <div class="add-hobby">
+      <h1>
+        Get Started
+      </h1>
+      <h2>
+        Add a HobbyHabit you want to track. Click the '+' for every additional HobbyHabit you want to track.
+      </h2>
 
-                <h1>
-                    Get Started
-                </h1>
-                <h2>
-                    Add a HobbyHabit you want to track. Click the '+' for every additional HobbyHabit you want to track.
-                </h2>
-
-                <form id="hobby-form" action="/add-hobby" method="POST">
-                    <div id="add-hobby" class="ui-widget">
-                        <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
-                        <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
-                        <button id="plus-btn" class="btn-info btn-sm" type="button" disabled>+</button>
-                    </div>
-                    <br><br>
-                    <input type="submit" class="btn btn-info" value="Continue">
-                </form>
-
+      <form id="hobby-form" action="/add-hobby" method="POST">
+        <div id="add-hobby" class="ui-widget">
+          <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
+          <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
+          <button id="plus-btn" class="btn-info btn-sm" type="button" disabled>+</button>
         </div>
-    {% endblock body_content %}
+        <br><br>
+        <input type="submit" class="btn btn-info" value="Continue">
+      </form>
 
-    {% block js_link %}
-        <script type="text/javascript" src="static/js/add-hobby.js"></script>
-    {% endblock js_link %}
+    </div>
+  {% endblock body_content %}
+
+  {% block js_link %}
+    <script type="text/javascript" src="static/js/add-hobby.js"></script>
+  {% endblock js_link %}

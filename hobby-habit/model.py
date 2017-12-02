@@ -56,13 +56,14 @@ class User(db.Model):
                                   primaryjoin="User.user_id==UserHobby.user_id",
                                   secondary="user_hobbies",
                                   secondaryjoin="UserHobby.user_hobby_id==Completion.user_hobby_id")
-
+    # Define relationship to user_hobbies.
     user_hobbies = db.relationship("UserHobby",
                                    primaryjoin="User.user_id==UserHobby.user_id",
                                    backref=db.backref("user"))
 
     def get_user_data(self):
-        """Gets helpful data for a particular user in the form of a dictionary."""
+        """Gets helpful data for a particular user in the form of a dictionary.
+        """
 
         user_data = {"user_id": self.user_id,
                      "username": self.username,
@@ -126,7 +127,7 @@ class Hobby(db.Model):
                            nullable=False)
     autocomplete = db.Column(db.Boolean,
                              default=False,
-                             nullable=False)  # No autocompletion for user added hobbies/habits. In seed.py will set non-user-added hobbies/habits to True.
+                             nullable=False)  # Autocomplete=False for all user added hobbyhabits.
 
     def __repr__(self):
         """Provide helpful representation about Hobby when printed."""

@@ -1,29 +1,26 @@
 {% extends 'base.html' %}
 
-    {% block my_css_link %}
-        <!-- <link rel="stylesheet" type="text/css" href=""> -->
-    {% endblock my_css_link %}
+  {% block title %}HobbyHabit: Sign In{% endblock %}
 
-    {% block title %}HobbyHabit: Sign In{% endblock %}
+  {% block body_content %}
 
-    {% block body_content %}
-        <div class="login-page">
+    <div class="login-page">
 
-            <h1>Sign In</h1> 
-            <form action="/login" method="POST">
-                Username: <input type="text" name="username" placeholder="username" required> <!-- username requirements add in 2.0-->
-                <br>
-                <a href="">Forgot username</a><!-- Add link, way to get to change form, and and add and commit to DB -->
-                <br>
-                <br>
-                Password: <input type="password" name="password" placeholder="password" required>
-                <br>
-                <a href="">Forgot password</a>  <!-- Add link, way to get to change form, and and add and commit to DB -->
-                <br>
-                <br>
-                <input type="submit" class="btn btn-info" value="Sign in">
-            </form>
-            
-        </div>
-    {% endblock body_content %}
-
+      <h1>Sign In</h1> 
+      <form action="/login" method="POST">
+        Username: <input type="text" name="username" placeholder="username" required> <!-- username requirements add in 2.0-->
+        <br>
+        <a href="">Forgot username</a><!-- Add link, way to get to change form, and and add and commit to DB -->
+        <br>
+        <br>
+        Password: <input type="password" name="password" placeholder="password" required>
+        <br>
+        <a href="">Forgot password</a>  <!-- Add link, way to get to change form, and and add and commit to DB -->
+        <br>
+        <br>
+        <input type="submit" class="btn btn-info" value="Sign in">
+      </form>
+        
+    </div>
+    
+  {% endblock body_content %}

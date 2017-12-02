@@ -11,8 +11,8 @@ def load_users():
 
     print "User"
 
-    # Delete all rows in table, so if we need to run this a second time,
-    # we won't be trying to add duplicate users
+    # Delete all rows in table, so that if running this a second time it won't
+    # try to add duplicate users.
     User.query.delete()
 
     for i, row in enumerate(open("seed-data/user.txt")):
@@ -41,14 +41,14 @@ def load_users():
                     text_reminder=text_reminder,
                     zipcode=zipcode)
 
-        # We need to add to the session or it won't ever be stored
+        # Add user to the session so it will be stored.
         db.session.add(user)
 
-        # provide some sense of progress
+        # Provide some sense of progress.
         if i % 100 == 0:
             print i
 
-    # Once we're done, we should commit our work
+    # Commit to db.
     db.session.commit()
 
 
@@ -95,20 +95,16 @@ def load_user_hobbies():
         user_hobby = UserHobby(user_id=user_id,
                                hobby_id=hobby_id)
 
-        # We need to add to the session or it won't ever be stored
         db.session.add(user_hobby)
 
-        # provide some sense of progress
         if i % 1000 == 0:
             print i
-            # An optimization: if we commit after every add, the database
-            # will do a lot of work committing each record. However, if we
-            # wait until the end, on computers with smaller amounts of
-            # memory, it might thrash around. By committing every 1,000th
-            # add, we'll strike a good balance.
+            # NOTE: for optimization--committing after every add, wiil cause the
+            # database to do a lot of work committing each record. However, if
+            # waiting until the end, on computers with smaller amounts of memory
+            # it might thrash around. Committing every 1,000th add is a good balance.
             db.session.commit()
 
-    # Once we're done, we should commit our work
     db.session.commit()
 
 
@@ -154,7 +150,6 @@ def load_goals():
                         goal_freq_num=goal_freq_num,
                         goal_freq_time_unit=goal_freq_time_unit)
 
-            # We need to add to the session or it won't ever be stored
             db.session.add(goal)
 
             if i % 100 == 0:

@@ -1,57 +1,54 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-    <head>
+  <head>
 
-        <!-- Bootstrap links -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap links. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- My CSS -->
-        <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        {% block my_css_link %}CSS LINK GOES HERE{% endblock my_css_link %}
+    <!-- CSS links. -->
+    <!-- <link rel="stylesheet" type="text/css" href="static/.../css"> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {% block my_css_link %}CSS LINK GOES HERE{% endblock my_css_link %}
+    
+    <title>
+        {% block title %}TITLE GOES HERE{% endblock title %}
+    </title>
         
-        <title>
-            {% block title %}TITLE GOES HERE{% endblock title %}
-        </title>
-        
-    </head>
+  </head>
 
-    <body>
+  <body>
 
-        {% if "user_id" in session %}
-            <a href="/logout">Logout</a>
-        {% else %}
-            <a href="/login">Login</a>
-        {% endif %}
-        <hr>
-        {% for flash in get_flashed_messages() %} 
-            {{ flash }}
-        {% endfor %}
+    {% if "user_id" in session %}
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+    <hr>
+    {% for flash in get_flashed_messages() %} 
+      {{ flash }}
+    {% endfor %}
 
-        <div id="body-content">
-            {% block body_content %}BODY GOES HERE{% endblock body_content %}
-        </div>
+    <div id="body-content">
+      {% block body_content %}BODY GOES HERE{% endblock body_content %}
+    </div>
 
-        <div id="footer">
-            {% block footer %}
-            &copy; Copyright 2017 by Natalie Komforti.
-            {% endblock footer %}
-        </div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2017 by Natalie Komforti.
+      {% endblock footer %}
+    </div>
 
-        <!-- JQuery links -->
-        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
+    <!-- JQuery links. -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
 
+    <!-- JavaScript links. -->
+    {% block js_link %}LINK TO MY JAVASCRIPT FILE GOES HERE{% endblock js_link %}
 
-
-        <!-- JavaScript link -->
-        {% block js_link %}LINK TO MY JAVASCRIPT FILE GOES HERE{% endblock js_link %}
-
-    </body>
+  </body>
 
 </html>
