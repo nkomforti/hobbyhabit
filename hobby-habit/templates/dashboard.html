@@ -44,7 +44,7 @@
 
               <!-- Modal trigger button. -->
               <button id="update-password-trigger-btn" class="btn btn-info" type="button">
-                  Update password
+                Update password
               </button>
               <br><br>
 
@@ -79,7 +79,7 @@
               <br><br>
 
               <button id="update-profile" class="btn btn-info" type="button">
-                  Save changes to profile
+                Save changes to profile
               </button>
               <br>
 
@@ -128,7 +128,7 @@
         <!-- My HobbyHabits. -->
         <div id="my-hobbyhabits">
           <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
-              My HobbyHabits
+            My HobbyHabits
           </button>
           <br><br>
 
@@ -138,7 +138,7 @@
             {% for user_hobby in current_user_data['user_hobbies'] %}
               <div class="my-hobbyhabit">
                 <button class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
-                    {{ user_hobby['hobby_name'][0].title() }}
+                  {{ user_hobby['hobby_name'][0].title() }}
                 </button>
               </div>
             {% endfor %}
@@ -207,11 +207,30 @@
           </button>
 
           <!-- Completions Visualizations -->
-          <div class="completion-chart">
-            <h2 class="chart-name"> ENTER CHART NAME HERE</h2>
-            <canvas id="lineChart"></canvas>
-            <div id="lineLegend" class="chart-legend"></div>
+          <div class="completions-charts">
+            <h3 class="chart-name"> ENTER CHART NAME HERE</h3>
+            <canvas id="line-chart" ></canvas>
           </div>
+
+          <div class="completions-charts">
+            <h3 class="chart-name"> ENTER CHART NAME HERE</h3>
+            <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <!-- Goals. -->
           <!-- Display active goal, if any. -->

@@ -10,7 +10,7 @@ $(".social-hobbyhabit-btn").click(function (evt) {
 
   userData["user-hobby-id"] = currentUserHobbyId;
 
-  $.get("/social.json", userData, function (results) {
+  $.get("/get_social_events.json", userData, function (results) {
 
     if (results === {}) {
       $("#flash-no-events").html("No related events are scheduled in your area at this time").show().fadeOut(5000);

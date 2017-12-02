@@ -202,7 +202,7 @@ class Goal(db.Model):
 
 
 class Completion(db.Model):
-    """Completion log of user hobby/habbit."""
+    """Completion log of user hobby/habit."""
 
     __tablename__ = "completions"
 

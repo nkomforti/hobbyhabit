@@ -100,7 +100,7 @@ $(document).ready(function(){
         
         // AJAX request to send form data to route and call anonymous function
         // passing in the response/results from request.
-        $.post("/update-user-profile", formData, function (results) {
+        $.post("/update-profile", formData, function (results) {
             $("#user-profile > #user-profile-content").show();
             $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
             $("#social > #social-content").hide();
@@ -207,7 +207,7 @@ $(document).ready(function(){
             }
 
             // Set value of global variable to div element and its children.
-            newCompletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
+            newCompletions = "<div id='" + completionId + "' class='user-hobby-completion'" + ">" +
                                 "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
                                 "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
                                 "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
@@ -239,10 +239,10 @@ $(document).ready(function(){
         $("#social > #social-content").hide();
 
         // AJAX request to send data to route and call specified function.
-        $.get("/view-completions.json", userData, viewCompletions);
+        $.get("/get-completions.json", userData, viewCompletions);
 
         // AJAX request to send data to route and call specified function.
-        $.get("/view-active-goal.json", userData, viewGoal);
+        $.get("/get-active-goal.json", userData, viewGoal);
 
     }  // viewUserHobbyData function closer
 

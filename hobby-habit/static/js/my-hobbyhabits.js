@@ -122,7 +122,7 @@ function viewCompletions (results) {
       }
 
       // Set value of global variable to div element and its children.
-      newCompletions = "<div id='" + completionId + "' class='userhobby-completion'" + ">" +
+      newCompletions = "<div id='" + completionId + "' class='user-hobby-completion'" + ">" +
                          "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
                          "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
                          "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
@@ -154,10 +154,10 @@ function viewUserHobbyData () {
   $("#social > #social-content").hide();
 
   // AJAX request to send data to route and call specified function.
-  $.get("/view-completions.json", userData, viewCompletions);
+  $.get("/get-completions.json", userData, viewCompletions);
 
   // AJAX request to send data to route and call specified function.
-  $.get("/view-active-goal.json", userData, viewGoal);
+  $.get("/get-active-goal.json", userData, viewGoal);
 
 }  // viewUserHobbyData function closer
 
@@ -179,22 +179,43 @@ function addHobbyHabitListener () {
   $(".hobbyhabit-btn").click(function (evt) {
     currentUserhobbyId = evt.target.dataset.userHobbyId;
     userData = {'user-hobby-id': currentUserhobbyId};
-      $(".completion-chart").show();
+      $(".completions-charts").show();
 
     let options = { responsive: true };
 
     // Make Line Chart of user's HobbyHabit completions over time.
-    let ctx_line = $("#lineChart").get(0).getContext("2d");
+    let ctx_line = $("#line-chart").get(0).getContext("2d");
 
-    $.get("/view-completions-vis.json", userData, function (data) {
+    $.get("/get-completions-vis.json", userData, function (data) {
       let myLineChart = new Chart.Line(ctx_line, {
                                                   data: data,
                                                   options: options
                                                  });
 
-      $("#lineLegend").html(myLineChart.generateLegend());
+  new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
     });
   });
+
+
 
   
 addHobbyHabitListener();

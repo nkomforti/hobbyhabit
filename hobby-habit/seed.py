@@ -1,4 +1,4 @@
-"""Utility file to seed hobbyhabbit database."""
+"""Utility file to seed hobbyhabit database."""
 
 import datetime
 
@@ -7,7 +7,7 @@ from server import app
 
 
 def load_users():
-    """Load users from u.user into database."""
+    """Load users from user.txt into database."""
 
     print "User"
 
@@ -53,7 +53,7 @@ def load_users():
 
 
 def load_hobbies():
-    """Load hobbies from u.hobby into database."""
+    """Load hobbies from hobby.txt into database."""
 
     print "Hobby"
 
@@ -81,13 +81,13 @@ def load_hobbies():
 
 
 def load_user_hobbies():
-    """Load user hobbies from u.userhobby into database."""
+    """Load user hobbies from user-hobby.txt into database."""
 
     print "UserHobby"
 
     UserHobby.query.delete()
 
-    for i, row in enumerate(open("seed-data/userhobby.txt")):
+    for i, row in enumerate(open("seed-data/user-hobby.txt")):
         row = row.rstrip()
 
         user_id, hobby_id = row.split("|")
@@ -109,7 +109,7 @@ def load_user_hobbies():
 
 
 def load_goals():
-    """Load goals from u.goal into database."""
+    """Load goals from goal.txt into database."""
 
     print "Goal"
 
@@ -159,7 +159,7 @@ def load_goals():
 
 
 def load_completions():
-    """Load completions from u.completion into database."""
+    """Load completions from completion.txt into database."""
 
     print "Completion"
 
