@@ -56,7 +56,7 @@ $(".social-hobbyhabit-btn").click(function (evt) {
       }
 
       $("#events").append(eventsHeading);
-      $("#events").append(eventInfo);
+      $("#events").html(eventInfo);
     }
   });
 });
