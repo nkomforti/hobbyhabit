@@ -1,7 +1,7 @@
 "use strict";
 
 let currentUserHobbyId;
-function addListenerSoc () {
+function addHobbyHabitListenerSoc () {
 
 $(".social-hobbyhabit-btn").click(function (evt) {
   let userData = {};
@@ -61,4 +61,4 @@ $(".social-hobbyhabit-btn").click(function (evt) {
   });
 });
 }
-addListenerSoc();
+addHobbyHabitListenerSoc();

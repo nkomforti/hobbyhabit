@@ -47,7 +47,7 @@ $("#add-hobbyhabit-btn").click(function (evt) {
   // Create break element and insert before at selected id.
   $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
 
-  addListener();
+  addHobbyHabitListener();
 
   // Create html button element and save to variable.
   let newHobbyHabitSoc = $("<button></button>");
@@ -61,7 +61,7 @@ $("#add-hobbyhabit-btn").click(function (evt) {
 
   $("#social-content").append(newHobbyHabitSoc);
 
-  addListenerSoc();
+  addHobbyHabitListenerSoc();  // Defined in social.js
 
   });  // add-hobby-dashboard post request function closer
 });  // add-hobbyhabit-btn click closer
@@ -162,19 +162,24 @@ function viewUserHobbyData () {
 }  // viewUserHobbyData function closer
 
 
-function addListener () {
+let userData;
+
+function addHobbyHabitListener () {
   // Select the element by class and attach event listener to it.
   $(".hobbyhabit-btn").click(function (evt) {
     currentUserhobbyId = evt.target.dataset.userHobbyId;
     viewUserHobbyData();
   });
 
+}
 
-  // NOTE: Creating line chart.
+
+// NOTE: Creating line chart.
   // Select the element by class and attach event listener to it.
   $(".hobbyhabit-btn").click(function (evt) {
     currentUserhobbyId = evt.target.dataset.userHobbyId;
-    let userData = {'user-hobby-id': currentUserhobbyId};
+    userData = {'user-hobby-id': currentUserhobbyId};
+      $(".completion-chart").show();
 
     let options = { responsive: true };
 
@@ -190,10 +195,9 @@ function addListener () {
       $("#lineLegend").html(myLineChart.generateLegend());
     });
   });
-  
-}
 
-addListener();
+  
+addHobbyHabitListener();
 
 // Select all elements with specified class and attach event listener to them.
 $(".page-direction").click(function (evt){

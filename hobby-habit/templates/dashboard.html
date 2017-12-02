@@ -125,7 +125,7 @@
             </div>
           </div>
         </div>
-                <!-- My HobbyHabits. -->
+        <!-- My HobbyHabits. -->
         <div id="my-hobbyhabits">
           <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
               My HobbyHabits
@@ -162,7 +162,7 @@
                   </div>
                   <div class="modal-body">
                     <form id="add-hobbyhabit-form" class="ui-widget">
-                      <input id="add-hobbyhabit-name" placeholder="HobbyHabit name" required>  <!-- NOTE: Not showing required. -->
+                      <input id="add-hobbyhabit-name" placeholder="HobbyHabit name" required>  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
                     </form>
                   </div>
                   <div class="modal-footer">
@@ -176,7 +176,7 @@
 
           <!-- Track Completions. -->
           <div id="hobbyhabit-tracker">
-            <form id="hobbyhabit-tracker-form">  <!-- NOTE: Not showing required. -->
+            <form id="hobbyhabit-tracker-form">  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
               Completion date
               <br>
               <input id="completion-date" type="text" name="completion-date" placeholder="-- Completion date --" required>
@@ -207,9 +207,8 @@
           </button>
 
           <!-- Completions Visualizations -->
-          <h2> ENTER CHART NAME HERE</h2>
-
           <div class="completion-chart">
+            <h2 class="chart-name"> ENTER CHART NAME HERE</h2>
             <canvas id="lineChart"></canvas>
             <div id="lineLegend" class="chart-legend"></div>
           </div>
@@ -221,7 +220,7 @@
               <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
           </div>
              
-         <!--  NOTE: Don't use a rom for this. Use the current div in the js, each
+         <!--  NOTE: Don't use a form for this. Use the current div in the js, each
           div should have an edit and delete button that triggers a modal with
           a form or a form that gets dynamically inserted on a click. When
           submitting that form that should dynamically update the DOM and also

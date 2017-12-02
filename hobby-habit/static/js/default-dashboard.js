@@ -16,6 +16,8 @@ $(document).ready(function(){
   $("#my-hobbyhabits-menu-btn").click(function (evt) {
     $("#user-profile > #user-profile-content").hide();
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+    $(".page-direction").hide();
+    $(".completion-chart").hide();
     $("#social > #social-content").hide();
     $("#hobbyhabit-tracker").hide();
   });
