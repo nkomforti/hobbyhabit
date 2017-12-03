@@ -170,7 +170,6 @@ function addHobbyHabitListener () {
     currentUserhobbyId = evt.target.dataset.userHobbyId;
     viewUserHobbyData();
   });
-
 }
 
 
@@ -178,10 +177,10 @@ function addHobbyHabitListener () {
 $(".hobbyhabit-btn").click(function (evt) {
   currentUserhobbyId = evt.target.dataset.userHobbyId;
   userData = {'user-hobby-id': currentUserhobbyId};
-    // $("#completions-line-chart").show();
-    $(".completions-charts").show();
+  // $("#completions-line-chart").show();
+  $(".completions-charts").show();
 
-  let lineOptions = { responsive: true };
+  let lineOptions = {responsive:false};
 
   let ctxLine = $("#line-chart").get(0).getContext("2d");
 
@@ -198,38 +197,93 @@ $(".hobbyhabit-btn").click(function (evt) {
 
 // Select the element by class and attach event listener to it.
 $(".hobbyhabit-btn").click(function (evt) {
-  currentUserhobbyId = evt.target.dataset.userHobbyId;
-  userData = {'user-hobby-id': currentUserhobbyId};
-    $("#completions-bar-chart").show();
+  // currentUserhobbyId = evt.target.dataset.userHobbyId;
+  // userData = {'user-hobby-id': currentUserhobbyId};
+  $("#completions-bar-chart-grouped").show();
 
-  // let barOptions = { responsive: true };
-  let barOptions = {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: "Stuffffff"
-          }
-  };
+  let barOptions = {responsive: false};
 
-  let ctxBar = $("#bar-chart-horizontal").get(0).getContext("2d");
+  let ctxBarGrouped = $("#bar-chart-grouped").get(0).getContext("2d");
 
-  $.get("/get-completions-bar-vis.json", userData, function (data) {
+  // $.get("/get-user-hobby-completions-by-year.json", userData, function (data) {
+  $.get("/get-user-hobby-completions-by-year.json", function (data) {
     
-    let horizontalBarChart = new Chart(ctxBar, {
-      type: 'horizontalBar',
-      data: data,
-      options: barOptions
+    let barChartGrouped = new Chart(ctxBarGrouped, {
+      type: 'bar',
+      data: {
+        labels: data.years,
+        datasets: [{
+          label: 'Total Completions per Year',
+          data: data.total_completions_per_year,
+          backgroundColor: "rgba(255,0,0,0.4)"
+        }, {
+          label: 'Total Practice Time (Hrs.)',
+          data: data.total_hours_per_year,
+          backgroundColor: "rgba(255,153,0,0.4)"
+        }]
+      },
+        options: barOptions
     });
   });
 });
 
-    //  ,options: {
-    //    legend: { display: false },
-    //    title: {
-    //      display: true,
-    //      text: 'Stufffff'
-    //    }
 
+// Select the element by class and attach event listener to it.
+$(".hobbyhabit-btn").click(function (evt) {
+  currentUserhobbyId = evt.target.dataset.userHobbyId;
+  userData = {'user-hobby-id': currentUserhobbyId};
+  $("#completions-doughnut-chart").show();
+
+  let doughnutOptions = {responsive: false};
+
+  let ctxDoughnut = $("#doughnut-chart").get(0).getContext("2d");
+
+  $.get("/get_mult-hobbies-vis.json", userData, function (data) {
+
+    let doughnutChart = new Chart(ctxDoughnut, {
+      type: 'doughnut',
+      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+      data: {
+        labels: [],
+        datasets: [{
+          data:[],
+          backgroundColor:[],
+          hoverBackgroundColor: []
+        }]
+      },
+      options: doughnutOptions
+    });
+  });   
+});
+
+
+  // new Chart($("#doughnut-chart"), {
+  //   type: 'doughnut',http://www.chartjs.org/docs/latest/charts/radar.html
+  //   tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+  //   data: {
+  //   labels: [
+  //     "blueberry",
+  //     "grape",
+  //     "apple",
+  //     "pineapple"
+  //   ],
+  //   datasets: [{
+  //   data: [15, 20, 30, 10],
+  //   backgroundColor: [
+  //     "#3498DB",
+  //     "#9B59B6",
+  //     "#E74C3C",
+  //     "#26B99A"
+  //   ],
+  //   hoverBackgroundColor: [
+  //     "#49A9EA",
+  //     "#B370CF",
+  //     "#E95E4F",
+  //     "#36CAAB"
+  //   ]
+  //   }]
+  // },
+  //   options: { responsive: false }
 
   
 addHobbyHabitListener();

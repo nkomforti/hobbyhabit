@@ -206,8 +206,6 @@ def get_completions_line_vis():
 
     current_user_data = current_user.get_user_data()
 
-    # completions = {}
-
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
             completions = user_hobby["completions"]
@@ -251,9 +249,9 @@ def get_completions_line_vis():
     return jsonify(data)
 
 
-@app.route('/get-completions-bar-vis.json', methods=['GET'])
-def get_completions_bar_vis():
-    """Get completions data for selected user_hobby for bar chart data vis."""
+@app.route('/get-user-hobby-completions-by-year.json', methods=['GET'])
+def get_user_hobby_completions_by_year():
+    """Get completions data for selected user_hobby by year chart/data vis."""
 
     current_user_id = session["user_id"]
 
@@ -263,14 +261,12 @@ def get_completions_bar_vis():
 
     current_user_data = current_user.get_user_data()
 
-    # completions = {}
-
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
             completions = user_hobby["completions"]
 
-    total_practice_times = []  # label
-    completion_dates = []  # data
+    total_practice_times = []
+    completion_dates = []
 
     for completion in completions:
         total_practice_times.append(completion['total_practice_time'])  # format with strftime
@@ -294,18 +290,22 @@ def get_completions_bar_vis():
         for completion in completions_by_year[year]:
             completions_by_year[year].sort()
 
-    for year in completions_by_year:
-        
+    years = []
+    total_hours_per_year = []
+    total_completions_per_year = []
 
-    data = {
-        "labels": completion_dates,  # comps
-        "datasets": [
-            {
-                "label": "HOBBY NAME",
-                "backgroundColor": ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                "data": total_practice_times}  # time
-        ]
-    }
+    for year in completions_by_year:
+        years.append(year)
+
+    for year in completions_by_year:
+        total_completions_per_year.append(len(completions_by_year[year]))
+
+    for year in completions_by_year:
+        total_hours_per_year.append(sum(comp[1] for comp in completions_by_year[year])/60)
+
+    data = {"years": years,
+            "total_hours_per_year": total_hours_per_year,
+            "total_completions_per_year": total_completions_per_year}
 
     return jsonify(data)
 
@@ -316,7 +316,11 @@ def get_mult_hobbies_vis():
     data visualization.
     """
 
-    pass
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    current_user_data = current_user.get_user_data()
 
 
 @app.route('/add-hobby-dashboard', methods=['POST'])
