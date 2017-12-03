@@ -194,9 +194,9 @@ def get_completions():
     return jsonify(completions)
 
 
-@app.route('/get-completions-vis.json', methods=['GET'])
-def get_completions_vis():
-    """Get completions data for selected user_hobby for data visualization."""
+@app.route('/get-completions-line-vis.json', methods=['GET'])
+def get_completions_line_vis():
+    """Get completions data for selected user_hobby for line chart data vis."""
 
     current_user_id = session["user_id"]
 
@@ -206,23 +206,23 @@ def get_completions_vis():
 
     current_user_data = current_user.get_user_data()
 
-    completions = {}
+    # completions = {}
 
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
             completions = user_hobby["completions"]
 
-    total_practice_time = []
-    completion_date = []
+    total_practice_times = []
+    completion_dates = []
 
     for completion in completions:
-        total_practice_time.append(completion['total_practice_time'])  # format with strftime
+        total_practice_times.append(completion['total_practice_time'])  # format with strftime
 
     for completion in completions:
-        completion_date.append(completion['completion_date'])
+        completion_dates.append(completion['completion_date'])
 
-    data_dict = {
-        "labels": completion_date,
+    data = {
+        "labels": completion_dates,
         "datasets": [
             {
                 "label": "HOBBY NAME",
@@ -243,12 +243,71 @@ def get_completions_vis():
                 "pointHoverBorderWidth": 2,
                 "pointRadius": 3,
                 "pointHitRadius": 10,
-                "data": total_practice_time,
+                "data": total_practice_times,
                 "spanGaps": False},
         ]
     }
 
-    return jsonify(data_dict)
+    return jsonify(data)
+
+
+@app.route('/get-completions-bar-vis.json', methods=['GET'])
+def get_completions_bar_vis():
+    """Get completions data for selected user_hobby for bar chart data vis."""
+
+    current_user_id = session["user_id"]
+
+    current_user = User.query.get(current_user_id)
+
+    user_hobby_id = int(request.args["user-hobby-id"])
+
+    current_user_data = current_user.get_user_data()
+
+    # completions = {}
+
+    for user_hobby in current_user_data["user_hobbies"]:
+        if user_hobby["user_hobby_id"] == user_hobby_id:
+            completions = user_hobby["completions"]
+
+    total_practice_times = []  # label
+    completion_dates = []  # data
+
+    for completion in completions:
+        total_practice_times.append(completion['total_practice_time'])  # format with strftime
+
+    for completion in completions:
+        completion_dates.append(completion['completion_date'])
+
+    completion_data = dict(zip(completion_dates, total_practice_times))
+    completion_data = completion_data.items()
+
+    completions_by_year = {}
+
+    for date, time in completion_data:
+        year = date.year
+        if year not in completions_by_year:
+            completions_by_year[year] = []
+        elif year in completions_by_year and date.year == year:
+            completions_by_year[year].extend([(date, time)])
+
+    for year in completions_by_year:
+        for completion in completions_by_year[year]:
+            completions_by_year[year].sort()
+
+    for year in completions_by_year:
+        
+
+    data = {
+        "labels": completion_dates,  # comps
+        "datasets": [
+            {
+                "label": "HOBBY NAME",
+                "backgroundColor": ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                "data": total_practice_times}  # time
+        ]
+    }
+
+    return jsonify(data)
 
 
 @app.route('/get_mult-hobbies-vis.json', methods=['GET'])

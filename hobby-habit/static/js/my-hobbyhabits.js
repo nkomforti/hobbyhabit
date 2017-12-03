@@ -174,54 +174,61 @@ function addHobbyHabitListener () {
 }
 
 
-// NOTE: Creating line chart.
 // Select the element by class and attach event listener to it.
 $(".hobbyhabit-btn").click(function (evt) {
   currentUserhobbyId = evt.target.dataset.userHobbyId;
   userData = {'user-hobby-id': currentUserhobbyId};
+    // $("#completions-line-chart").show();
     $(".completions-charts").show();
 
-  let options = { responsive: true };
+  let lineOptions = { responsive: true };
 
-  // Make Line Chart of user's HobbyHabit completions over time.
   let ctxLine = $("#line-chart").get(0).getContext("2d");
 
-  $.get("/get-completions-vis.json", userData, function (data) {
-
-    let lineChart = new Chart.Line(ctxLine, {
+  $.get("/get-completions-line-vis.json", userData, function (data) {
+    // new Chart.Line(ctxLine,)
+    let lineChart = new Chart(ctxLine, {
+      type: 'line',
       data: data,
-      options: options
+      options: lineOptions
     });
   });
 });
 
 
-// let ctxBar = $("#bar-chart-horizontal").getContext("2d");
-// let horizontalBarChart = {data: data,
-//                           options: options
-//   }
+// Select the element by class and attach event listener to it.
+$(".hobbyhabit-btn").click(function (evt) {
+  currentUserhobbyId = evt.target.dataset.userHobbyId;
+  userData = {'user-hobby-id': currentUserhobbyId};
+    $("#completions-bar-chart").show();
 
-//   new Chart(document.getElementById("bar-chart-horizontal"), {
-//     type: 'horizontalBar',
-//     data: {
-//       labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-//       datasets: [
-//         {
-//           label: "Population (millions)",
-//           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-//           data: [2478,5267,734,784,433]
-//         }
-//       ]
-//     },
-//     options: {
-//       legend: { display: false },
-//       title: {
-//         display: true,
-//         text: 'Predicted world population (millions) in 2050'
-//       }
-//     }
-// });
+  // let barOptions = { responsive: true };
+  let barOptions = {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Stuffffff"
+          }
+  };
 
+  let ctxBar = $("#bar-chart-horizontal").get(0).getContext("2d");
+
+  $.get("/get-completions-bar-vis.json", userData, function (data) {
+    
+    let horizontalBarChart = new Chart(ctxBar, {
+      type: 'horizontalBar',
+      data: data,
+      options: barOptions
+    });
+  });
+});
+
+    //  ,options: {
+    //    legend: { display: false },
+    //    title: {
+    //      display: true,
+    //      text: 'Stufffff'
+    //    }
 
 
   
