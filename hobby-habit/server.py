@@ -209,6 +209,7 @@ def get_completions_line_vis():
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
             completions = user_hobby["completions"]
+            hobby_name = user_hobby["hobby_name"]
 
     total_practice_times = []
     completion_dates = []
@@ -219,7 +220,8 @@ def get_completions_line_vis():
     for completion in completions:
         completion_dates.append(completion['completion_date'])
 
-    data = {"total_practice_times": total_practice_times,
+    data = {"hobby_name": hobby_name,
+            "total_practice_times": total_practice_times,
             "completion_dates": completion_dates}
 
     return jsonify(data)
@@ -240,6 +242,7 @@ def get_user_hobby_completions_by_year():
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
             completions = user_hobby["completions"]
+            hobby_name = user_hobby["hobby_name"]
 
     total_practice_times = []
     completion_dates = []
@@ -279,7 +282,8 @@ def get_user_hobby_completions_by_year():
     for year in completions_by_year:
         total_hours_per_year.append(sum(comp[1] for comp in completions_by_year[year])/60)
 
-    data = {"years": years,
+    data = {"hobby_name": hobby_name,
+            "years": years,
             "total_hours_per_year": total_hours_per_year,
             "total_completions_per_year": total_completions_per_year}
 
@@ -304,7 +308,7 @@ def get_mult_hobbies_vis():
 
     completion_count = []
     hobby_names = []
-    # import pdb; pdb.set_trace()
+
     for user_hobby in current_user_data["user_hobbies"]:
         hobby_names.append(user_hobby["hobby_name"])
         completions[user_hobby["user_hobby_id"]] = []

@@ -173,6 +173,8 @@ function addHobbyHabitListener () {
 }
 
 
+let hobbyName;
+
 // Select the element by class and attach event listener to it.
 $(".hobbyhabit-btn").click(function (evt) {
   currentUserhobbyId = evt.target.dataset.userHobbyId;
@@ -180,29 +182,28 @@ $(".hobbyhabit-btn").click(function (evt) {
   // $("#completions-line-chart").show();
   $(".completions-charts").show();
 
-  let lineOptions = {responsive:false};
+  let lineOptions = {responsive:true};
 
   let ctxLine = $("#line-chart").get(0).getContext("2d");
 
   $.get("/get-completions-line-vis.json", userData, function (data) {
-    // new Chart.Line(ctxLine,)
+    hobbyName = data.hobby_name;
     let lineChart = new Chart(ctxLine, {
       type: 'line',
       data: {
         labels: data.completion_dates,
         datasets: [{
-          label: "HOBBY NAME",
+          label: "Tracked Completions",
           fill: true,
           lineTension: 0.5,
-          backgroundColor: "rgb(153, 102, 255)",
-          borderColor: "rgba(220,220,220,1)",
+          backgroundColor: "rgba(237, 64, 156, 1)",
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
           pointBorderColor: "rgba(220,220,220,1)",
           pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
+          pointBorderWidth: 0.5,
           pointHoverRadius: 5,
           pointHoverBackgroundColor: "#fff",
           pointHoverBorderColor: "rgba(220,220,220,1)",
@@ -214,6 +215,7 @@ $(".hobbyhabit-btn").click(function (evt) {
       },
       options: lineOptions
     });
+    $("#line-chart-name").html("Completions by Month: " + hobbyName);
   });
 });
 
@@ -224,12 +226,13 @@ $(".hobbyhabit-btn").click(function (evt) {
   userData = {'user-hobby-id': currentUserhobbyId};
   $("#completions-bar-chart-grouped").show();
 
-  let barOptions = {responsive: false};
+  let barOptions = {responsive: true};
 
   let ctxBarGrouped = $("#bar-chart-grouped").get(0).getContext("2d");
 
   $.get("/get-user-hobby-completions-by-year.json", userData, function (data) {
-    
+    hobbyName = data.hobby_name;
+
     let barChartGrouped = new Chart(ctxBarGrouped, {
       type: 'bar',
       data: {
@@ -237,15 +240,16 @@ $(".hobbyhabit-btn").click(function (evt) {
         datasets: [{
           label: 'Total Completions per Year',
           data: data.total_completions_per_year,
-          backgroundColor: ["rgb(153, 102, 255)"]
+          backgroundColor: "rgba(45, 156, 230, 1)"
         }, {
           label: 'Total Practice Time (Hrs.)',
           data: data.total_hours_per_year,
-          backgroundColor: ["rgb(201, 203, 207)"]
+          backgroundColor: "rgba(255, 200, 67, 1)"
         }]
       },
         options: barOptions
     });
+    $("#bar-chart-grouped-name").html("Total Completions & Total Practice Time by Year: " + hobbyName);
   });
 });
 
@@ -256,7 +260,7 @@ $(".hobbyhabit-btn").click(function (evt) {
   // userData = {'user-hobby-id': currentUserhobbyId};
   $("#completions-doughnut-chart").show();
 
-  let doughnutOptions = {responsive: false};
+  let doughnutOptions = {responsive: true};
 
   let ctxDoughnut = $("#doughnut-chart").get(0).getContext("2d");
 
@@ -271,16 +275,24 @@ $(".hobbyhabit-btn").click(function (evt) {
         datasets: [{
           data: data.completion_count,
           backgroundColor:[
-              '#4dc9f6',
-              '#f67019',
-              '#f53794',
-              '#537bc4',
-              '#acc236',
-              '#166a8f',
-              '#00a950',
-              '#58595b',
-              '#8549ba'
-          ]
+              '#16a27c',
+              '#943ee5',
+              '#ffc843',
+              '#2d9ce6',
+              '#ed409c',
+          ],
+          borderWidth: 3,
+          hoverBackgroundColor: [
+              '#8cdae8',
+              '#d7b7f5',
+              '#ffe3a3',
+              '#96cef3',
+              '#f8b4d8',
+
+
+              ],
+          hoverBorderColor: [],
+          hoverBorderWidth: []
         }]
       },
       options: doughnutOptions
