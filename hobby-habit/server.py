@@ -185,7 +185,7 @@ def get_completions():
 
     current_user_data = current_user.get_user_data()
 
-    completions = {}
+    # completions = {}
 
     for user_hobby in current_user_data["user_hobbies"]:
         if user_hobby["user_hobby_id"] == user_hobby_id:
@@ -214,37 +214,13 @@ def get_completions_line_vis():
     completion_dates = []
 
     for completion in completions:
-        total_practice_times.append(completion['total_practice_time'])  # format with strftime
+        total_practice_times.append(completion['total_practice_time'])
 
     for completion in completions:
         completion_dates.append(completion['completion_date'])
 
-    data = {
-        "labels": completion_dates,
-        "datasets": [
-            {
-                "label": "HOBBY NAME",
-                "fill": True,
-                "lineTension": 0.5,
-                "backgroundColor": "rgba(220,220,220,0.2)",
-                "borderColor": "rgba(220,220,220,1)",
-                "borderCapStyle": 'butt',
-                "borderDash": [],
-                "borderDashOffset": 0.0,
-                "borderJoinStyle": 'miter',
-                "pointBorderColor": "rgba(220,220,220,1)",
-                "pointBackgroundColor": "#fff",
-                "pointBorderWidth": 1,
-                "pointHoverRadius": 5,
-                "pointHoverBackgroundColor": "#fff",
-                "pointHoverBorderColor": "rgba(220,220,220,1)",
-                "pointHoverBorderWidth": 2,
-                "pointRadius": 3,
-                "pointHitRadius": 10,
-                "data": total_practice_times,
-                "spanGaps": False},
-        ]
-    }
+    data = {"total_practice_times": total_practice_times,
+            "completion_dates": completion_dates}
 
     return jsonify(data)
 
@@ -310,17 +286,38 @@ def get_user_hobby_completions_by_year():
     return jsonify(data)
 
 
-@app.route('/get_mult-hobbies-vis.json', methods=['GET'])
+@app.route('/get-mult-hobbies-vis.json', methods=['GET'])
 def get_mult_hobbies_vis():
     """Get completion data for all of the current user's user_hobbies and create
     data visualization.
     """
+
+    # TODO: This is just for demo. Add data by year after demo.
 
     current_user_id = session["user_id"]
 
     current_user = User.query.get(current_user_id)
 
     current_user_data = current_user.get_user_data()
+
+    completions = {}
+
+    completion_count = []
+    hobby_names = []
+    # import pdb; pdb.set_trace()
+    for user_hobby in current_user_data["user_hobbies"]:
+        hobby_names.append(user_hobby["hobby_name"])
+        completions[user_hobby["user_hobby_id"]] = []
+        for completion in user_hobby["completions"]:
+            completions[user_hobby["user_hobby_id"]].append(completion)
+
+    for completion in completions:
+        completion_count.append(len(completions[completion]))
+
+    data = {"hobby_names": hobby_names,
+            "completion_count": completion_count}
+
+    return jsonify(data)
 
 
 @app.route('/add-hobby-dashboard', methods=['POST'])
@@ -601,6 +598,6 @@ def logout():
 if __name__ == "__main__":
 
     app.debug = True
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
     connect_to_db(app)
     app.run(host="0.0.0.0")

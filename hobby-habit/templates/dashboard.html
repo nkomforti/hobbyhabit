@@ -2,7 +2,6 @@
 
   {% block my_css_link %}
 
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
     <link href="/static/css/style.css" rel="stylesheet"></link>
     
   {% endblock my_css_link %}
@@ -11,7 +10,7 @@
 
   {% block body_content %}
 
-    <div class="dashboard">
+    <div class="container-fluid dashboard">
 
       <div id="flash-update-profile-status"></div>
       <div id="flash-tracking-status"></div>
@@ -30,100 +29,104 @@
           </button>
           <br><br>
 
-          <div id="user-profile-content" hidden>
-            <form id="user-profile-form">
-              Username
-              <br>
-              <input id="username" type="text" name="username" value="{{ current_user.username }}" disabled>
-              <br><br>
+          <!-- <div class ="row"> -->
+            <!-- <div class="col-xs-12 col-md-6 col-lg-12"> -->
+              <div id="user-profile-content" hidden>
+                <form id="user-profile-form" class="form-group">
+                  Username
+                  <br>
+                  <input id="username" type="text" name="username" value="{{ current_user.username }}" disabled>
+                  <br><br>
 
-              Email
-              <br>
-              <input id="email" type="email" name="email" value="{{ current_user.email }}" disabled>
-              <br><br>
+                  Email
+                  <br>
+                  <input id="email" type="email" name="email" value="{{ current_user.email }}" disabled>
+                  <br><br>
+            <!-- </div> -->
+          <!-- </div> -->
 
-              <!-- Modal trigger button. -->
-              <button id="update-password-trigger-btn" class="btn btn-info" type="button">
-                Update password
-              </button>
-              <br><br>
+                  <!-- Modal trigger button. -->
+                  <button id="update-password-trigger-btn" class="btn btn-info" type="button">
+                    Update password
+                  </button>
+                  <br><br>
 
-              First name
-              <br>
-              <input id="first-name" type="text" name="first-name" value=""> 
-              <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
-              <br><br>
+                  First name
+                  <br>
+                  <input id="first-name" type="text" name="first-name" value=""> 
+                  <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
+                  <br><br>
 
-              Last name
-              <br>
-              <input id="last-name" type="text" name="last-name" value="">
-              <input id="hidden-last-name" type="hidden" name="hidden-last-name" value="{{ current_user.last_name }}">
-              <br><br>
+                  Last name
+                  <br>
+                  <input id="last-name" type="text" name="last-name" value="">
+                  <input id="hidden-last-name" type="hidden" name="hidden-last-name" value="{{ current_user.last_name }}">
+                  <br><br>
 
-              Zipcode
-              <br>
-              <input id="zipcode" type="text" name="zipcode" value="">
-              <input id="hidden-zipcode" type="hidden" name="hidden-zipcode" value="{{ current_user.zipcode }}">
-              <br><br>
+                  Zipcode
+                  <br>
+                  <input id="zipcode" type="text" name="zipcode" value="">
+                  <input id="hidden-zipcode" type="hidden" name="hidden-zipcode" value="{{ current_user.zipcode }}">
+                  <br><br>
 
-              Phone number
-              <br>
-              <input id="phone-number" type="text" name="phone-number" value="">
-              <input id="hidden-phone-number" type="hidden" name="hidden-phone-number" value="{{ current_user.phone }}">
-              <br><br>
+                  Phone number
+                  <br>
+                  <input id="phone-number" type="text" name="phone-number" value="">
+                  <input id="hidden-phone-number" type="hidden" name="hidden-phone-number" value="{{ current_user.phone }}">
+                  <br><br>
 
-              Text message reminder
-              <br>
-              <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in-out" value="on"> On
-              <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
-              <br><br>
+                  Text message reminder
+                  <br>
+                  <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in-out" value="on"> On
+                  <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
+                  <br><br>
 
-              <button id="update-profile" class="btn btn-info" type="button">
-                Save changes to profile
-              </button>
-              <br>
+                  <button id="update-profile" class="btn btn-info" type="button">
+                    Save changes to profile
+                  </button>
+                  <br>
 
-            </form>
-            <!-- Update password modal. -->
-            <div id="updatePasswordModal" class="modal fade">
-              <div class="modal-dialog modal-sm">
+                </form>
+                <!-- Update password modal. -->
+                <div id="updatePasswordModal" class="modal fade">
+                  <div class="modal-dialog modal-sm">
 
-                <!-- Update password modal content.-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">
-                      Update Password
-                    </h4>
-                  </div>
-                  <div class="modal-body">
-                    <form id="update-password-form">
-                      Old password
-                      <br>
-                      <input id="old-password" type="password" name="old-password" required>
-                      <br><br>
+                    <!-- Update password modal content.-->
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                          Update Password
+                        </h4>
+                      </div>
+                      <div class="modal-body">
+                        <form id="update-password-form">
+                          Old password
+                          <br>
+                          <input id="old-password" type="password" name="old-password" required>
+                          <br><br>
 
-                      New password
-                      <br> 
-                      <input id="new-password" type="password" name="new-password" required>
-                      <br><br>
+                          New password
+                          <br> 
+                          <input id="new-password" type="password" name="new-password" required>
+                          <br><br>
 
-                      Confirm new password
-                      <br> 
-                      <input id="confirm-new-password" type="password" name="confirm-new-password" required>
-                      <br>
-                      <a href="">Forgot password</a>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="update-password-btn" class="btn btn-info">
-                      Update password
-                    </button>
+                          Confirm new password
+                          <br> 
+                          <input id="confirm-new-password" type="password" name="confirm-new-password" required>
+                          <br>
+                          <a href="">Forgot password</a>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="update-password-btn" class="btn btn-info">
+                          Update password
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
         </div>
         <!-- My HobbyHabits. -->
         <div id="my-hobbyhabits">

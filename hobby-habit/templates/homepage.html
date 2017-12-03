@@ -1,36 +1,49 @@
 {% extends 'base.html' %}
+  
+  {% block my_css_link %}{% endblock my_css_link %}
 
   {% block title %}HobbyHabit{% endblock title %}
 
   {% block body_content %}
 
-    <div class="homepage">
 
-      <h1>HobbyHabit is a place to...</h1> 
-      <br>
-      <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
-      <br>
-      <br>
+      <div class="container-fluid homepage">
 
-      <form id="register-form" action="/register" method="POST">
-        Username
-        <br>
-        <input type="text" name="username" placeholder="Pick a username" required>
-        <br>
-        <br>
-        Email
-        <br>
-        <input type="email" name="email" placeholder="you@example.com" required>
-        <br>
-        <br>
-        Password
-        <br>
-        <input type="password" name="password" placeholder="Create a password" required>
-        <br>
-        <br>
-        <input type="submit" class="btn btn-info" value="Sign up for HobbyHabit">
-      </form>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 col-lg-8" id="welcome">
+          <h1>Welcome to HobbyHabit!</h1>
+          <br>
+          <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg">
+          <br>
+          <br>
+          <p>
+            HobbyHabit is a tracking application that allows you to track any tasks or hobbies you want to hold yourself accountable for or wish you had a way to visualize the progress of. With HobbyHabit you can set goals for what you'd like to achieve, receive text message reminders, and even find local events where you can meet others doing those same activities! HobbyHabit makes it easy to log your progress in just a few quick and easy steps, and uses data visualizations to make your tracking and marveling at all the progress you'll make a snap!
+        </div>
 
+        <div class="col-xs-12 col-md-6 col-lg-4" id="register">
+          <form id="register-form" action="/register" method="POST">
+            Username
+            <br>
+            <input type="text" name="username" placeholder="Pick a username" required>
+            <br>
+            <br>
+            Email
+            <br>
+            <input type="email" name="email" placeholder="you@example.com" required>
+            <br>
+            <br>
+            Password
+            <br>
+            <input type="password" name="password" placeholder="Create a password" required>
+            <br>
+            <br>
+            <input type="submit" class="btn btn-info" value="Sign up for HobbyHabit">
+          </form>
+        </div>
+
+      </div>
     </div>
     
   {% endblock body_content %}
+
+  {% block js_link %}{% endblock js_link %}

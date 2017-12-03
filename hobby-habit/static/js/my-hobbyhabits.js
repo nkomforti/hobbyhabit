@@ -188,7 +188,30 @@ $(".hobbyhabit-btn").click(function (evt) {
     // new Chart.Line(ctxLine,)
     let lineChart = new Chart(ctxLine, {
       type: 'line',
-      data: data,
+      data: {
+        labels: data.completion_dates,
+        datasets: [{
+          label: "HOBBY NAME",
+          fill: true,
+          lineTension: 0.5,
+          backgroundColor: "rgb(153, 102, 255)",
+          borderColor: "rgba(220,220,220,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(220,220,220,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 3,
+          pointHitRadius: 10,
+          data: data.total_practice_times,
+          spanGaps: false}],
+      },
       options: lineOptions
     });
   });
@@ -197,16 +220,15 @@ $(".hobbyhabit-btn").click(function (evt) {
 
 // Select the element by class and attach event listener to it.
 $(".hobbyhabit-btn").click(function (evt) {
-  // currentUserhobbyId = evt.target.dataset.userHobbyId;
-  // userData = {'user-hobby-id': currentUserhobbyId};
+  currentUserhobbyId = evt.target.dataset.userHobbyId;
+  userData = {'user-hobby-id': currentUserhobbyId};
   $("#completions-bar-chart-grouped").show();
 
   let barOptions = {responsive: false};
 
   let ctxBarGrouped = $("#bar-chart-grouped").get(0).getContext("2d");
 
-  // $.get("/get-user-hobby-completions-by-year.json", userData, function (data) {
-  $.get("/get-user-hobby-completions-by-year.json", function (data) {
+  $.get("/get-user-hobby-completions-by-year.json", userData, function (data) {
     
     let barChartGrouped = new Chart(ctxBarGrouped, {
       type: 'bar',
@@ -215,11 +237,11 @@ $(".hobbyhabit-btn").click(function (evt) {
         datasets: [{
           label: 'Total Completions per Year',
           data: data.total_completions_per_year,
-          backgroundColor: "rgba(255,0,0,0.4)"
+          backgroundColor: ["rgb(153, 102, 255)"]
         }, {
           label: 'Total Practice Time (Hrs.)',
           data: data.total_hours_per_year,
-          backgroundColor: "rgba(255,153,0,0.4)"
+          backgroundColor: ["rgb(201, 203, 207)"]
         }]
       },
         options: barOptions
@@ -230,60 +252,41 @@ $(".hobbyhabit-btn").click(function (evt) {
 
 // Select the element by class and attach event listener to it.
 $(".hobbyhabit-btn").click(function (evt) {
-  currentUserhobbyId = evt.target.dataset.userHobbyId;
-  userData = {'user-hobby-id': currentUserhobbyId};
+  // currentUserhobbyId = evt.target.dataset.userHobbyId;
+  // userData = {'user-hobby-id': currentUserhobbyId};
   $("#completions-doughnut-chart").show();
 
   let doughnutOptions = {responsive: false};
 
   let ctxDoughnut = $("#doughnut-chart").get(0).getContext("2d");
 
-  $.get("/get_mult-hobbies-vis.json", userData, function (data) {
+  // $.get("/get-mult-hobbies-vis.json", userData, function (data) {
+    $.get("/get-mult-hobbies-vis.json", function (data) {
 
     let doughnutChart = new Chart(ctxDoughnut, {
       type: 'doughnut',
       tooltipFillColor: "rgba(51, 51, 51, 0.55)",
       data: {
-        labels: [],
+        labels: data.hobby_names,
         datasets: [{
-          data:[],
-          backgroundColor:[],
-          hoverBackgroundColor: []
+          data: data.completion_count,
+          backgroundColor:[
+              '#4dc9f6',
+              '#f67019',
+              '#f53794',
+              '#537bc4',
+              '#acc236',
+              '#166a8f',
+              '#00a950',
+              '#58595b',
+              '#8549ba'
+          ]
         }]
       },
       options: doughnutOptions
     });
   });   
 });
-
-
-  // new Chart($("#doughnut-chart"), {
-  //   type: 'doughnut',http://www.chartjs.org/docs/latest/charts/radar.html
-  //   tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-  //   data: {
-  //   labels: [
-  //     "blueberry",
-  //     "grape",
-  //     "apple",
-  //     "pineapple"
-  //   ],
-  //   datasets: [{
-  //   data: [15, 20, 30, 10],
-  //   backgroundColor: [
-  //     "#3498DB",
-  //     "#9B59B6",
-  //     "#E74C3C",
-  //     "#26B99A"
-  //   ],
-  //   hoverBackgroundColor: [
-  //     "#49A9EA",
-  //     "#B370CF",
-  //     "#E95E4F",
-  //     "#36CAAB"
-  //   ]
-  //   }]
-  // },
-  //   options: { responsive: false }
 
   
 addHobbyHabitListener();

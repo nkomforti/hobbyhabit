@@ -14,7 +14,7 @@ $(document).ready(function(){
 
   // Show/hide elements based on menu button that was clicked.
   $("#my-hobbyhabits-menu-btn").click(function (evt) {
-    $("#user-profile > #user-profile-content").hide();
+    $("#user-profile > #user-profile-content >").hide();
     $("#my-hobbyhabits > #my-hobbyhabit-content").show();
     $(".page-direction").hide();
     $(".completions-charts").hide();
