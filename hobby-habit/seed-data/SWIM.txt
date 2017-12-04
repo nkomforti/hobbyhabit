@@ -1,0 +1,100 @@
+1|2017-10-04 04:05:10|157|Practice with John
+1|2016-04-21 07:20:59|99|Practice with John
+1|2017-03-13 09:56:22|137|Coney Island
+1|2016-07-29 07:27:59|121|Training for race
+1|2015-12-14 09:14:57|65|Coney Island
+1|2015-11-23 01:28:58|55|Practice with John
+1|2017-05-03 18:13:35|30|Practice with John
+1|2016-10-03 05:58:13|98|Manhattan Beach
+1|2016-09-29 00:48:27|154|Training for race
+1|2016-01-01 22:12:21|141|Felt sluggish
+1|2015-06-18 03:22:03|72|Training for race
+1|2016-11-30 13:01:19|52|Training for race
+1|2017-04-18 20:49:44|181|Practice with John
+1|2016-07-02 15:48:28|153|Lap pool at gym
+1|2017-01-30 15:53:02|82|Training for race
+1|2017-11-11 08:55:31|170|Lap pool at gym
+1|2016-05-01 13:48:18|83|Manhattan Beach
+1|2017-01-13 12:57:33|88|Practice with John
+1|2017-02-08 14:55:14|168|Training for race
+1|2016-12-10 08:16:25|191|Coney Island
+1|2016-10-12 17:02:03|138|Lap pool at gym
+1|2017-03-30 23:16:30|45|Felt sluggish
+1|2017-01-30 05:58:02|103|Practice with John
+1|2016-08-15 19:16:10|32|Felt sluggish
+1|2016-07-19 23:54:03|99|Indoor Pool
+1|2017-10-30 00:04:00|200|Manhattan Beach
+1|2016-05-29 03:15:28|48|Practice with John
+1|2016-05-03 07:31:08|193|Coney Island
+1|2016-04-29 16:56:15|168|Coney Island
+1|2015-11-16 20:49:40|164|Indoor Pool
+1|2016-01-05 04:15:03|174|Manhattan Beach
+1|2015-12-25 11:08:03|77|Training for race
+1|2016-07-28 14:36:45|80|Practice with John
+1|2016-04-15 21:40:22|138|Indoor Pool
+1|2015-08-20 21:41:43|157|Coney Island
+1|2017-03-02 03:25:44|174|Lap pool at gym
+1|2016-06-07 11:08:12|181|Felt sluggish
+1|2017-07-11 19:13:17|81|Manhattan Beach
+1|2017-11-10 17:10:37|129|Practice with John
+1|2017-10-12 17:44:50|200|Training for race
+1|2015-07-21 23:07:25|105|Lap pool at gym
+1|2017-11-14 15:37:23|90|Lap pool at gym
+1|2015-07-14 12:05:36|37|Indoor Pool
+1|2017-11-29 04:29:17|178|Training for race
+1|2017-03-10 10:25:00|82|Training for race
+1|2016-01-15 00:29:58|83|Practice with John
+1|2016-04-16 01:38:55|66|Manhattan Beach
+1|2015-12-03 03:09:47|181|Indoor Pool
+1|2017-07-13 03:56:59|118|Felt sluggish
+1|2017-09-07 12:47:03|78|Felt sluggish
+1|2015-08-12 21:21:52|108|Training for race
+1|2017-03-28 17:14:00|85|Training for race
+1|2016-11-20 05:28:55|86|Coney Island
+1|2015-10-27 00:15:04|66|Indoor Pool
+1|2017-07-03 15:30:50|197|Felt sluggish
+1|2017-05-28 05:02:27|63|Training for race
+1|2016-03-02 02:33:49|100|Coney Island
+1|2015-09-07 15:18:52|182|Coney Island
+1|2016-06-21 22:54:28|102|Coney Island
+1|2015-07-19 16:57:17|198|Lap pool at gym
+1|2016-01-14 08:24:33|68|Manhattan Beach
+1|2017-10-05 22:00:07|43|Felt sluggish
+1|2016-05-31 22:35:05|109|Coney Island
+1|2016-12-24 16:06:44|110|Felt sluggish
+1|2017-05-02 16:27:28|139|Manhattan Beach
+1|2016-09-06 12:15:04|51|Lap pool at gym
+1|2015-11-20 13:15:52|184|Training for race
+1|2016-01-14 17:50:30|163|Indoor Pool
+1|2016-05-23 17:00:34|95|Practice with John
+1|2015-12-07 11:47:45|142|Indoor Pool
+1|2017-01-07 01:00:30|126|Coney Island
+1|2016-11-28 20:14:50|182|Coney Island
+1|2016-12-21 20:41:15|59|Training for race
+1|2016-05-19 13:15:38|40|Indoor Pool
+1|2016-02-23 21:59:34|98|Manhattan Beach
+1|2015-11-26 07:43:23|155|Lap pool at gym
+1|2015-07-03 05:31:38|180|Coney Island
+1|2015-07-25 14:27:11|193|Lap pool at gym
+1|2017-08-12 09:32:27|150|Felt sluggish
+1|2015-06-04 17:59:12|74|Coney Island
+1|2016-02-28 17:45:53|148|Lap pool at gym
+1|2015-07-19 22:43:29|50|Lap pool at gym
+1|2017-10-16 21:27:50|51|Training for race
+1|2016-11-10 00:12:07|167|Coney Island
+1|2015-09-20 16:36:15|75|Training for race
+1|2017-10-10 06:57:56|56|Felt sluggish
+1|2017-05-09 14:39:03|38|Practice with John
+1|2017-01-21 15:00:21|199|Indoor Pool
+1|2015-08-27 08:06:10|162|Training for race
+1|2017-08-13 13:44:17|126|Felt sluggish
+1|2017-07-14 01:00:51|118|Practice with John
+1|2017-10-08 10:59:50|33|Training for race
+1|2016-12-08 23:00:21|181|Practice with John
+1|2016-03-12 02:22:32|188|Coney Island
+1|2017-01-26 13:31:40|159|Coney Island
+1|2017-04-08 14:57:04|121|Indoor Pool
+1|2016-09-20 05:43:27|127|Practice with John
+1|2016-05-16 20:32:47|125|Felt sluggish
+1|2016-01-09 22:29:25|79|Indoor Pool
+1|2017-01-07 01:37:41|150|Training for race

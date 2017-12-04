@@ -19,318 +19,327 @@
       <div id="flash-no-events"></div>
       <div id="flash-fail-req"></div>
 
-      <!-- Dashboard menu. -->
-      <div class="menu-btns">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-8" id="welcome">
+          <div style="width:100%;height:0;padding-bottom:50%;position:relative;">
+            <iframe src="static/img/dash-dude.gif" width="100%" height="100%" style="position:absolute" frameBorder="0" class="gif-embed" allowFullScreen></iframe>
+          </div>
+        </div>
+      </div>
 
-      <!-- User Profile. -->
-        <div id="user-profile">
-          <button id="user-profile-menu-btn" class="btn-info btn-lg" type="button">
-            User Profile
-          </button>
-          <br><br>
+        <!-- Dashboard menu. -->
+        <div class="menu-btns">
 
-          <!-- <div class ="row"> -->
-            <!-- <div class="col-xs-12 col-md-6 col-lg-12"> -->
-              <div id="user-profile-content" hidden>
-                <form id="user-profile-form" class="form-group">
-                  Username
-                  <br>
-                  <input id="username" type="text" name="username" value="{{ current_user.username }}" disabled>
-                  <br><br>
+        <!-- User Profile. -->
+          <div id="user-profile">
+            <button id="user-profile-menu-btn" class="btn-info btn-lg" type="button">
+              User Profile
+            </button>
+            <br><br>
 
-                  Email
-                  <br>
-                  <input id="email" type="email" name="email" value="{{ current_user.email }}" disabled>
-                  <br><br>
+            <!-- <div class ="row"> -->
+              <!-- <div class="col-xs-12 col-md-6 col-lg-12"> -->
+                <div id="user-profile-content" hidden>
+                  <form id="user-profile-form" class="form-group">
+                    Username
+                    <br>
+                    <input id="username" type="text" name="username" value="{{ current_user.username }}" disabled>
+                    <br><br>
+
+                    Email
+                    <br>
+                    <input id="email" type="email" name="email" value="{{ current_user.email }}" disabled>
+                    <br><br>
+              <!-- </div> -->
             <!-- </div> -->
-          <!-- </div> -->
 
-                  <!-- Modal trigger button. -->
-                  <button id="update-password-trigger-btn" class="btn btn-info" type="button">
-                    Update password
-                  </button>
-                  <br><br>
+                    <!-- Modal trigger button. -->
+                    <button id="update-password-trigger-btn" class="btn btn-info" type="button">
+                      Update password
+                    </button>
+                    <br><br>
 
-                  First name
-                  <br>
-                  <input id="first-name" type="text" name="first-name" value=""> 
-                  <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
-                  <br><br>
+                    First name
+                    <br>
+                    <input id="first-name" type="text" name="first-name" value=""> 
+                    <input id="hidden-first-name" type="hidden" name="hidden-first-name" value="{{ current_user.first_name }}">
+                    <br><br>
 
-                  Last name
-                  <br>
-                  <input id="last-name" type="text" name="last-name" value="">
-                  <input id="hidden-last-name" type="hidden" name="hidden-last-name" value="{{ current_user.last_name }}">
-                  <br><br>
+                    Last name
+                    <br>
+                    <input id="last-name" type="text" name="last-name" value="">
+                    <input id="hidden-last-name" type="hidden" name="hidden-last-name" value="{{ current_user.last_name }}">
+                    <br><br>
 
-                  Zipcode
-                  <br>
-                  <input id="zipcode" type="text" name="zipcode" value="">
-                  <input id="hidden-zipcode" type="hidden" name="hidden-zipcode" value="{{ current_user.zipcode }}">
-                  <br><br>
+                    Zipcode
+                    <br>
+                    <input id="zipcode" type="text" name="zipcode" value="">
+                    <input id="hidden-zipcode" type="hidden" name="hidden-zipcode" value="{{ current_user.zipcode }}">
+                    <br><br>
 
-                  Phone number
-                  <br>
-                  <input id="phone-number" type="text" name="phone-number" value="">
-                  <input id="hidden-phone-number" type="hidden" name="hidden-phone-number" value="{{ current_user.phone }}">
-                  <br><br>
+                    Phone number
+                    <br>
+                    <input id="phone-number" type="text" name="phone-number" value="">
+                    <input id="hidden-phone-number" type="hidden" name="hidden-phone-number" value="{{ current_user.phone }}">
+                    <br><br>
 
-                  Text message reminder
-                  <br>
-                  <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in-out" value="on"> On
-                  <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
-                  <br><br>
+                    Text message reminder
+                    <br>
+                    <input id="txt-opt-in" class="txt-reminder"type="radio" name="txt-opt-in-out" value="on"> On
+                    <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
+                    <br><br>
 
-                  <button id="update-profile" class="btn btn-info" type="button">
-                    Save changes to profile
-                  </button>
-                  <br>
+                    <button id="update-profile" class="btn btn-info" type="button">
+                      Save changes to profile
+                    </button>
+                    <br>
 
-                </form>
-                <!-- Update password modal. -->
-                <div id="updatePasswordModal" class="modal fade">
-                  <div class="modal-dialog modal-sm">
+                  </form>
+                  <!-- Update password modal. -->
+                  <div id="updatePasswordModal" class="modal fade">
+                    <div class="modal-dialog modal-sm">
 
-                    <!-- Update password modal content.-->
-                  <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">
-                          Update Password
-                        </h4>
-                      </div>
-                      <div class="modal-body">
-                        <form id="update-password-form">
-                          Old password
-                          <br>
-                          <input id="old-password" type="password" name="old-password" required>
-                          <br><br>
+                      <!-- Update password modal content.-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">
+                            Update Password
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <form id="update-password-form">
+                            Old password
+                            <br>
+                            <input id="old-password" type="password" name="old-password" required>
+                            <br><br>
 
-                          New password
-                          <br> 
-                          <input id="new-password" type="password" name="new-password" required>
-                          <br><br>
+                            New password
+                            <br> 
+                            <input id="new-password" type="password" name="new-password" required>
+                            <br><br>
 
-                          Confirm new password
-                          <br> 
-                          <input id="confirm-new-password" type="password" name="confirm-new-password" required>
-                          <br>
-                          <a href="">Forgot password</a>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button id="update-password-btn" class="btn btn-info">
-                          Update password
-                        </button>
+                            Confirm new password
+                            <br> 
+                            <input id="confirm-new-password" type="password" name="confirm-new-password" required>
+                            <br>
+                            <a href="">Forgot password</a>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="update-password-btn" class="btn btn-info">
+                            Update password
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-        </div>
-        <!-- My HobbyHabits. -->
-        <div id="my-hobbyhabits">
-          <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
-            My HobbyHabits
-          </button>
-          <br><br>
-
-          <!-- My HobbyHabit content. -->
-          <div id="my-hobbyhabit-content" hidden>
-
-            {% for user_hobby in current_user_data['user_hobbies'] %}
-              <div class="my-hobbyhabit">
-                <button class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
-                  {{ user_hobby['hobby_name'][0].title() }}
-                </button>
-              </div>
-            {% endfor %}
-
-            <!-- Trigger button for add-hobbyhabit modal. -->
-            <button id="add-hobbyhabit-trigger-btn" class="btn btn-info my-hobbyhabit" type="button">
-              +
+          </div>
+          <!-- My HobbyHabits. -->
+          <div id="my-hobbyhabits">
+            <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
+              My HobbyHabits
             </button>
+            <br><br>
 
-            <!-- Add HobbyHabit modal. -->
-            <div class="modal fade" id="addHobbyhabitModal">
-              <div class="modal-dialog modal-sm" role="document">
+            <!-- My HobbyHabit content. -->
+            <div id="my-hobbyhabit-content" hidden>
 
-                <!-- Modal content. -->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">
-                      Add New HobbyHabit
-                    </h4>
-                  </div>
-                  <div class="modal-body">
-                    <form id="add-hobbyhabit-form" class="ui-widget">
-                      <input id="add-hobbyhabit-name" placeholder="HobbyHabit name" required>  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="add-hobbyhabit-btn" class="btn btn-info" type="button">
-                      Add Hobbyhabit
-                    </button>
+              {% for user_hobby in current_user_data['user_hobbies'] %}
+                <div class="my-hobbyhabit">
+                  <button class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                    {{ user_hobby['hobby_name'][0].title() }}
+                  </button>
+                </div>
+              {% endfor %}
+
+              <!-- Trigger button for add-hobbyhabit modal. -->
+              <button id="add-hobbyhabit-trigger-btn" class="btn btn-info my-hobbyhabit" type="button">
+                +
+              </button>
+
+              <!-- Add HobbyHabit modal. -->
+              <div class="modal fade" id="addHobbyhabitModal">
+                <div class="modal-dialog modal-sm" role="document">
+
+                  <!-- Modal content. -->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">
+                        Add New HobbyHabit
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      <form id="add-hobbyhabit-form" class="ui-widget">
+                        <input id="add-hobbyhabit-name" placeholder="HobbyHabit name" required>  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="add-hobbyhabit-btn" class="btn btn-info" type="button">
+                        Add Hobbyhabit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
+
+            <!-- Track Completions. -->
+            <div id="hobbyhabit-tracker">
+              <form id="hobbyhabit-tracker-form">  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
+                Completion date
+                <br>
+                <input id="completion-date" type="text" name="completion-date" placeholder="-- Completion date --" required>
+                <br><br>
+
+                Total practice time
+                <br>
+                Hr: <input id="total-hours" type="number" name="total-hours" min="0" max="100" placeholder="hr" required>
+                Min: <input id="total-minutes" type="number" name="total-minutes" min="0" max="1440" placeholder="min" required>
+                <br><br>
+
+                Notes
+                <br>
+                <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
+                <br><br>
+
+                <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track completion" data>
+              </form>
             </div>
 
-          <!-- Track Completions. -->
-          <div id="hobbyhabit-tracker">
-            <form id="hobbyhabit-tracker-form">  <!-- NOTE: Not showing required because of js, must add manually (form validation). -->
-              Completion date
-              <br>
-              <input id="completion-date" type="text" name="completion-date" placeholder="-- Completion date --" required>
-              <br><br>
+            <!-- View Completions. -->
+            <div id="view-completions"></div>
+            <button id="previous-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="previous">
+              Previous
+            </button>
+            <button id="next-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="next">
+              Next
+            </button>
 
-              Total practice time
-              <br>
-              Hr: <input id="total-hours" type="number" name="total-hours" min="0" max="100" placeholder="hr" required>
-              Min: <input id="total-minutes" type="number" name="total-minutes" min="0" max="1440" placeholder="min" required>
-              <br><br>
+            <!-- Completions Visualizations -->
+            <div class="completions-charts">
 
-              Notes
-              <br>
-              <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
-              <br><br>
-
-              <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track completion" data>
-            </form>
-          </div>
-
-          <!-- View Completions. -->
-          <div id="view-completions"></div>
-          <button id="previous-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="previous">
-            Previous
-          </button>
-          <button id="next-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="next">
-            Next
-          </button>
-
-          <!-- Completions Visualizations -->
-          <div class="completions-charts">
-
-            <div id="completions-line-chart">
-              <h3 id="line-chart-name" class="chart-name"> ENTER CHART NAME HERE</h3>
-              <canvas id="line-chart" width="1400" height="600"></canvas>
-            </div>
-
-            <div class="completions-bar-chart-grouped">
-              <h3 id="bar-chart-grouped-name" class="chart-name"></h3>
-              <canvas id="bar-chart-grouped" width="750" height="375"></canvas>
-            </div>
-
-            <div id="completions-doughnut-chart">
-              <h3 class="chart-name"> Total Overall Completions: All HobbyHabits</h3>
-              <canvas id="doughnut-chart" width="475" height="475"></canvas>
-            </div>
-
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <!-- Goals. -->
-          <!-- Display active goal, if any. -->
-          <div id="active-goal" hidden>
-            <div id="view-active-goal"></div>
-              <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
-          </div>
-             
-         <!--  NOTE: Don't use a form for this. Use the current div in the js, each
-          div should have an edit and delete button that triggers a modal with
-          a form or a form that gets dynamically inserted on a click. When
-          submitting that form that should dynamically update the DOM and also
-          update the DB.  -->               
-          <!-- <div id="active-goal">  
-            <form id="view-active-goal">
-              Goal Start Date
-              <br>
-              <input id="active-goal-start-date" type="text" value="">
-              <input id="hidden-active-goal-start-date" type="hidden" value="">
-              <br><br>
-
-              Goal Frequency
-              <br>
-              <input id="active-goal-freq-num" type="text" value="">
-              <input id="hidden-active-goal-freq-num" type="hidden" value="">
-              <br><br>
-
-              Goal Time Unit
-              <br>
-              <input id="active-goal-freq-time-unit" type="text" value="">
-              <input id="hidden-active-goal-freq-time-unit" type="hidden" value="">
-              <br>
-              <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
-            </form>
-          </div> -->
-
-          <!-- Display add-goal form if no active goal. -->
-          <div id="add-goal" hidden>
-            <form id="add-goal-form">
-              Goal start date
-              <br> 
-              <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
-              <br><br>
-
-              Goal frequency
-              <br>
-              <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
-              <br><br>
-
-              Goal time-unit
-              <br> 
-              <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
-                <option value="" disabled selected>-- Time unit --</option>
-                <option value="Day">Day</option>
-                <option value="Week">Week</option>
-                <option value="Month">Month</option>
-                <option value="Year">Year</option>
-              </select>
-              <br><br>
-              <button id="add-goal-btn" class="btn btn-info add-goal-btn ">
-                Set goal
-              </button>
-            </form>
-          </div>                        
-          </div>
-        </div>
-
-        <!-- Social. -->
-        <!-- Display user hobbyhabits as buttons to trigger Eventbrite API request. -->
-        <div id="social">
-          <button id="social-menu-btn" class="btn-info btn-lg" type="button">
-            Social
-          </button>
-          <br><br>
-          <div id="social-content" hidden>
-
-            {% for user_hobby in current_user_data['user_hobbies'] %}
-              <div class="social-hobbyhabit">
-                <button class="btn btn-info active social-hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
-                  {{ user_hobby['hobby_name'][0].title() }}
-                </button>
+              <div id="completions-line-chart">
+                <h3 id="line-chart-name" class="chart-name"> ENTER CHART NAME HERE</h3>
+                <canvas id="line-chart" width="1400" height="600"></canvas>
               </div>
-            {% endfor %}
 
-              <div id="events"></div>
+              <div class="completions-bar-chart-grouped">
+                <h3 id="bar-chart-grouped-name" class="chart-name"></h3>
+                <canvas id="bar-chart-grouped" width="750" height="375"></canvas>
+              </div>
+
+              <div id="completions-doughnut-chart">
+                <h3 class="chart-name"> Total Overall Completions: All HobbyHabits</h3>
+                <canvas id="doughnut-chart" width="475" height="475"></canvas>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Goals. -->
+            <!-- Display active goal, if any. -->
+            <div id="active-goal" hidden>
+              <div id="view-active-goal"></div>
+                <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+            </div>
+               
+           <!--  NOTE: Don't use a form for this. Use the current div in the js, each
+            div should have an edit and delete button that triggers a modal with
+            a form or a form that gets dynamically inserted on a click. When
+            submitting that form that should dynamically update the DOM and also
+            update the DB.  -->               
+            <!-- <div id="active-goal">  
+              <form id="view-active-goal">
+                Goal Start Date
+                <br>
+                <input id="active-goal-start-date" type="text" value="">
+                <input id="hidden-active-goal-start-date" type="hidden" value="">
+                <br><br>
+
+                Goal Frequency
+                <br>
+                <input id="active-goal-freq-num" type="text" value="">
+                <input id="hidden-active-goal-freq-num" type="hidden" value="">
+                <br><br>
+
+                Goal Time Unit
+                <br>
+                <input id="active-goal-freq-time-unit" type="text" value="">
+                <input id="hidden-active-goal-freq-time-unit" type="hidden" value="">
+                <br>
+                <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+              </form>
+            </div> -->
+
+            <!-- Display add-goal form if no active goal. -->
+            <div id="add-goal" hidden>
+              <form id="add-goal-form">
+                Goal start date
+                <br> 
+                <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
+                <br><br>
+
+                Goal frequency
+                <br>
+                <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
+                <br><br>
+
+                Goal time-unit
+                <br> 
+                <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
+                  <option value="" disabled selected>-- Time unit --</option>
+                  <option value="Day">Day</option>
+                  <option value="Week">Week</option>
+                  <option value="Month">Month</option>
+                  <option value="Year">Year</option>
+                </select>
+                <br><br>
+                <button id="add-goal-btn" class="btn btn-info add-goal-btn ">
+                  Set goal
+                </button>
+              </form>
+            </div>                        
+            </div>
+          </div>
+
+          <!-- Social. -->
+          <!-- Display user hobbyhabits as buttons to trigger Eventbrite API request. -->
+          <div id="social">
+            <button id="social-menu-btn" class="btn-info btn-lg" type="button">
+              Social
+            </button>
+            <br><br>
+            <div id="social-content" hidden>
+
+              {% for user_hobby in current_user_data['user_hobbies'] %}
+                <div class="social-hobbyhabit">
+                  <button class="btn btn-info active social-hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                    {{ user_hobby['hobby_name'][0].title() }}
+                  </button>
+                </div>
+              {% endfor %}
+
+                <div id="events"></div>
+            </div>
           </div>
         </div>
-      </div>
+
     </div>
 
   {% endblock body_content %}

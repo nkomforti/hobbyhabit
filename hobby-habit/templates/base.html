@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
   <head>
-    <meta charset="utf-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap links. -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 
     <!-- CSS links. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="static/css/test.css">
@@ -24,6 +20,88 @@
 
   <body>
 
+
+
+    <!-- Navbar start.-->
+    <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
+      <!-- <div class="container-fluid"> -->
+
+        <!-- <div class="navbar-header"> -->
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
+            <!-- <span class="sr-only">Toggle navigation</span> -->
+            <!-- <span class="icon-bar"></span> -->
+            <!-- <span class="icon-bar"></span> -->
+            <!-- <span class="icon-bar"></span> -->
+          <!-- </button> -->
+          <!-- <a class="navbar-brand-hidden" href="/"></a> -->
+          <!-- <a class="navbar-brand"> -->
+            <!-- <img alt="Hackbright Academy" src="/static/images/hb-logo-grey.1ec8d79dcb52.png"> --> <!-- TODO -->
+          <!-- </a> -->
+        <!-- </div> -->
+
+          <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+            <!-- <ul class="nav navbar-nav navbar-center">  -->
+             <!--  <li class="navbar-cohort"> --><!-- TODO -->
+                <!-- NAVBAR TITLE HERE --><!-- TODO -->
+              <!-- </li> -->
+            <!-- </ul> -->
+
+            <!-- <ul class="nav navbar-nav navbar-right"> -->
+                <!-- <li class="navbar-student"> --><!-- TODO -->
+                  <!-- <ul class="nav navbar-nav navbar-right"> -->
+                    <!-- <li class="dropdown"> -->
+                      <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> --><!-- TODO -->
+                        <!-- <span class="glyphicon glyphicon-menu-down"></span> -->
+                      <!-- </a> -->
+                      <!-- <ul class="dropdown-menu"> -->
+                        <!-- <li> -->
+                          <!-- <a href="/accounts/password/change/">CHANGE PASSWORD</a> --><!-- TODO -->
+                        <!-- </li> -->
+                        <!-- <li> -->
+                          <!-- <a href="/sis/student/">YOUR PROFILE</a> --><!-- TODO -->
+                        <!-- </li> -->
+                        <!-- <li role="separator" class="divider"></li> -->
+                        <!-- <li> -->
+                          <!-- <a href="/accounts/logout/">LOGOUT</a> --><!-- TODO -->
+                        <!-- </li> -->
+                      <!-- </ul> -->
+                    <!-- </li> -->
+
+                  <!-- </ul> -->
+                    <!-- <span class="navbar-name">USERNAME HERE</span> --><!-- TODO -->
+                    <!-- <img class="navbar-photo img-circle" src="/media/CACHE/images/students/nek_g8SjxgC/a510a7e411f950bf3a3196c271f69bac.jpg"> -->
+                <!-- </li> --><!-- TODO -->
+            <!-- </ul> -->
+
+            <!-- <ul class="nav navbar-nav navbar-right hidden-lg hidden-xs"> -->
+              <!-- <li> -->
+                <!-- <a href="/search/"> --><!-- TODO -->
+                  <!-- <span class="fa fa-search search-icon"></span> -->
+                  <!-- <span class="sr-only">SEARCH</span> --><!-- TODO -->
+               <!--  </a> -->
+              <!-- </li> -->
+            <!-- </ul> -->
+
+          <!-- TODO -->
+          <!--   <form class="hidden-sm hidden-md navbar-form pull-right navbar-search-form" action="/search/">
+              <div class="input-group">
+                <label for="searchbox" class="sr-only">SEARCH</label>
+                <input type="text" class="form-control" placeholder="Search" name="q" accesskey="4" value="">
+                <div class="input-group-btn">
+                  <button class="btn" type="submit">
+                    <i class="fa fa-search"><span class="sr-only">SEARCH</span></i>
+                  </button>
+                </div>
+              </div>
+            </form> -->
+          <!-- </div> -->
+
+      <!-- </div> -->
+    <!-- </nav> -->
+  <!-- Navbar end. -->
+
+
+
     {% if "user_id" in session %}
       <a href="/logout">Logout</a>
     {% else %}
@@ -34,27 +112,24 @@
       {{ flash }}
     {% endfor %}
 
-      <div id="body-content">
-        {% block body_content %}BODY GOES HERE{% endblock body_content %}
-      </div>
+    <div id="body-content">
+      {% block body_content %}BODY GOES HERE{% endblock body_content %}
+    </div>
 
-      <div id="footer">
-        {% block footer %}
-        &copy; Copyright 2017 by Natalie Komforti.
-        {% endblock footer %}
-      </div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2017 by Natalie Komforti.
+      {% endblock footer %}
+    </div>
 
     <!-- JQuery links. -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
 
-
     <!-- JavaScript links. -->
+    <script type="text/javascript" href="static/js/nn.js"></script><!-- TODO -->
     {% block js_link %}LINK TO MY JAVASCRIPT FILE GOES HERE{% endblock js_link %}
 
   </body>

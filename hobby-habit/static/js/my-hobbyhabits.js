@@ -196,7 +196,7 @@ $(".hobbyhabit-btn").click(function (evt) {
           label: "Tracked Completions",
           fill: true,
           lineTension: 0.5,
-          backgroundColor: "rgba(237, 64, 156, 1)",
+          backgroundColor: "rgba(228, 68, 55, 1)",
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
@@ -240,11 +240,11 @@ $(".hobbyhabit-btn").click(function (evt) {
         datasets: [{
           label: 'Total Completions per Year',
           data: data.total_completions_per_year,
-          backgroundColor: "rgba(45, 156, 230, 1)"
+          backgroundColor: "rgba(11, 133, 203, 1)"
         }, {
           label: 'Total Practice Time (Hrs.)',
           data: data.total_hours_per_year,
-          backgroundColor: "rgba(255, 200, 67, 1)"
+          backgroundColor: "rgb(249,190,97)"
         }]
       },
         options: barOptions
@@ -275,19 +275,19 @@ $(".hobbyhabit-btn").click(function (evt) {
         datasets: [{
           data: data.completion_count,
           backgroundColor:[
-              '#16a27c',
-              '#943ee5',
-              '#ffc843',
-              '#2d9ce6',
-              '#ed409c',
+              '#128586',
+              '#e44437',
+              '#f9be61',
+              '#0b85cb',
+              '#c115b0',
           ],
           borderWidth: 3,
           hoverBackgroundColor: [
-              '#8cdae8',
-              '#d7b7f5',
-              '#ffe3a3',
-              '#96cef3',
-              '#f8b4d8',
+              '#85d5d6',
+              '#e78279',
+              '#facb7f',
+              '#71b4da',
+              '#dd73d3',
 
 
               ],
