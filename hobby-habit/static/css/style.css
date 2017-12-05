@@ -1,34 +1,44 @@
 /*FONTS
-
-font-family: 'Syncopate', sans-serif;
-font-family: 'Montserrat', sans-serif;
 font-family: 'Raleway', sans-serif;
+font-family: 'Poiret One', sans-serif;
+font-family: 'Satisfy', cursive;
 */
+/*
 *{
-    font-family: 'Raleway', sans-serif;}
+    font-family: 'Raleway', sans-serif;}*/
 
-h1{
+/*#home-heading{
     font-family: 'Raleway', sans-serif;
     font-size: 5.0em;
-    font-weight: thin;
+    font-weight: 100;
     color: #8c8c8c;
-}
+}*/
 
+#login-form { 
+    margin: 0 auto; 
+    width:250px;
+}
+/*
 button{
     font-family: 'Raleway', sans-serif;
 }
 
 form{
     font-family: 'Raleway', sans-serif;
-}
+}*/
 
 
-p{
+/*#about-us{
     font-family: 'Raleway', sans-serif;
     font-size: 1.25em;
-    font-weight: thin;
+    font-weight: 100;
     color: #8c8c8c;
-}
+}*/
+
+/*#brand-img{
+    position: relative;
+    top: -6px;
+}*/
 
 #completions-charts{
     width: 800px;
@@ -50,11 +60,11 @@ p{
     background-color: #f9be61;
 }
 
-#brand-name{
-    font-family: 'Syncopate', sans-serif;
+/*#brand-name{
+    font-family: 'Satisfy', sans-serif;
     font-size: 2.5em; /* 30px/16=1.875em */
-    color: black;
-}
+    /*color: black;*/
+/*}*/
 
 .login{
     font-family: 'Raleway', sans-serif;
