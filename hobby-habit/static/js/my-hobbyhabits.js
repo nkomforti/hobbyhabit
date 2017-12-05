@@ -121,13 +121,13 @@ function viewCompletions (results) {
         notes = completion.notes;
       }
 
-      // Set value of global variable to div element and its children.
-      newCompletions = "<div id='completion" + completionId + "' class='user-hobby-completion'" + ">" +
-                         "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
-                         "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
-                         "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
-                       "</div>";
-
+      newCompletions = "<tr id='completion" + completionId + "'>" +
+                          "<td>" + completionDate + "</td>" +
+                          "<td>" + totalHours + " hr.  " + totalMinutes + " min." + "</td>" +
+                          "<td>" + notes + "</td>" +
+                          "<td><button class='add-goal-btn btn-info btn-sm edit-btn'>Edit</button><span> </span><button class='add-goal-btn btn-info btn-sm del-btn'>Delete</button></td>" +
+                       "</tr>";
+// id="add-more" class="add-goal-btn btn-info btn-sm
       // Append value of global variable to element with specified id.
       $("#view-completions").append(newCompletions);
     }  // for loop closer 
@@ -153,6 +153,7 @@ function viewUserHobbyData () {
   $("#my-hobbyhabit-content").show();
   $("#tracker-goal-div").show();
   $("#social > #social-content").hide();
+  $("#my-completions").show();
 
   // AJAX request to send data to route and call specified function.
   $.get("/get-completions.json", userData, viewCompletions);
@@ -250,7 +251,7 @@ $(".hobbyhabit-btn").click(function (evt) {
       },
         options: barOptions
     });
-    $("#bar-chart-grouped-name").html("Total Completions & Total Practice Time by Year: " + hobbyName);
+    $("#bar-chart-grouped-name").html("Total Completions & Practice Time by Year: " + hobbyName);
   });
 });
 
@@ -284,27 +285,12 @@ $(".hobbyhabit-btn").click(function (evt) {
           ],
           borderWidth: 3,
           hoverBackgroundColor: [
-              '#85d5d6',
-              '#e78279',
-              '#facb7f',
-              '#71b4da',
-              '#dd73d3',
+              '#de8d87',
+              '#31487c',
+              '#cbe2d8',
+              '#efca80',
+              '#7393ab',
               ],
-          // backgroundColor:[
-          //     '#128586',
-          //     '#e44437',
-          //     '#f9be61',
-          //     '#0b85cb',
-          //     '#7C18AE',
-          // ],
-          // borderWidth: 3,
-          // hoverBackgroundColor: [
-          //     '#85d5d6',
-          //     '#e78279',
-          //     '#facb7f',
-          //     '#71b4da',
-          //     '#dd73d3',
-          //     ],
           hoverBorderColor: [],
           hoverBorderWidth: []
         }]
@@ -395,11 +381,19 @@ function viewGoal (results) {
     let activeGoalFreqNum = activeGoal.goal_freq_num;
     let activeGoalFreqTimeUnit = activeGoal.goal_freq_time_unit;
 
+    // viewActiveGoal = "<div id='goal" + activeGoalId + "'>" +
+    //                     "<b>Goal Start Date</b><p id='goal-start-date'>" + activeGoalStartDate + "</p>" +
+    //                     "<b>Goal Frequency</b><p id='goal-freq-num'>" + activeGoalFreqNum + "</p>" +
+    //                     "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
+    //                  "</div>";   
+
+
     viewActiveGoal = "<div id='goal" + activeGoalId + "'>" +
+                        "<h3> My Goal</h3>" +
                         "<b>Goal Start Date</b><p id='goal-start-date'>" + activeGoalStartDate + "</p>" +
                         "<b>Goal Frequency</b><p id='goal-freq-num'>" + activeGoalFreqNum + "</p>" +
                         "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
-                     "</div>";            
+                     "</div>";  
 
       $("#view-active-goal").append(viewActiveGoal);
       $("#active-goal").show();

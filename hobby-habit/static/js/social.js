@@ -41,7 +41,7 @@ $(".social-hobbyhabit-btn").click(function (evt) {
         if (events[i].description.text !== null){
 
           eventInfo += "<ul>" +
-                          "<li><a href='" + events[i].url + "'>" + events[i].name.text + "</a></li>" +
+                          "<li><b><a href='" + events[i].url + "'>" + events[i].name.text + "</a></b></li>" +
                           "<li>" + events[i].description.text.slice(0, 300) + "..." + "</li>" +
                           "<li>" + events[i].start.local.slice(0, -9) + "</li>" +
                        "</ul>" + "<br>";
