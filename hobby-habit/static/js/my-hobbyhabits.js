@@ -149,7 +149,7 @@ function viewUserHobbyData () {
   // Show/hide elements at specified ids.
   $("#hobbyhabit-tracker").show();
   $("#view-completions").show();
-  $("#user-profile > #user-profile-content").hide();
+  $("#user-profile-content").hide();
   $("#my-hobbyhabit-content").show();
   $("#tracker-goal-div").show();
   $("#social > #social-content").hide();
@@ -345,7 +345,7 @@ $("#hobbyhabit-tracker-btn").click(function (evt) {
   // passing in the response/results from request.
   $.post("/add-completion", formData, function (results) {
     // Show/hide elements at specified ids.
-    $("#user-profile > #user-profile-content").hide();
+    $("#user-profile-content").hide();
     $("#my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
 
@@ -423,7 +423,7 @@ $("#add-goal-btn").click(function (evt) {
   // passing in the response/results from request.
   $.post("/add-goal-dashboard", formData, function (results) {
     // Show/hide elements at specified ids.
-    $("#user-profile > #user-profile-content").hide();
+    $("#user-profile-content").hide();
     $("#my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
 

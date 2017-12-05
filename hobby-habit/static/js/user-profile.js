@@ -69,7 +69,7 @@ $("#update-profile").click(function (evt) {
   // AJAX request to send form data to route and call anonymous function passing
   // in the response/results from request.
   $.post("/update-profile", formData, function (results) {
-    $("#user-profile > #user-profile-content").show();
+    $("#user-profile-content").show();
     $("#my-hobbyhabit-content").hide();
     $("#social > #social-content").hide();
 

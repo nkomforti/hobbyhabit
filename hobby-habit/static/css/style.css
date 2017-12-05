@@ -1,4 +1,4 @@
-#myChart{
+#completions-charts{
     width: 800px;
 }
 
@@ -12,4 +12,10 @@
 
 #dash-gif{
     background-color: #f9be61;
+}
+
+#brand-name{
+    font-family: 'Cabin Sketch', sans-serif;
+    font-size: 2.875em; /* 30px/16=1.875em */
+    color: black;
 }
