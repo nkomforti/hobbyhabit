@@ -1,9 +1,15 @@
 #myChart{
     width: 800px;
 }
+
 .btn .btn-info .active .hobbyhabit-btn{
   display: inline-block;
 }
+
+.social-hobbyhabit{
+    display: inline-block;
+}
+
 #dash-gif{
     background-color: #f9be61;
 }

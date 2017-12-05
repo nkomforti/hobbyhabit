@@ -45,7 +45,7 @@ $("#add-hobbyhabit-btn").click(function (evt) {
   // Insert button element before element at selected id.
   newHobbyHabit.insertBefore("#add-hobbyhabit-trigger-btn");
   // Create break element and insert before at selected id.
-  // $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
+  $("<span>   </span>").insertBefore("#add-hobbyhabit-trigger-btn");
 
   addHobbyHabitListener();
 
@@ -122,7 +122,7 @@ function viewCompletions (results) {
       }
 
       // Set value of global variable to div element and its children.
-      newCompletions = "<div id='" + completionId + "' class='user-hobby-completion'" + ">" +
+      newCompletions = "<div id='completion" + completionId + "' class='user-hobby-completion'" + ">" +
                          "<b>Completion Date</b><p id='completion-date'>" + completionDate + "</p>" +
                          "<b>Total Practice Time</b><p id='total-practice-time'>" + totalHours + " hr.  " + totalMinutes + " min." + "</p>" +
                          "<b>Notes</b><p id='notes'>" + notes + "</p>" + 
@@ -151,6 +151,7 @@ function viewUserHobbyData () {
   $("#view-completions").show();
   $("#user-profile > #user-profile-content").hide();
   $("#my-hobbyhabit-content").show();
+  $("#tracker-goal-div").show();
   $("#social > #social-content").hide();
 
   // AJAX request to send data to route and call specified function.
@@ -379,7 +380,7 @@ function viewGoal (results) {
     let activeGoalFreqNum = activeGoal.goal_freq_num;
     let activeGoalFreqTimeUnit = activeGoal.goal_freq_time_unit;
 
-    viewActiveGoal = "<div id='" + activeGoalId + "'>" +
+    viewActiveGoal = "<div id='goal" + activeGoalId + "'>" +
                         "<b>Goal Start Date</b><p id='goal-start-date'>" + activeGoalStartDate + "</p>" +
                         "<b>Goal Frequency</b><p id='goal-freq-num'>" + activeGoalFreqNum + "</p>" +
                         "<b>Goal Time Unit</b><p id='goal-freq-time-unit'>" + activeGoalFreqTimeUnit + "</p>" +
