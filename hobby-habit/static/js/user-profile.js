@@ -70,7 +70,7 @@ $("#update-profile").click(function (evt) {
   // in the response/results from request.
   $.post("/update-profile", formData, function (results) {
     $("#user-profile > #user-profile-content").show();
-    $("#my-hobbyhabits > #my-hobbyhabit-content").hide();
+    $("#my-hobbyhabit-content").hide();
     $("#social > #social-content").hide();
 
     // Set html value for success message.

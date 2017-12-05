@@ -3,7 +3,7 @@
 // Select element by id and attach event listener to it.
 $("#add-hobbyhabit-trigger-btn").click(function (evt) {
   // On click show modal.
-  $("#addHobbyhabitModal").modal("show");
+  $("#addHobbyHabitModal").modal("show");
 });
 
 
@@ -12,7 +12,7 @@ $.get("/get-hobbies.json", function (results) {
 
   $("#add-hobbyhabit-name").autocomplete({
     source: hobbies,
-    appendTo : $("#addHobbyhabitModal"),
+    appendTo : $("#addHobbyHabitModal"),
   });
 });
 
@@ -27,13 +27,13 @@ $("#add-hobbyhabit-btn").click(function (evt) {
   // AJAX request to send form data to route and call anonymous function
   // passing in the response/results from request.
   $.post("/add-hobby-dashboard", formData, function (results) {
-    $("#addHobbyhabitModal").modal("hide");
+    $("#addHobbyHabitModal").modal("hide");
 
     // Set html value for success message. Show and fade-out message.
     $("#flash-add-hobbyhabit-status").html("New HobbyHabit successfully added to profile").show().fadeOut(5000);
 
   // Create html button element and save to variable.
-  let newHobbyHabit = $("<button></button>");
+  let newHobbyHabit = $("<div class='col-md-2'><button></button></div>");
   // Add attributes to element.
   newHobbyHabit.attr({"id": "hobbyhabit-btn",
                       "class": "btn btn-info active hobbyhabit-btn",
@@ -45,7 +45,7 @@ $("#add-hobbyhabit-btn").click(function (evt) {
   // Insert button element before element at selected id.
   newHobbyHabit.insertBefore("#add-hobbyhabit-trigger-btn");
   // Create break element and insert before at selected id.
-  $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
+  // $("<br>").insertBefore("#add-hobbyhabit-trigger-btn");
 
   addHobbyHabitListener();
 
@@ -150,7 +150,7 @@ function viewUserHobbyData () {
   $("#hobbyhabit-tracker").show();
   $("#view-completions").show();
   $("#user-profile > #user-profile-content").hide();
-  $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+  $("#my-hobbyhabit-content").show();
   $("#social > #social-content").hide();
 
   // AJAX request to send data to route and call specified function.
@@ -279,7 +279,7 @@ $(".hobbyhabit-btn").click(function (evt) {
               '#e44437',
               '#f9be61',
               '#0b85cb',
-              '#c115b0',
+              '#7C18AE',
           ],
           borderWidth: 3,
           hoverBackgroundColor: [
@@ -288,8 +288,6 @@ $(".hobbyhabit-btn").click(function (evt) {
               '#facb7f',
               '#71b4da',
               '#dd73d3',
-
-
               ],
           hoverBorderColor: [],
           hoverBorderWidth: []
@@ -347,7 +345,7 @@ $("#hobbyhabit-tracker-btn").click(function (evt) {
   $.post("/add-completion", formData, function (results) {
     // Show/hide elements at specified ids.
     $("#user-profile > #user-profile-content").hide();
-    $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+    $("#my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
 
     // Set value of html for success message. Show and fade-out message.
@@ -425,7 +423,7 @@ $("#add-goal-btn").click(function (evt) {
   $.post("/add-goal-dashboard", formData, function (results) {
     // Show/hide elements at specified ids.
     $("#user-profile > #user-profile-content").hide();
-    $("#my-hobbyhabits > #my-hobbyhabit-content").show();
+    $("#my-hobbyhabit-content").show();
     $("#social > #social-content").hide();
 
     // Set value of html for success message. Show and fade-out message.

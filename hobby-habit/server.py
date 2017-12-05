@@ -28,7 +28,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if g.user is None:  # g is short for global.
-            return redirect(url_for('process_login_form', next=request.url))
+            return redirect(url_for('login', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
 
