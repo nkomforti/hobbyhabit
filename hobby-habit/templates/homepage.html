@@ -8,37 +8,53 @@
 
         <div class="row">
           <div class="col-xs-12" id="welcome">
-          <h1>Welcome to HobbyHabit!</h1>
-          <br><br>
-          <div class="row">
-            <p>
-              HobbyHabit is a tracking application that gives you the ability to record your progress for any and as many tasks or hobbies you want to hold yourself more accountable for or just you wish you could more easily gauge your process and efforts towards. Once registered, you'll add HobbyHabits to track, set goals for any of your HobbyHabits based on what you'd like to achieve, opt-in for text reminders should you worry about falling behind, find events where you can socialize with others in your area interested in the same activities, and toggle between several data visualizations that make analyzing the details of your progress easy and approachable, so that marveling at all your hard work is a snap and you can get back to getting things done!
-            </p>
+            <h1>Go do things</h1>
+            <!-- <h1>things...</h1> -->
+            <br><br>
 
-        <div class="col-xs-12 col-md-6 col-lg-4" id="register">
-          <form id="register-form" action="/register" method="POST">
-            Username
-            <br>
-            <input type="text" name="username" placeholder="Pick a username" required>
-            <br>
-            <br>
-            Email
-            <br>
-            <input type="email" name="email" placeholder="you@example.com" required>
-            <br>
-            <br>
-            Password
-            <br>
-            <input type="password" name="password" placeholder="Create a password" required>
-            <br>
-            <br>
-            <input type="submit" class="btn btn-info" value="Sign up for HobbyHabit">
-          </form>
-        </div>
+            <style>
+            body {
+                background-image: url(static/img/background-home.jpg); no-repeat center center fixed; 
+                background-repeat: no-repeat;
+                background-position: 50% 0;
+                -ms-background-size: cover;
+                -o-background-size: cover;
+                -moz-background-size: cover;
+                -webkit-background-size: cover;
+                background-size: cover;
+            }
+            </style>
 
+            <div class="row">
+              <div class="col-xs-8" id="about-us">
+                <p>
+                  HobbyHabit lets you track your progress for any tasks or hobbies you want to hold yourself more accountable for. Once registered, you'll add the HobbyHabits you want to track, set goals based on what you want to achieve, schedule reminders, find events where you can socialize with others in your area interested in the same activities, and toggle between several data visualizations that make analyzing the details of your progress easy and approachable, so that marveling at all your hard work is a snap and you can get back to getting things done! 
+                </p>
+              </div>
+
+              <div class="col-xs-4" id="register">
+                <form id="register-form" action="/register" method="POST">
+                  Username
+                  <br>
+                  <input type="text" name="username" placeholder="Select username" required>
+                  <br>
+                  <br>
+                  Email
+                  <br>
+                  <input type="email" name="email" placeholder="you@example.com" required>
+                  <br>
+                  <br>
+                  Password
+                  <br>
+                  <input type="password" name="password" placeholder="Create a password" required>
+                  <br>
+                  <br>
+                  <input type="submit" class="btn btn-info" value="Sign up for HobbyHabit">
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     
   {% endblock body_content %}
 

@@ -1,8 +1,43 @@
+/*FONTS
+
+font-family: 'Syncopate', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Raleway', sans-serif;
+*/
+
+
+h1{
+    font-family: 'Raleway', sans-serif;
+    font-size: 5.0em;
+    font-weight: thin;
+    color: #8c8c8c;
+}
+
+button{
+    font-family: 'Raleway', sans-serif;
+}
+
+form{
+    font-family: 'Raleway', sans-serif;
+}
+
+
+p{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.25em;
+    font-weight: thin;
+    color: #8c8c8c;
+}
+
 #completions-charts{
     width: 800px;
 }
 
 .btn .btn-info .active .hobbyhabit-btn{
+  display: inline-block;
+}
+
+.btn .btn-info .active .hobby-goal-btn{
   display: inline-block;
 }
 
@@ -15,7 +50,13 @@
 }
 
 #brand-name{
-    font-family: 'Cabin Sketch', sans-serif;
-    font-size: 2.875em; /* 30px/16=1.875em */
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.5em; /* 30px/16=1.875em */
+    color: black;
+}
+
+.login{
+    font-family: 'Raleway', sans-serif;
+    /*font-size: 1.5em;  30px/16=1.875em */
     color: black;
 }

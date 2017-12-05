@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway|Syncopate" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
 
 
@@ -42,9 +42,9 @@
         <ul class="nav navbar-nav navbar-right">
           <li>
             {% if "user_id" in session %}
-              <a href="/logout">Logout</a>
+              <a class="login" href="/logout">Logout</a>
             {% else %}
-              <a href="/login">Login</a>
+              <a class="login" href="/login">Login</a>
             {% endif %}
           </li>
         </ul>
