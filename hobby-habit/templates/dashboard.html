@@ -6,24 +6,31 @@
 
   {% block body_content %}
 
+    <style>
+        body {
+            background-color: #dce4ea; 
+        }
+      </style>
+
     <div id="flash-update-profile-status"></div>
     <div id="flash-tracking-status"></div>
     <div id="flash-add-hobbyhabit-status"></div>
     <div id="flash-add-goal-status"></div>
     <div id="flash-no-events"></div>
     <div id="flash-fail-req"></div>
+
    
 
     <!-- Dashboard menu. -->
     <div class="row">
       <div class="col-xs-3">
         <div id="sidebar-menu-btns">
-          <button id="user-profile-menu-btn" class="btn-info btn-lg" type="button">
+          <button id="user-profile-menu-btn" class="btn-info btn-lg" user-btn"" type="button">
             User Profile
           </button>
           <br><br>
 
-           <button id="my-hobbyhabits-menu-btn" class="btn btn-info btn-lg" type="button">
+           <button id="my-hobbyhabits-menu-btn" class="btn-info btn-lg" type="button">
             My HobbyHabits
           </button>
           <br><br>
@@ -37,7 +44,7 @@
       <div class="col-xs-9"><!-- main content for all dash pages -->
         <div>
           <div id="dash-gif" style="width:100%;height:0;padding-bottom:50%;position:relative;">
-            <iframe id="gif" src="static/img/dash-gif.gif" width="100%" height="100%" style="position:absolute" frameBorder="0" class="gif-embed" allowFullScreen></iframe>
+            <!-- <iframe id="gif" src="static/img/dash-gif.gif" width="100%" height="100%" style="position:absolute" frameBorder="0" class="gif-embed" allowFullScreen></iframe> -->
           </div>
         </div>
 
@@ -58,13 +65,13 @@
                 <br><br>
 
                 <!-- Modal trigger button. -->
-                <button id="update-password-trigger-btn" class="btn btn-info" type="button">
+                <button id="update-password-trigger-btn" class="btn-info" type="button">
                   Update password
                 </button>
                 <br><br>
               </div>
 
-              <div class="col-xs-8">
+              <div class="col-xs-8" id="form-second-half">
                 First name
                 <br>
                 <input id="first-name" type="text" name="first-name" value=""> 
@@ -95,7 +102,7 @@
                 <input id="txt-opt-out" class="txt-reminder" type="radio" name="txt-opt-in-out" value="off" checked> Off
                 <br><br>
 
-                <button id="update-profile" class="btn btn-info" type="button">
+                <button id="update-profile" class="btn-info" type="button">
                   Save changes to profile
                 </button>
                 <br>
@@ -134,7 +141,7 @@
                         </form>
                       </div>
                       <div class="modal-footer">
-                        <button id="update-password-btn" class="btn btn-info">
+                        <button id="update-password-btn" class="btn-info">
                           Update password
                         </button>
                       </div>
@@ -150,13 +157,13 @@
         <div id="my-hobbyhabit-content" hidden>
             <div id="my-hobbyhabit-btns">
               {% for user_hobby in current_user_data['user_hobbies'] %}
-                  <button class="btn btn-info active hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                  <button class="btn-info hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
                     {{ user_hobby['hobby_name'][0].title() }}
                   </button>
               {% endfor %}
                 <!-- Trigger button for add-hobbyhabit modal. -->
               
-                <button id="add-hobbyhabit-trigger-btn" class="btn btn-info my-hobbyhabit" type="button">
+                <button id="add-hobbyhabit-trigger-btn" class="btn-info my-hobbyhabit" type="button">
                   +
                 </button>
               </div>
@@ -179,7 +186,7 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button id="add-hobbyhabit-btn" class="btn btn-info" type="button">
+                  <button id="add-hobbyhabit-btn" class="btn-info" type="button">
                     Add Hobbyhabit
                   </button>
                 </div>
@@ -209,7 +216,7 @@
                   <textarea id="notes" form="hobbyhabit-tracker-form" rows="6" cols="40" maxlength="500" placeholder="Enter notes here..."></textarea>
                   <br><br>
 
-                  <input id="hobbyhabit-tracker-btn" class="btn btn-info" type="button" value="Track completion" data>
+                  <input id="hobbyhabit-tracker-btn" class="btn-info" type="button" value="Track completion" data>
                 </form>
               </div>
             </div>
@@ -220,7 +227,7 @@
               <div id="active-goal" hidden>
                 <div id="view-active-goal"></div>
 
-                  <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+                  <button id="deactivate-goal-btn" class="btn-info">Deactivate goal</button>
               </div>
              
              <!--  NOTE: Don't use a form for this. Use the current div in the js, each
@@ -247,7 +254,7 @@
                   <input id="active-goal-freq-time-unit" type="text" value="">
                   <input id="hidden-active-goal-freq-time-unit" type="hidden" value="">
                   <br>
-                  <button id="deactivate-goal-btn" class="btn btn-info">Deactivate goal</button>
+                  <button id="deactivate-goal-btn" class="btn-info">Deactivate goal</button>
                 </form>
               </div> -->
 
@@ -275,7 +282,7 @@
                     <option value="Year">Year</option>
                   </select>
                   <br><br>
-                  <button id="add-goal-btn" class="btn btn-info add-goal-btn ">
+                  <button id="add-goal-btn" class="btn-info add-goal-btn">
                     Set goal
                   </button>
                 </form>
@@ -286,31 +293,31 @@
 
       <!-- View Completions. -->
       <div id="my-completions" hidden>
-        <h3>My Completions</h3> 
-        <table class="table table-hover" >
+        <h3 id="my-completions">My Completions</h3> 
+        <table id="completions-table" class="table table-hover" >
           <thead>
             <tr>
-              <th>Completion Date</th>
-              <th>Total Practice Time</th>
-              <th>Notes</th>
-              <th>Edit/Delete</th>
+              <th style="width:20%;">Completion Date</th>
+              <th style="width:20%;">Total Practice Time</th>
+              <th style="width:40%;">Notes</th>
+              <th style="width:20%;">Edit/Delete</th>
             </tr>
           </thead>
           <tbody id="view-completions"></tbody>
         </table>
       </div>
 
-      <button id="previous-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="previous">
+      <button id="previous-page-btn" class="btn-info page-direction" type="button" data-page-direction="previous">
         Previous
       </button>
-      <button id="next-page-btn" class="btn btn-info page-direction" type="button" data-page-direction="next">
+      <button id="next-page-btn" class="btn-info page-direction" type="button" data-page-direction="next">
         Next
       </button>
 
       <!-- Completions Visualizations -->
         <div class="completions-charts">
             <div id="completions-line-chart">
-              <h3 id="line-chart-name" class="chart-name"></h3>
+              <h3 id="line-chart-name" class="chart-name" align="center"></h3>
               <canvas id="line-chart"></canvas>
             </div>
 
@@ -324,7 +331,7 @@
 
               <div class="col-xs-6">
                 <div id="completions-doughnut-chart">
-                  <h3 class="chart-name"> Total Overall Completions: All HobbyHabits</h3>
+                  <h3 id="doughnut-chart-name" class="chart-name"> Total Overall Completions: All HobbyHabits</h3>
                   <canvas id="doughnut-chart"></canvas>
                 </div>
               </div>
@@ -340,7 +347,7 @@
 
             {% for user_hobby in current_user_data['user_hobbies'] %}
               <div class="social-hobbyhabit">
-                <button class="btn btn-info active social-hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
+                <button class="btn-info social-hobbyhabit-btn" type="button" data-user-hobby-id="{{ user_hobby['user_hobby_id'] }}">
                   {{ user_hobby['hobby_name'][0].title() }}
                 </button>
               </div>
