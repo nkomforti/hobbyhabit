@@ -5,25 +5,44 @@
   {% block title %}HobbyHabit: Add HobbyHabits{% endblock title %}
 
   {% block body_content %}
-    <div class="add-hobby">
+    <div class="row add-hobby">
 
-      <h1>
-        Get Started
-      </h1>
-      <h2>
-        Add a HobbyHabit you want to track. Click the '+' for every additional HobbyHabit you want to track.
-      </h2>
+     <div class="col-xs-12">
+      <style>
+        body {
+            background-image: url(static/img/abstract-background.jpg); no-repeat center center fixed; 
+            background-repeat: no-repeat;
+            background-position: 50% 0;
+            -ms-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+      </style>
+        <h1 id="get-started" align="center">
+          Get Started
+        </h1>
+        <p class="get-started-directions" align="center">Add a HobbyHabit you want to track</p>
+        <p class="get-started-directions" align="center">(Click the '+' for every additional HobbyHabit you want to track)</p>
+    </div>
 
-      <form id="hobby-form" action="/add-hobby" method="POST">
-        <div id="add-hobby" class="ui-widget">
-          <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
-          <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
-          <button id="plus-btn" class="btn-info btn-sm" type="button" disabled>+</button>
-        </div>
-        <br><br>
-        <input type="submit" class="btn btn-info" value="Continue">
-      </form>
+    <div class="row">
+      <div class="col-xs-5"></div>
+      <div class="col-xs-7">
 
+
+        <form id="hobby-form" action="/add-hobby" method="POST">
+          <div id="add-hobby" class="ui-widget">
+            <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
+            <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
+            <button id="plus-btn" class="btn-info btn-lg add-btn" type="button" disabled>+</button>
+          </div>
+          <br><br>
+          <input type="submit" class="btn-info btn-lg continue-btn" value="Continue">
+        </form>
+
+      </div>
     </div>
   {% endblock body_content %}
 

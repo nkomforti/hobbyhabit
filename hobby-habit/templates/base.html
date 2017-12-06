@@ -35,16 +35,16 @@
           <span class="icon-bar"></span>
         </button>
         <ul class="nav navbar-nav">
-          <li><a href="/"><img id="brand-img" alt="Brand" src="static/img/clipboard-icon.png" width="35"><span id="brand-name">HobbyHabit</span></a></li>
+          <li><a id="brand" href="/"><img id="brand-img" alt="Brand" src="static/img/wht-clipboard-icon.png" width="35"><span id="brand-name">HobbyHabit</span></a></li>
         </ul>
       </div>
 
         <ul class="nav navbar-nav navbar-right">
           <li>
             {% if "user_id" in session %}
-              <a class="login" href="/logout">Logout</a>
+              <a class="login-link" href="/logout">Logout</a>
             {% else %}
-              <a class="login" href="/login">Login</a>
+              <a class="login-link" href="/login">Login</a>
             {% endif %}
           </li>
         </ul>

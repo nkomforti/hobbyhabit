@@ -6,23 +6,45 @@
 
   {% block body_content %}
 
-    <div class="login-page">
+    <div id="login-page" class="row">
 
-      <h2 id="sign-in">Sign In</h2> 
-      <form id="login-form" action="/login" method="POST">
-        Username: <input type="text" name="username" placeholder="username" required> <!-- username requirements add in 2.0-->
-        <br>
-        <a href="">Forgot username</a><!-- Add link, way to get to change form, and and add and commit to DB -->
-        <br>
-        <br>
-        Password: <input type="password" name="password" placeholder="password" required>
-        <br>
-        <a href="">Forgot password</a>  <!-- Add link, way to get to change form, and and add and commit to DB -->
-        <br>
-        <br>
-        <input type="submit" class="btn btn-info" value="Sign in">
-      </form>
-        
+      <div class="col-xs-12">
+        <style>
+          body {
+              background-image: url(static/img/abstract-background.jpg); no-repeat center center fixed; 
+              background-repeat: no-repeat;
+              background-position: 50% 0;
+              -ms-background-size: cover;
+              -o-background-size: cover;
+              -moz-background-size: cover;
+              -webkit-background-size: cover;
+              background-size: cover;
+          }
+        </style>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-7">
+          <h2 id="sign-in">Sign In</h2> 
+          <form id="login-form" action="/login" method="POST">
+            Username
+            <br>
+            <input type="text" name="username" placeholder="username" required> <!-- username requirements add in 2.0-->
+            <br>
+            <a href="">Forgot username</a><!-- Add link, way to get to change form, and and add and commit to DB -->
+            <br>
+            <br>
+            Password
+            <br><input type="password" name="password" placeholder="password" required>
+            <br>
+            <a href="">Forgot password</a>  <!-- Add link, way to get to change form, and and add and commit to DB -->
+            <br>
+            <br>
+            <input type="submit" class="btn-info login-btn" value="Sign in">
+          </form>
+         </div>
+      </div>
     </div>
     
   {% endblock body_content %}
