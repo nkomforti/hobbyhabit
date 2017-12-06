@@ -43,8 +43,15 @@
 
       <div class="col-xs-9"><!-- main content for all dash pages -->
         <div>
-          <div id="dash-gif" style="width:100%;height:0;padding-bottom:50%;position:relative;">
-            <!-- <iframe id="gif" src="static/img/dash-gif.gif" width="100%" height="100%" style="position:absolute" frameBorder="0" class="gif-embed" allowFullScreen></iframe> -->
+          <div id="dash-welcome">
+            <div class="jumbotron">
+              <h1 id="welcome-msg-pt1">
+                Hello, {{ current_user_data['username'] }}.
+              </h1>
+              <h1 id="welcome-msg-pt2">
+                  Welcome to<span> HobbyHabit !</span>
+              </h1>
+            </div>
           </div>
         </div>
 

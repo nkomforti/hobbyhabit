@@ -265,6 +265,37 @@ h5.set-goals{
 
 
 /* DASHBOARD */
+#dash-welcome{
+    margin-top: 3.5em;
+    margin-right: 6em;
+    margin-left: 4em;
+}
+
+#dash-welcome #welcome-msg-pt1{
+    color: #455f73;
+    margin-left: 2.5em;
+}
+
+#dash-welcome #welcome-msg-pt2{
+    color: #455f73;
+    margin-left: 1em;
+}
+
+#dash-welcome #welcome-msg-pt2 span{
+    color: #455f73;
+    font-family: 'Satisfy', sans-serif;
+    font-size: 1em;
+}
+
+/*.jumbotron {
+    position: relative;
+    background: #000 url("static/img/abstract-background.jpg") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+}*/
+
 #sidebar-menu-btns button{
     margin-top: 2em;
     margin-left: 2em;
