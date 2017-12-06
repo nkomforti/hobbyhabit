@@ -265,10 +265,6 @@ h5.set-goals{
 
 
 /* DASHBOARD */
-.social-hobbyhabit{
-    display: inline-block;
-}
-
 #sidebar-menu-btns button{
     margin-top: 2em;
     margin-left: 2em;
@@ -339,8 +335,19 @@ form#hobbyhabit-tracker-form input{
     padding-left: 1em;
 }
 
-.col-xs-4 #active-goal{
-    margin-right: 3em;
+form#hobbyhabit-tracker-form input#completion-date{
+    padding-left: 5.5em;
+    padding-right: 5.5em;
+}
+
+form#hobbyhabit-tracker-form input#total-hours{
+    padding-left: 2.75em;
+    padding-right: 2.75em;
+}
+
+form#hobbyhabit-tracker-form input#total-minutes{
+    padding-left: 2.75em;
+    padding-right: 2.75em;
 }
 
 h3#my-completions{
@@ -432,7 +439,20 @@ canvas#doughnut-chart{
     padding-right: 2em;
 }
 
+.social-hobbyhabit{
+    display: inline-block;
+    margin-top: 3em;
+    margin-left: .5em;
+}
 
+#social-content{
+    margin-left: 2em;
+}
+
+#events{
+    margin-top: 3em;
+    margin-right: 5em;
+}
 
 
 /* KEEP AT BOTTOM */
