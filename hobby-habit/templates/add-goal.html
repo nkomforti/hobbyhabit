@@ -6,92 +6,106 @@
 
   {% block body_content %}
 
-    <div class="add-goal">
-      <h1>
-        Set Goals
-      </h1>
-      <h2>
-        Setting goals for your HobbyHabits is optional...
-      </h2>
-      <h3>
-        Click a HobbyHabit to set a goal for that HobbyHabit...
-      </h3>
-      <h5>
-        (Click skip at the bottom to go directly to your dashboard.)
-      </h5>
-      <br>
+    <div class="row add-goal">
+      <div class="col-xs-12">
 
-      {% for hobby in current_user_hobbies %}
+      <style>
+        body {
+            background-image: url(static/img/abstract-background.jpg); no-repeat center center fixed; 
+            background-repeat: no-repeat;
+            background-position: 50% 0;
+            -ms-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+      </style>
 
-        <div id="current-user-hobby">
-          <!-- Trigger modal with button. -->
-          <button class="btn btn-info active hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
-            {{ hobby.hobby_name.title() }}
-          </button>
-        </div>
+        <h1 class="set-goals" align="center">
+          Set Goals
+        </h1>
+        <h2 class="set-goals" align="center">
+          Setting goals for your HobbyHabits is optional...
+        </h2>
+        <h3 class="set-goals" align="center">
+          Click a HobbyHabit to set a goal for that HobbyHabit...
+        </h3>
+        <h5 class="set-goals" align="center">
+          (Click skip at the bottom to go directly to your dashboard.)
+        </h5>
         <br>
 
-      {% endfor %}
-      <br>
-      <button id="skip-goal-btn" class="btn btn-info active" type="button">
-        Skip
-      </button>
+        <div align="center">
+          {% for hobby in current_user_hobbies %}
 
-      <!-- Goal modal. -->
-      <div id="goalModal" class="modal fade">
-        <div class="modal-dialog">
+              <!-- Trigger modal with button. -->
+              <button class="btn-info btn-lg hobby-goal-btn" type="button" data-hobby-id="{{ hobby.hobby_id }}">
+                {{ hobby.hobby_name.title() }}
+              </button>
 
-          <!-- Modal content. -->
-          <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
-                  Set your goal for: <span id="hobby-name"></span>
-                </h4>
-              </div>
+          {% endfor %}
+        <br><br>
+        <button id="skip-goal-btn" class="btn-info btn-lg skip-goal-btn" type="button">
+          Skip
+        </button>
+        </div>
 
-              <div class="modal-body">
-                <form id="add-goal-form">
-                  <input id="hobby-id" type="hidden" name="hobby-id">
-                  Goal start date: 
-                  <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
-                  <br>
-                  <br>
-                  Goal frequency: 
-                  <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
-                  <br>
-                  <br>
-                  Goal time-unit: 
-                  <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
-                    <option value="" disabled selected>-- Time unit --</option>
-                    <option value="Day">Day</option>
-                    <option value="Week">Week</option>
-                    <option value="Month">Month</option>
-                    <option value="Year">Year</option>
-                  </select>
-                  <br>
-                  <br>
-                  <button id="add-more" class="add-goal-btn btn-info btn-sm" data-next="add-more">
-                    Add goal for another HobbyHabit
-                  </button> or <!-- TODO: Disable if user does not have more than one hobbyhabit -->
-                  <button class="add-goal-btn btn-info btn-sm" data-next="dashboard">
-                    Set goal & continue to dashboard
+        <!-- Goal modal. -->
+        <div id="goalModal" class="modal fade">
+          <div class="modal-dialog">
+
+            <!-- Modal content. -->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">
+                    Set your goal for: <span id="hobby-name"></span>
+                  </h4>
+                </div>
+
+                <div class="modal-body">
+                  <form id="add-goal-form">
+                    <input id="hobby-id" type="hidden" name="hobby-id">
+                    Goal start date: 
+                    <input id="goal-start-date" type="text" name="goal-start-date" placeholder="-- Select start date --" required>
+                    <br>
+                    <br>
+                    Goal frequency: 
+                    <input id="goal-freq-num" type="number" name="goal-freq-num" min="1" max="1000" placeholder="--" required>
+                    <br>
+                    <br>
+                    Goal time-unit: 
+                    <select id="goal-freq-time-unit" name="goal-freq-time-unit" required>
+                      <option value="" disabled selected>-- Time unit --</option>
+                      <option value="Day">Day</option>
+                      <option value="Week">Week</option>
+                      <option value="Month">Month</option>
+                      <option value="Year">Year</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button id="add-more" class="add-goal-btn btn-info goal-modal-btn" data-next="add-more">
+                      Set & add another another HobbyHabit Goal
+                    </button> or <!-- TODO: Disable if user does not have more than one hobbyhabit -->
+                    <button class="add-goal-btn btn-info goal-modal-btn" data-next="dashboard">
+                      Set & continue to dashboard
+                    </button>
+                  </form>
+                </div>
+
+                <div class="modal-footer">
+                  <p id="sm-fields-note" align="left">
+                    <small>*All fields are required in order to set goal</small>
+                  </p>
+                  <button type="button" class="btn-info exit-btn goal-modal-btn" data-dismiss="modal">
+                    Exit without setting goal
                   </button>
-                </form>
+                </div>
               </div>
-
-              <div class="modal-footer">
-                <p id="sm-fields-note" align="left">
-                  <small>*All fields are required in order to set goal</small>
-                </p>
-                <button type="button" class="btn btn-info" data-dismiss="modal">
-                  Exit without setting goal
-                </button>
-              </div>
+            </div>
           </div>
         </div>
-      </div>
-
     </div>
 
   {% endblock body_content %}

@@ -20,6 +20,7 @@
             background-size: cover;
         }
       </style>
+      
         <h1 id="get-started" align="center">
           Get Started
         </h1>
@@ -36,7 +37,7 @@
           <div id="add-hobby" class="ui-widget">
             <input id="num-hobbies" type="hidden" name="num-hobbies" value="1">
             <input id="hobby-name-1" class="hobby-name" type="text" name="hobby-name-1" placeholder="-- HobbyHabit No. 1 --" required>
-            <button id="plus-btn" class="btn-info btn-lg add-btn" type="button" disabled>+</button>
+            <button id="plus-btn" class="add-btn btn-info btn-lg" type="button" disabled>+</button>
           </div>
           <br><br>
           <input type="submit" class="btn-info btn-lg continue-btn" value="Continue">
@@ -44,6 +45,7 @@
 
       </div>
     </div>
+  </div>
   {% endblock body_content %}
 
   {% block js_link %}
