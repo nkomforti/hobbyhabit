@@ -287,14 +287,32 @@ h5.set-goals{
     font-size: 1em;
 }
 
-/*.jumbotron {
-    position: relative;
-    style="url("static/img/abstract-background.jpg") center center;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    overflow: hidden;
-}*/
+#social-welcome {
+    margin-left: .6em;
+    margin-right: 5em;
+    margin-top: 2em;
+}
+
+#social-welcome h1{
+    color: #455f73;
+    font-size: 3em;
+}
+
+#my-hobbyhabits-welcome{
+    margin-top: 2em;
+    margin-left: 2em;
+    padding-top: 2.5em;
+    margin-right: 3.5em;
+    padding-bottom: 2.5em;
+    padding-right: 3em;
+    padding-left: 3em;
+    font-size:1.5em;
+}
+
+#my-hobbyhabits-welcome #my-hobbyhabits-welcome-msg{
+    color: #455f73;
+    font-size: 2em;
+}
 
 #sidebar-menu-btns button{
     margin-top: 2em;

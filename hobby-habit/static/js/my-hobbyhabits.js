@@ -170,6 +170,7 @@ function addHobbyHabitListener () {
   // Select the element by class and attach event listener to it.
   $(".hobbyhabit-btn").click(function (evt) {
     currentUserhobbyId = evt.target.dataset.userHobbyId;
+    $("#my-hobbyhabits-welcome").hide();
     viewUserHobbyData();
   });
 }

@@ -10,6 +10,10 @@ $(document).ready(function(){
     $("#social > #social-content").hide();
     $("#my-hobbyhabit-content").children().hide();
     $("#dash-welcome").parent().hide();
+    $("#my-hobbyhabits-welcome").hide();
+
+    $("#my-hobbyhabits-welcome").parent().hide();
+    $("#social-welcome").hide();
   });
 
   // Show/hide elements based on menu button that was clicked.
@@ -22,6 +26,9 @@ $(document).ready(function(){
     $("#social > #social-content").hide();
     $("#hobbyhabit-tracker").hide();
     $("#dash-welcome").parent().hide();
+
+    $("#my-hobbyhabits-welcome").show();
+    $("#social-welcome").hide();
   });
 
   // Show/hide elements based on menu button that was clicked.
@@ -31,6 +38,9 @@ $(document).ready(function(){
     $("#my-hobbyhabit-content").children().hide();
     $("#social > #social-content").show();
     $("#dash-welcome").parent().hide();
+
+    $("#my-hobbyhabits-welcome").parent().hide();
+    $("#social-welcome").show();
   });
 
 });  // document.ready closer
