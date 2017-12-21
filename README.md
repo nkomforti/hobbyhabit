@@ -42,10 +42,36 @@ at their hard work is a snap and they can get back to getting things done!
 
 * Access the web app in browser at localhost:5000
 
-<!-- ![Homepage](hobbyhabit/doc/homepage.png width="48") -->
-<img src=hobbyhabit/doc/homepage.png width="500px" />
 
 ## Features and Flow
+
+##### Homepage
+<!-- ![Homepage](hobbyhabit/doc/homepage.png width="48") -->
+<img src=hobbyhabit/doc/homepage.png width="500px"/>
+
+##### Create Account
+<img src=hobbyhabit/doc/create-account.gif width="500px"/>
+
+##### Login
+<img src=hobbyhabit/doc/login.png width="500px"/>
+
+##### Dashboard
+<img src=hobbyhabit/doc/dashboard.png width="500px"/>
+
+##### Progress Visualization
+<img src=hobbyhabit/doc/tracker-and-goal.png width="500px"/>
+
+##### Completions Table
+<img src=hobbyhabit/doc/dashboard.png width="500px"/>
+
+##### Progress Visualization
+<img src=hobbyhabit/doc/data-vis-1.png width="500px"/>
+
+##### Progress Visualization
+<img src=hobbyhabit/doc/data-vis-2.png width="500px"/>
+
+##### Social
+<img src=hobbyhabit/doc/social.gif width="500px"/>
 
 #### New User:
 * Create account on homepage
