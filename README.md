@@ -107,4 +107,4 @@ with to get a list of events (using the Eventbrite API) in their area related to
 the seleceted HobbyHabit 
 
 ## Author
-![Natalie Komforti]("https://www.linkedin.com/in/nkomforti/")
+<a href="https://www.linkedin.com/in/nkomforti/">Natalie Komforti</a>
