@@ -62,7 +62,7 @@ at their hard work is a snap and they can get back to getting things done!
     </tr>
     <tr>
         <td>Progress Visualization<img src=hobbyhabit/doc/data-vis-1.png width="450"/></td>
-        <td>Progress Visualization<img src=hobbyhabit/doc/data-vis-2.png width="450"/></td>
+        <td valign="top">Progress Visualization<img src=hobbyhabit/doc/data-vis-2.png width="450"/></td>
     </tr>
     <tr>
         <td colspan="2" valign="top" align="center">Social<br><img src=hobbyhabit/doc/social.gif width="550"/></td>
