@@ -105,3 +105,6 @@ table, and view their progress via 3 data-visualizations created with chart.js
 minimun of 1 HobbyHabit. User can select the HobbyHabit they want to interact
 with to get a list of events (using the Eventbrite API) in their area related to
 the seleceted HobbyHabit 
+
+## Author
+![Natalie Komforti]("https://www.linkedin.com/in/nkomforti/")
