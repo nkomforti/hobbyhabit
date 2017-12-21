@@ -47,7 +47,7 @@ at their hard work is a snap and they can get back to getting things done!
 #### New User:
 * Create account on homepage
 
-[Homepage](hobbyhabit/doc/homepage.png)
+![alt text](hobbyhabit/doc/homepage.png "Homepage")
 
 * New page renders for user to add HobbyHabits to track, this page uses 
 javascript/jQuery to dynamically add form-fields for the user to add any number
