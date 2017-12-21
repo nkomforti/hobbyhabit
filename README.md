@@ -47,25 +47,25 @@ at their hard work is a snap and they can get back to getting things done!
 
 <table width="100%" border="0">
     <tr>
-        <td colspan="2" valign="top" align="center">Homepage<br><img src=hobbyhabit/doc/homepage.png width="550"/></td>
+        <td border="0" background-color="#ffffff" colspan="2" valign="top" align="center">Homepage<br><img src=hobbyhabit/doc/homepage.png width="550"/></td>
     </tr>
     <tr>
-        <td colspan="2" valign="top" align="center">Create Account<br><img src=hobbyhabit/doc/create-account.gif width="550"/></td>
+        <td border="0" background-color="#ffffff" colspan="2" valign="top" align="center">Create Account<br><img src=hobbyhabit/doc/create-account.gif width="550"/></td>
     </tr>
     <tr>
-        <td>Login<img src=hobbyhabit/doc/login.png width="450"/></td>
-        <td>Dashboard<img src=hobbyhabit/doc/dashboard.png width="450"/></td>
+        <td border="0" background-color="#ffffff">Login<img src=hobbyhabit/doc/login.png width="450"/></td>
+        <td border="0" background-color="#ffffff">Dashboard<img src=hobbyhabit/doc/dashboard.png width="450"/></td>
     </tr>
     <tr>
-        <td>Progress Visualization<img src=hobbyhabit/doc/tracker-and-goal.png width="450"/></td>
-        <td>Completions Table<img src=hobbyhabit/doc/dashboard.png width="450"/></td>
+        <td border="0" background-color="#ffffff">Progress Visualization<img src=hobbyhabit/doc/tracker-and-goal.png width="450"/></td>
+        <td border="0" background-color="#ffffff">Completions Table<img src=hobbyhabit/doc/dashboard.png width="450"/></td>
     </tr>
     <tr>
-        <td>Progress Visualization<img src=hobbyhabit/doc/data-vis-1.png width="450"/></td>
-        <td valign="top">Progress Visualization<img src=hobbyhabit/doc/data-vis-2.png width="450"/></td>
+        <td border="0" background-color="#ffffff">Progress Visualization<img src=hobbyhabit/doc/data-vis-1.png width="450"/></td>
+        <td border="0" background-color="#ffffff" valign="top">Progress Visualization<img src=hobbyhabit/doc/data-vis-2.png width="450"/></td>
     </tr>
     <tr>
-        <td colspan="2" valign="top" align="center">Social<br><img src=hobbyhabit/doc/social.gif width="550"/></td>
+        <td border="0" background-color="#ffffff" colspan="2" valign="top" align="center">Social<br><img src=hobbyhabit/doc/social.gif width="550"/></td>
     </tr>
 </table>
 
