@@ -42,6 +42,8 @@ at their hard work is a snap and they can get back to getting things done!
 
 * Access the web app in browser at localhost:5000
 
+![Homepage](doc/homepage.png)
+
 ## Features and Flow
 
 #### New User:
