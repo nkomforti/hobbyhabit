@@ -44,7 +44,7 @@ at their hard work is a snap and they can get back to getting things done!
 
 ## Features and Flow
 
-### New User:
+#### New User:
 * Create account on homepage
 
 * New page renders for user to add HobbyHabits to track, this page uses 
@@ -58,7 +58,7 @@ bootstrap modal, or select the option to skip aheat to their dashboard
 
 * Additional HobbyHabits and goals can be set in the dashboard
 
-### Existing User:
+#### Existing User:
 * Click login link on homepage
 
 * New page renders to display login form
