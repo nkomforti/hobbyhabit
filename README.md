@@ -47,10 +47,10 @@ at their hard work is a snap and they can get back to getting things done!
 
 <table width="100%" border="0">
     <tr>
-        <td>Homepage<img src=hobbyhabit/doc/homepage.png width="450"/></td>
+        <td colspan="2">Homepage<img src=hobbyhabit/doc/homepage.png width="550"/></td>
     </tr>
     <tr>
-        <td>Create Account<img src=hobbyhabit/doc/create-account.gif width="450"/></td>
+        <td colspan="2">Create Account<img src=hobbyhabit/doc/create-account.gif width="550"/></td>
     </tr>
     <tr>
         <td>Login<img src=hobbyhabit/doc/login.png width="450"/></td>
@@ -65,7 +65,7 @@ at their hard work is a snap and they can get back to getting things done!
         <td>Progress Visualization<img src=hobbyhabit/doc/data-vis-2.png width="450"/></td>
     </tr>
     <tr>
-        <td>Social<img src=hobbyhabit/doc/social.gif width="450"/></td>
+        <td colspan="2">Social<img src=hobbyhabit/doc/social.gif width="550"/></td>
     </tr>
 </table>
 
