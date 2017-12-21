@@ -42,7 +42,7 @@ at their hard work is a snap and they can get back to getting things done!
 
 * Access the web app in browser at localhost:5000
 
-![Homepage](hobbyhabit/doc/homepage.png){:width="50%"}
+![Homepage](hobbyhabit/doc/homepage.png width="48")
 
 ## Features and Flow
 
