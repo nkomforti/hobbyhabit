@@ -45,33 +45,37 @@ at their hard work is a snap and they can get back to getting things done!
 
 ## Features and Flow
 
-##### Homepage
-<!-- ![Homepage](hobbyhabit/doc/homepage.png width="48") -->
-<img src=hobbyhabit/doc/homepage.png width="500px"/>
+<table width="100%">
+    <tr>
+        <td>##### Homepage<img src=hobbyhabit/doc/homepage.png width="450"/></td>
+        <td>##### Create Account<img src=hobbyhabit/doc/create-account.gif width="450"/></td>
+    </tr>
+</table>
+
 
 ##### Create Account
-<img src=hobbyhabit/doc/create-account.gif width="500px"/>
+<img src=hobbyhabit/doc/create-account.gif width="450"/>
 
 ##### Login
-<img src=hobbyhabit/doc/login.png width="500px"/>
+<img src=hobbyhabit/doc/login.png width="450"/>
 
 ##### Dashboard
-<img src=hobbyhabit/doc/dashboard.png width="500px"/>
+<img src=hobbyhabit/doc/dashboard.png width="450"/>
 
 ##### Progress Visualization
-<img src=hobbyhabit/doc/tracker-and-goal.png width="500px"/>
+<img src=hobbyhabit/doc/tracker-and-goal.png width="450"/>
 
 ##### Completions Table
-<img src=hobbyhabit/doc/dashboard.png width="500px"/>
+<img src=hobbyhabit/doc/dashboard.png width="450"/>
 
 ##### Progress Visualization
-<img src=hobbyhabit/doc/data-vis-1.png width="500px"/>
+<img src=hobbyhabit/doc/data-vis-1.png width="450"/>
 
 ##### Progress Visualization
-<img src=hobbyhabit/doc/data-vis-2.png width="500px"/>
+<img src=hobbyhabit/doc/data-vis-2.png width="450"/>
 
 ##### Social
-<img src=hobbyhabit/doc/social.gif width="500px"/>
+<img src=hobbyhabit/doc/social.gif width="450"/>
 
 #### New User:
 * Create account on homepage
