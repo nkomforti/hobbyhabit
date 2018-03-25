@@ -47,7 +47,7 @@ at their hard work is a snap and they can get back to getting things done!
 
 <table width="100%" border="0">
     <tr>
-        <td colspan="2" valign="top" align="center">Homepage<br><img src=hobbyhabit/doc/homepage.png width="550"/></td>
+        <td colspan="2" valign="top" align="center">Homepage<br><img src=./doc/homepage.png width="550"/></td>
     </tr>
     <tr>
         <td colspan="2" valign="top" align="center">Create Account<br><img src=hobbyhabit/doc/create-account.gif width="550"/></td>
