@@ -602,6 +602,6 @@ def logout():
 if __name__ == "__main__":
 
     app.debug = True
-    # DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
     connect_to_db(app)
     app.run(host="0.0.0.0")

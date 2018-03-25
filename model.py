@@ -116,7 +116,7 @@ class User(db.Model):
 
 
 class Hobby(db.Model):
-    """User hobby/habit."""
+    """User hobbyhabit."""
 
     __tablename__ = "hobbies"
 
@@ -164,7 +164,7 @@ class UserHobby(db.Model):
 
 
 class Goal(db.Model):
-    """"""
+    """Goals for user hobbyhabits."""
 
     __tablename__ = "goals"
 
@@ -202,7 +202,7 @@ class Goal(db.Model):
 
 
 class Completion(db.Model):
-    """Completion log of user hobby/habit."""
+    """Completion log of user hobbyhabit."""
 
     __tablename__ = "completions"
 
@@ -249,5 +249,5 @@ if __name__ == "__main__":
 
     app = Flask(__name__)  # Dummy instance of Flask class. Using this instead of: from server import app
     connect_to_db(app)  # Connect database to Flask app
-    db.create_all()  # Create database
+    # db.create_all()  # Create database
     print "Connected to DB."
