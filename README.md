@@ -38,6 +38,8 @@ at their hard work is a snap and they can get back to getting things done!
 
 * Start Flask server:
 
+
+# Kelsey is Cool
 `$ python server.py`
 
 * Access the web app in browser at localhost:5000
